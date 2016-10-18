@@ -11,7 +11,7 @@ public class CPU : MonoBehaviour {
 	private void Start() {
         rb = GetComponent<Rigidbody2D>();
 
-        speed = Random.Range(2f, 4.5f);
+        speed = Random.Range(1f, 3f);
 	}
 	
 	void Update() {
