@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour {
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTH.GetComponent<Text>();
         roundText = ROUND.GetComponent<Text>();
+
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
         Health = player.GetComponent<Health>();
