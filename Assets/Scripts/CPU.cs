@@ -47,6 +47,7 @@ public class CPU : MonoBehaviour {
                 Vector2 direction = td.normalized;
                 GameObject bulletObj = Instantiate(bulletPrefab, this.transform.position + (Vector3)direction, Quaternion.identity) as GameObject;
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
+                bullet.damage = 5;
                 bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
             }
             yield return new WaitForSeconds(0.1f);
