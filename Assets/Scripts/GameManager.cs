@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static long Score = 0;
     public int Round = 0;
     private int toSpawn = 1;
+    private bool hasDied = false;
     private Health Health;
     public GameObject[] spawned = new GameObject[900];
     public GameObject[] spawnPoints = new GameObject[4];
@@ -16,10 +17,12 @@ public class GameManager : MonoBehaviour {
     private GameObject fastEnemy;
     private GameObject shootEnemy;
     private GameObject dupeEnemy;
+    
 
     public GameObject SCORE;
     public GameObject HEALTH;
     public GameObject ROUND;
+    public GameObject GAMEOVER;
 
     private Text scoreText;
     private Text healthText;
@@ -58,9 +61,31 @@ public class GameManager : MonoBehaviour {
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
         }
+        if (player == null && hasDied == false) {
+            hasDied = true;
+            GAMEOVER.SetActive(true);
+            for (int i = 0; i < toSpawn; i++) {
+                Destroy(spawned[i]);
+            }
+        }
         handleRound();
 	}
+
+    public void resetGame() {
+        player = (GameObject)Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        Health = player.GetComponent<Health>();
+        Round = 0;
+        Score = 0;
+        Round++;
+        toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
+        for (int i = 0; i < toSpawn; i++) {
+            int sp = (int)(Mathf.Round(Random.Range(0f, 4f)));
+            spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
+        }
+        hasDied = false;
+    }
     public void handleRound() {
+        if (hasDied) return;
         if(checkDead()) {
             Round++;
             toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
