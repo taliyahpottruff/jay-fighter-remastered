@@ -17,7 +17,7 @@ public class CPU : MonoBehaviour {
 
 	private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
-        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
+        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/DupeMinion");
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(FireBullet());
         speed = Random.Range(minSpeed, maxSpeed);

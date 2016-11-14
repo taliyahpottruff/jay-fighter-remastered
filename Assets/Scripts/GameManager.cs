@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     private GameObject playerPrefab;
@@ -72,23 +73,16 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void resetGame() {
-        player = (GameObject)Instantiate(playerPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-        Health = player.GetComponent<Health>();
-        Round = 0;
         Score = 0;
-        Round++;
-        toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
-        for (int i = 0; i < toSpawn; i++) {
-            int sp = (int)(Mathf.Round(Random.Range(0f, 4f)));
-            spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
-        }
-        hasDied = false;
+        Round = 0;
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
     public void handleRound() {
         if (hasDied) return;
         if(checkDead()) {
             Round++;
-            toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
+            toSpawn = 1 + Round + (int)(Mathf.Round(Random.Range(0f, Round)));
             for(int i = 0; i < toSpawn; i++) {
                 int sp = (int)(Mathf.Round(Random.Range(0f, 4f)));
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
@@ -126,7 +120,7 @@ public class GameManager : MonoBehaviour {
                 if(ran == 0) {
                     return fastEnemy;
                 }else if(ran == 1) {
-                    return shootEnemy;
+                    return dupeEnemy;
                 } else {
                     return basicEnemy;
                 }
