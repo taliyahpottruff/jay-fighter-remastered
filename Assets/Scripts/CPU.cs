@@ -8,13 +8,16 @@ public class CPU : MonoBehaviour {
     public float maxSpeed = 3;
     public float speed = 3;
     public bool shooter = false;
+    public bool duplicator = false;
     public bool firing = false;
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
+    private GameObject basicEnemy;
     private Vector2 td;
 
 	private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(FireBullet());
         speed = Random.Range(minSpeed, maxSpeed);
@@ -25,11 +28,20 @@ public class CPU : MonoBehaviour {
         Vector2 targetDirection = (playerPosition - (Vector2) transform.position).normalized;
         td = targetDirection;
         rb.velocity = targetDirection * speed;
-        float r = Mathf.Round(Random.Range(0f, 1.5f));
-        if (shooter && (r == 0f)) {
+        enemyLogic();
+    }
+    private void enemyLogic() {
+        float duperate = Mathf.Round(Random.Range(0f, 100f));
+        float firerate = Mathf.Round(Random.Range(0f, 1.5f));
+        Vector3 offset = new Vector3(0, 1);
+        if (shooter && (firerate == 0f)) {
             firing = true;
         } else firing = false;
+        if(duplicator && (duperate == 0f)) {
+            Instantiate(basicEnemy, this.transform.position + offset, Quaternion.identity);
+        }
     }
+
     private IEnumerator FireBullet() {
         do {
             if (firing) {
