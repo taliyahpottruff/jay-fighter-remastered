@@ -33,12 +33,11 @@ public class CPU : MonoBehaviour {
     private void enemyLogic() {
         float duperate = Mathf.Round(Random.Range(0f, 100f));
         float firerate = Mathf.Round(Random.Range(0f, 1.5f));
-        Vector3 offset = new Vector3(0, 1);
         if (shooter && (firerate == 0f)) {
             firing = true;
         } else firing = false;
         if(duplicator && (duperate == 0f)) {
-            Instantiate(basicEnemy, this.transform.position + offset, Quaternion.identity);
+            Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity);
         }
     }
 

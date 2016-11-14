@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -21,9 +21,6 @@ public class Bullet : MonoBehaviour {
         //Only if the other object has a health component
         if (health != null) {
             health.DoDamage(10);
-        }
-        if (rigidbody != null) {
-            rigidbody.AddForce(rb.velocity * 100);
         }
 
     }
