@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Player))]
@@ -27,7 +27,13 @@ public class PlayerCombat : MonoBehaviour {
         else
             firing = false;
     }
-
+    private void OnTriggerEnter2D(Collider2D other) {
+        Health health = other.GetComponent<Health>();
+        CPU cpu = other.GetComponent<CPU>();
+        if(cpu != null) {
+            this.gameObject.GetComponent<Health>().DoDamage(5);
+        }
+    }
     private IEnumerator FireBullet() {
         do {
             if (firing) {
