@@ -9,6 +9,8 @@ public class MapEditorUI : MonoBehaviour {
     public Text selectedObjName;
     public Toggle selectedObjVisibleToggle;
     public Toggle selectedObjColliderToggle;
+    public InputField widthField;
+    public InputField heightField;
 
     private MapEditorObject selectedMapObj;
     private bool moveMode;
@@ -53,7 +55,6 @@ public class MapEditorUI : MonoBehaviour {
                         }
                         else {
                             MapEditorObject obj = hit.collider.gameObject.GetComponent<MapEditorObject>();
-                            Debug.Log(hit.collider.gameObject.name);
 
                             if (obj != null) {
                                 selected = hit.collider.gameObject;
@@ -61,6 +62,8 @@ public class MapEditorUI : MonoBehaviour {
                                 selectedObjName.text = selected.name;
                                 selectedObjVisibleToggle.isOn = obj.visible;
                                 selectedObjColliderToggle.isOn = obj.hasCollider;
+                                widthField.text = obj.transform.localScale.x.ToString();
+                                heightField.text = obj.transform.localScale.y.ToString();
 
                                 selectedMapObj = obj;
                             }
@@ -74,6 +77,24 @@ public class MapEditorUI : MonoBehaviour {
                     moveMode = false;
                 }
             }
+        }
+    }
+
+    public void SetObjWidth(string width) {
+        if (selected != null) {
+            float newWidth = float.Parse(width);
+            Vector3 scale = selected.transform.localScale;
+            scale.x = newWidth;
+            selected.transform.localScale = scale;
+        }
+    }
+
+    public void SetObjHeight(string height) {
+        if (selected != null) {
+            float newHeight = float.Parse(height);
+            Vector3 scale = selected.transform.localScale;
+            scale.y = newHeight;
+            selected.transform.localScale = scale;
         }
     }
 }
