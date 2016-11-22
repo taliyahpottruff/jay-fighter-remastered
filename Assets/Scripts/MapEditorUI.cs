@@ -6,9 +6,12 @@ using UnityEngine.EventSystems;
 public class MapEditorUI : MonoBehaviour {
     public GameObject selected = null;
     public GameObject ui;
+    public EditorMap map;
     public Text selectedObjName;
     public Toggle selectedObjVisibleToggle;
     public Toggle selectedObjColliderToggle;
+    public InputField xField;
+    public InputField yField;
     public InputField widthField;
     public InputField heightField;
 
@@ -27,17 +30,20 @@ public class MapEditorUI : MonoBehaviour {
 
                 if (Input.GetKey(KeyCode.Space)) {
                     if (pos.x > 0)
-                        pos.x = ((int)pos.x) + 0.5f;
+                        pos.x = (int)(pos.x + 0.5f);
                     else if (pos.x < 0)
-                        pos.x = ((int)pos.x) - 0.5f;
+                        pos.x = (int)(pos.x - 0.5f);
 
                     if (pos.y > 0)
-                        pos.y = ((int)pos.y) + 0.5f;
+                        pos.y = (int)(pos.y + 0.5f);
                     else if (pos.y < 0)
-                        pos.y = ((int)pos.y) - 0.5f;
+                        pos.y = (int)(pos.y - 0.5f);
                 }
 
                 selected.transform.position = pos;
+
+                xField.text = selected.transform.position.x.ToString();
+                yField.text = selected.transform.position.y.ToString();
             }
         }
         else {
@@ -62,6 +68,8 @@ public class MapEditorUI : MonoBehaviour {
                                 selectedObjName.text = selected.name;
                                 selectedObjVisibleToggle.isOn = obj.visible;
                                 selectedObjColliderToggle.isOn = obj.hasCollider;
+                                xField.text = obj.transform.position.x.ToString();
+                                yField.text = obj.transform.position.y.ToString();
                                 widthField.text = obj.transform.localScale.x.ToString();
                                 heightField.text = obj.transform.localScale.y.ToString();
 
@@ -75,26 +83,65 @@ public class MapEditorUI : MonoBehaviour {
                     }
                 } else {
                     moveMode = false;
+                    map.UpdateMap();
                 }
             }
         }
     }
 
+    public void SetObjX(string x) {
+        if (selected != null) {
+            float newVal = 0f;
+
+            if (x != "")
+                newVal = float.Parse(x);
+
+            Vector2 position = selected.transform.position;
+            position.x = newVal;
+            selected.transform.position = position;
+            map.UpdateMap();
+        }
+    }
+
+    public void SetObjY(string y) {
+        if (selected != null) {
+            float newVal = 0f;
+
+            if (y != "")
+                newVal = float.Parse(y);
+
+            Vector2 position = selected.transform.position;
+            position.y = newVal;
+            selected.transform.position = position;
+            map.UpdateMap();
+        }
+    }
+
     public void SetObjWidth(string width) {
         if (selected != null) {
-            float newWidth = float.Parse(width);
+            float newVal = 0f;
+
+            if (width != "")
+                newVal = float.Parse(width);
+
             Vector3 scale = selected.transform.localScale;
-            scale.x = newWidth;
+            scale.x = newVal;
             selected.transform.localScale = scale;
+            map.UpdateMap();
         }
     }
 
     public void SetObjHeight(string height) {
         if (selected != null) {
-            float newHeight = float.Parse(height);
+            float newVal = 0f;
+
+            if (height != "")
+                newVal = float.Parse(height);
+
             Vector3 scale = selected.transform.localScale;
-            scale.y = newHeight;
+            scale.y = newVal;
             selected.transform.localScale = scale;
+            map.UpdateMap();
         }
     }
 }
