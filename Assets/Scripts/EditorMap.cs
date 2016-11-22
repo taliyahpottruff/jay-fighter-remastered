@@ -56,8 +56,8 @@ public class EditorMap : MonoBehaviour {
         }
     }
 
-    public void LoadMap() {
-        FileStream fs = new FileStream(directory + "/" + name + ".map", FileMode.Open);
+    public void LoadMap(string mapToLoad) {
+        FileStream fs = new FileStream(directory + "/" + mapToLoad + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
             json = reader.ReadToEnd();
             map = JsonUtility.FromJson<Map>(json);
@@ -80,6 +80,10 @@ public class EditorMap : MonoBehaviour {
                 newMapEditObj.hasCollider = mapObj.collider;
             }
         }
+    }
+
+    public void LoadMap() {
+        LoadMap(name);
     }
 }
 
