@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerCombat : MonoBehaviour {

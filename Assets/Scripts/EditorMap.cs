@@ -4,6 +4,10 @@ using System.Collections;
 using System;
 using System.IO;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class EditorMap : MonoBehaviour {
     public new string name = "New Map";
     public string json;

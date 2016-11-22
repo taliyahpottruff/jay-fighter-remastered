@@ -2,6 +2,10 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(Animator))]
 public class AddObjectPanel : MonoBehaviour {
     public PanelMode mode = PanelMode.Close;

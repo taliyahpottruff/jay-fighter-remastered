@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class GameCamera : MonoBehaviour {
     public Transform player;
     public Transform map;

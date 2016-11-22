@@ -2,7 +2,7 @@
 using System.Collections;
 
 /*
-   * Author: FireGamer3
+   * Author: Garrett Nicholas
 */
 
 public class EditorCam : MonoBehaviour {

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class MapEditorObject : MonoBehaviour {
     public bool visible = true;
