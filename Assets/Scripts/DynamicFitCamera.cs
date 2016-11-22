@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -40,7 +40,8 @@ public class DynamicFitCamera : MonoBehaviour {
         viewWidth = max.x - min.x;
         viewHeight = max.y - min.y;
 
-        Debug.Log(viewHeight);
+        //commented out because of console spam
+        //Debug.Log(viewHeight);
 
         meanVector /= entities.Count;
         transform.position = new Vector3(meanVector.x, meanVector.y, -10);
