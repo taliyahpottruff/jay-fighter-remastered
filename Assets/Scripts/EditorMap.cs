@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using System.IO;
 
 public class EditorMap : MonoBehaviour {
-    public new string name;
+    public new string name = "New Map";
     public string json;
 
     private Map map;
@@ -14,7 +15,7 @@ public class EditorMap : MonoBehaviour {
 
     public void UpdateMap() {
         map = new Map();
-        map.name = "Test";
+        map.name = name;
         GameObject[] gos = GameObject.FindGameObjectsWithTag("MapObj");
         MapObj[] objs = new MapObj[gos.Length];
         for (int i = 0; i < gos.Length; i++) {
@@ -34,6 +35,21 @@ public class EditorMap : MonoBehaviour {
 
         json = JsonUtility.ToJson(map);
         Debug.Log(json);
+    }
+
+    public void SetMapName(string name) {
+        this.name = name;
+        UpdateMap();
+    }
+
+    public void SaveMap() {
+        string directory = Application.persistentDataPath + "/maps";
+        Debug.Log(directory);
+        Directory.CreateDirectory(directory);
+        FileStream fs = new FileStream(directory + "/" + map.name + ".map", FileMode.OpenOrCreate);
+        using (StreamWriter writer = new StreamWriter(fs)) {
+            writer.Write(json);
+        }
     }
 }
 
