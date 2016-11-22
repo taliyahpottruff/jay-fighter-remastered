@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     private bool hasDied = false;
     private Health Health;
     public GameObject[] spawned = new GameObject[900];
-    public GameObject[] spawnPoints = new GameObject[4];
+    private GameObject[] spawnPoints;
 
     private GameObject basicEnemy;
     private GameObject fastEnemy;
@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour {
     private Text healthText;
     private Text roundText;
     void Start () {
+        spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
+        //DEBUG OUT
+        Debug.Log("I found " + spawnPoints.Length + " Spawn Points!");
+
         basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
         fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Fast Enemy");
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
@@ -45,7 +49,7 @@ public class GameManager : MonoBehaviour {
         Round++;
         toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
         for (int i = 0; i < toSpawn; i++) {
-            int sp = (int)(Mathf.Round(Random.Range(0f, 4f)));
+            int sp = (int)(Mathf.Round(Random.Range(0f, (spawnPoints.Length - 1))));
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
         }
     }
