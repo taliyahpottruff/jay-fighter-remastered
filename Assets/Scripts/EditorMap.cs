@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.IO;
@@ -8,8 +9,13 @@ public class EditorMap : MonoBehaviour {
     public string json;
 
     private Map map;
+    private string directory = Application.persistentDataPath + "/maps";
+
+    private InputField mapNameField;
 
     private void Start() {
+        mapNameField = GameObject.FindGameObjectWithTag("MapNameInput").GetComponent<InputField>();
+
         UpdateMap(); //Init the JSON
     }
 
@@ -43,12 +49,36 @@ public class EditorMap : MonoBehaviour {
     }
 
     public void SaveMap() {
-        string directory = Application.persistentDataPath + "/maps";
-        Debug.Log(directory);
         Directory.CreateDirectory(directory);
         FileStream fs = new FileStream(directory + "/" + map.name + ".map", FileMode.OpenOrCreate);
         using (StreamWriter writer = new StreamWriter(fs)) {
             writer.Write(json);
+        }
+    }
+
+    public void LoadMap() {
+        FileStream fs = new FileStream(directory + "/" + name + ".map", FileMode.Open);
+        using (StreamReader reader = new StreamReader(fs)) {
+            json = reader.ReadToEnd();
+            map = JsonUtility.FromJson<Map>(json);
+            GameObject mapGO = GameObject.FindGameObjectWithTag("Map");
+            //Clears the map object of existing children
+            for (int i = 0; i < mapGO.transform.childCount; i++) {
+                Destroy(mapGO.transform.GetChild(i).gameObject);
+            }
+            for (int i = 0; i < map.objects.Length; i++) {
+                MapObj mapObj = map.objects[i];
+                GameObject prefab = Resources.Load<GameObject>("Prefabs/MapEditorObjects/" + mapObj.name);
+                GameObject newGO = Instantiate(prefab, new Vector2(mapObj.x, mapObj.y), Quaternion.identity, mapGO.transform) as GameObject;
+                newGO.name = prefab.name;
+                Vector3 size = Vector3.one;
+                size.x = mapObj.width;
+                size.y = mapObj.height;
+                newGO.transform.localScale = size;
+                MapEditorObject newMapEditObj = newGO.GetComponent<MapEditorObject>();
+                newMapEditObj.visible = mapObj.visible;
+                newMapEditObj.hasCollider = mapObj.collider;
+            }
         }
     }
 }
