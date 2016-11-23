@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class AddObjectButton : MonoBehaviour {
     public string objectToSpawn;
 

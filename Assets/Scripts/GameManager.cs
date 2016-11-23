@@ -3,6 +3,10 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+    * AUTHOR: Garrett Nicholas
+*/
+
 public class GameManager : MonoBehaviour {
     private GameObject playerPrefab;
     private GameObject player;

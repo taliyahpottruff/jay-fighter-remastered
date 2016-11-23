@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class CPU : MonoBehaviour {

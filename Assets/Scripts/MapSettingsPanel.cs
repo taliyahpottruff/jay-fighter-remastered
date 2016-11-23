@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(Animator))]
 public class MapSettingsPanel : MonoBehaviour {
     public PanelMode mode = PanelMode.Close;

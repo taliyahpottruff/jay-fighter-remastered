@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class Border : MonoBehaviour {
     public BorderMode mode = BorderMode.Bottom;
 

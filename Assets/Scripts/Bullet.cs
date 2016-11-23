@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : MonoBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;

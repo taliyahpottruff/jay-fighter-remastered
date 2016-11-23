@@ -3,6 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.EventSystems;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class MapEditorUI : MonoBehaviour {
     public GameObject selected = null;
     public GameObject ui;

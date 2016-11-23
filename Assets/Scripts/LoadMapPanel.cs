@@ -3,6 +3,10 @@ using UnityEngine.UI;
 using System.Collections;
 using System.IO;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class LoadMapPanel : MonoBehaviour {
     public Transform content;
 

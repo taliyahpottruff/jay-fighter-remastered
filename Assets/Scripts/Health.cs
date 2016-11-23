@@ -1,6 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
+
 public class Health : MonoBehaviour {
     public float health = 100;
     private float maxHeath = 100;
