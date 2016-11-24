@@ -9,6 +9,7 @@ using System.Collections;
 public class MapEditorObject : MonoBehaviour {
     public bool visible = true;
     public bool hasCollider = false;
+    public bool isSpawn = false;
 
     private SpriteRenderer sr;
 
@@ -17,6 +18,12 @@ public class MapEditorObject : MonoBehaviour {
     }
 
     private void Update() {
+        //If the object is a spawn point, it cannot have a collider or be visible
+        if (isSpawn) {
+            hasCollider = false;
+            visible = false;
+        }
+
         if (visible) {
             Color c = sr.color;
             c.a = 1f;

@@ -40,6 +40,7 @@ public class EditorMap : MonoBehaviour {
             MapEditorObject mapEditObj = gos[i].GetComponent<MapEditorObject>();
             objs[i].visible = mapEditObj.visible;
             objs[i].collider = mapEditObj.hasCollider;
+            objs[i].spawn = mapEditObj.isSpawn;
         }
         map.objects = objs;
 
@@ -56,14 +57,14 @@ public class EditorMap : MonoBehaviour {
         Directory.CreateDirectory(directory);
         FileStream fs = new FileStream(directory + "/" + map.name + ".map", FileMode.OpenOrCreate);
         using (StreamWriter writer = new StreamWriter(fs)) {
-            writer.Write(json);
+            writer.Write(Utilities.Base64Encode(json));
         }
     }
 
     public void LoadMap(string mapToLoad) {
         FileStream fs = new FileStream(directory + "/" + mapToLoad + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
-            json = reader.ReadToEnd();
+            json = Utilities.Base64Decode(reader.ReadToEnd());
             map = JsonUtility.FromJson<Map>(json);
             GameObject mapGO = GameObject.FindGameObjectWithTag("Map");
             //Clears the map object of existing children
@@ -83,27 +84,11 @@ public class EditorMap : MonoBehaviour {
                 newMapEditObj.visible = mapObj.visible;
                 newMapEditObj.hasCollider = mapObj.collider;
             }
+            mapNameField.text = map.name;
         }
     }
 
     public void LoadMap() {
         LoadMap(name);
     }
-}
-
-[Serializable]
-public class Map {
-    public string name;
-    public MapObj[] objects;
-}
-
-[Serializable]
-public class MapObj {
-    public string name;
-    public float x;
-    public float y;
-    public float width;
-    public float height;
-    public bool visible;
-    public bool collider;
 }
