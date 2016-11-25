@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class Utilities {
     //SOURCE: http://stackoverflow.com/questions/11743160/how-do-i-encode-and-decode-a-base64-string
@@ -14,5 +19,11 @@ public class Utilities {
     public static string Base64Decode(string base64EncodedData) {
         var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
         return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+    }
+
+    public static void ClearChildren(Transform parent) {
+        for (int i = 0; i < parent.childCount; i++) {
+            GameObject.Destroy(parent.GetChild(i).gameObject);
+        }
     }
 }
