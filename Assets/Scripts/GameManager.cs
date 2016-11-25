@@ -11,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     private GameObject playerPrefab;
     private GameObject player;
+    public bool hasStarted = false;
     public static long Score = 0;
     public int Round = 0;
     private int toSpawn = 1;
@@ -34,10 +35,6 @@ public class GameManager : MonoBehaviour {
     private Text healthText;
     private Text roundText;
     void Start () {
-        spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
-        //DEBUG OUT
-        Debug.Log("I found " + spawnPoints.Length + " Spawn Points!");
-
         basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
         fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Fast Enemy");
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
@@ -67,14 +64,16 @@ public class GameManager : MonoBehaviour {
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
         }
-        if (player == null && hasDied == false) {
-            hasDied = true;
-            GAMEOVER.SetActive(true);
-            for (int i = 0; i < toSpawn; i++) {
-                Destroy(spawned[i]);
+        if (hasStarted) {
+            if (player == null && hasDied == false) {
+                hasDied = true;
+                GAMEOVER.SetActive(true);
+                for (int i = 0; i < toSpawn; i++) {
+                    Destroy(spawned[i]);
+                }
             }
+            handleRound();
         }
-        handleRound();
 	}
 
     public void resetGame() {
@@ -104,7 +103,7 @@ public class GameManager : MonoBehaviour {
     }
     //Selects a spawnpoint (this returns an int to be used with the array)
     private int selectSP() {
-        return (int)Mathf.Round(Random.Range(0f, 3.1f));
+        return (int)Mathf.Round(Random.Range(0f, spawnPoints.Length - 1));
     }
 
     //This returns a random enemy prefab based on what round the game is on
@@ -142,11 +141,15 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         //Spawning code originally by Garrett Nicholas
+        spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
+        //DEBUG OUT
+        Debug.Log("I found " + spawnPoints.Length + " Spawn Points!");
         Round++;
         toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
         for (int i = 0; i < toSpawn; i++) {
-            int sp = (int)(Mathf.Round(Random.Range(0f, (spawnPoints.Length - 1))));
+            int sp = selectSP();
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
         }
+        hasStarted = true;
     }
 }
