@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 /*
     * AUTHOR: Garrett Nicholas
+    * ADDITIONAL: Trenton Pottruff
 */
 
 public class GameManager : MonoBehaviour {
@@ -49,13 +50,9 @@ public class GameManager : MonoBehaviour {
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
         Health = player.GetComponent<Health>();
-        
-        Round++;
-        toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
-        for (int i = 0; i < toSpawn; i++) {
-            int sp = (int)(Mathf.Round(Random.Range(0f, (spawnPoints.Length - 1))));
-            spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
-        }
+
+        //TP: Added a coroutine
+        StartCoroutine(DelayedStartSpawn());
     }
 	public static void addScore(long s) {
         Score += s;
@@ -137,6 +134,19 @@ public class GameManager : MonoBehaviour {
                     return fastEnemy;
                 } else return basicEnemy;
             }
+        }
+    }
+
+    //AUTHOR: Trenton Pottruff
+    private IEnumerator DelayedStartSpawn() {
+        yield return new WaitForSeconds(1f);
+
+        //Spawning code originally by Garrett Nicholas
+        Round++;
+        toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
+        for (int i = 0; i < toSpawn; i++) {
+            int sp = (int)(Mathf.Round(Random.Range(0f, (spawnPoints.Length - 1))));
+            spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
         }
     }
 }
