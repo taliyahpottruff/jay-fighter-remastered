@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour {
             Round++;
             toSpawn = 1 + Round + (int)(Mathf.Round(Random.Range(0f, Round)));
             for(int i = 0; i < toSpawn; i++) {
-                int sp = (int)(Mathf.Round(Random.Range(0f, 4f)));
+                int sp = selectSP();
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
             }
         }
