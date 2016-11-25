@@ -3,6 +3,9 @@ using System.Collections;
 
 /*
     * AUTHOR: Trenton Pottruff
+    * 
+    * CONTRIBUTOR: Garrett Nicholas
+    * (added the checks for the player getting hurt by coliding with an enemy)
 */
 
 [RequireComponent(typeof(Player))]
