@@ -3,6 +3,8 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class MapSelectionDisplay : MonoBehaviour {
+    public MenuManager menuManager;
+
     public GameObject mapSelectButtonPrefab;
 
     private void Start() {
@@ -25,5 +27,9 @@ public class MapSelectionDisplay : MonoBehaviour {
 
     public void PlayGame() {
         SceneManager.LoadScene("Game");
+    }
+
+    public void BackToMain() {
+        menuManager.ChangeMenu(0);
     }
 }
