@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -6,9 +7,9 @@ using System.Collections;
 */
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class NetworkPlayerMovement : NetworkBehaviour {
     public float speed = 5;
-    
+
     private Rigidbody2D rb;
 
     private void Start() {
@@ -16,6 +17,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
+        if (!isLocalPlayer)
+            return;
+
         DoUpdate();
     }
 
