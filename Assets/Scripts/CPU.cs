@@ -3,6 +3,9 @@ using System.Collections;
 
 /*
     * AUTHOR: Trenton Pottruff
+    * 
+    * CONTRIBUTOR: Garrett Nicholas
+    * (Logic for the different types of enemies and balancing)
 */
 
 [RequireComponent(typeof(Health))]

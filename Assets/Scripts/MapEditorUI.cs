@@ -14,6 +14,7 @@ public class MapEditorUI : MonoBehaviour {
     public Text selectedObjName;
     public Toggle selectedObjVisibleToggle;
     public Toggle selectedObjColliderToggle;
+    public Toggle selectedObjSpawnToggle;
     public InputField xField;
     public InputField yField;
     public InputField widthField;
@@ -28,6 +29,7 @@ public class MapEditorUI : MonoBehaviour {
 
             selectedMapObj.visible = selectedObjVisibleToggle.isOn;
             selectedMapObj.hasCollider = selectedObjColliderToggle.isOn;
+            selectedMapObj.isSpawn = selectedObjSpawnToggle.isOn;
 
             if (moveMode) {
                 Vector2 pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -72,6 +74,7 @@ public class MapEditorUI : MonoBehaviour {
                                 selectedObjName.text = selected.name;
                                 selectedObjVisibleToggle.isOn = obj.visible;
                                 selectedObjColliderToggle.isOn = obj.hasCollider;
+                                selectedObjSpawnToggle.isOn = obj.isSpawn;
                                 xField.text = obj.transform.position.x.ToString();
                                 yField.text = obj.transform.position.y.ToString();
                                 widthField.text = obj.transform.localScale.x.ToString();
