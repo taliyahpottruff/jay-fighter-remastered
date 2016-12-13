@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -10,13 +11,14 @@ using System.Collections;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerCombat : MonoBehaviour {
+public class PlayerCombat : NetworkBehaviour {
     public bool firing = false;
 
     private Vector2 fireVector = Vector2.zero;
     private Rigidbody2D rb;
 
     private GameObject bulletPrefab;
+    private Vector2 playerPositon = Vector2.zero;
 
     private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
@@ -27,6 +29,11 @@ public class PlayerCombat : MonoBehaviour {
     }
 
     private void Update() {
+        if (!isLocalPlayer)
+            return;
+
+        playerPositon = (Vector2)this.transform.position;
+
         fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
 
         if (fireVector != Vector2.zero)
@@ -43,13 +50,27 @@ public class PlayerCombat : MonoBehaviour {
     }
     private IEnumerator FireBullet() {
         do {
+            if (!isLocalPlayer)
+                break;
+
             if (firing) {
-                Vector2 direction = fireVector.normalized;
+                /*Vector2 direction = fireVector.normalized;
                 GameObject bulletObj = Instantiate(bulletPrefab, this.transform.position + (Vector3)direction, Quaternion.identity) as GameObject;
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
+                bulletObj.GetComponent<Rigidbody2D>().velocity = rb.velocity + (direction * 10);*/
+                CmdFire(playerPositon, fireVector.normalized);
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);
+    }
+
+    [Command]
+    private void CmdFire(Vector2 positon, Vector2 direction) {
+        GameObject bulletObj = Instantiate(bulletPrefab, positon + direction, Quaternion.identity) as GameObject;
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
+        bulletObj.GetComponent<Rigidbody2D>().velocity = rb.velocity + (direction * 10);
+        NetworkServer.Spawn(bulletObj);
     }
 }

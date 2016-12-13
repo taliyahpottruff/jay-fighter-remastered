@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -6,7 +7,7 @@ using System.Collections;
 */
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour {
     public float speed = 5;
     
     private Rigidbody2D rb;
@@ -16,6 +17,9 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
+        if (!isLocalPlayer)
+            return;
+
         Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         Vector2 directionVector = inputVector.normalized;
         rb.velocity = directionVector * speed;
