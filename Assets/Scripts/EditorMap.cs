@@ -74,8 +74,9 @@ public class EditorMap : MonoBehaviour {
             for (int i = 0; i < map.objects.Length; i++) {
                 MapObj mapObj = map.objects[i];
                 GameObject prefab = Resources.Load<GameObject>("Prefabs/MapEditorObjects/" + mapObj.name);
-                GameObject newGO = Instantiate(prefab, new Vector2(mapObj.x, mapObj.y), Quaternion.identity, mapGO.transform) as GameObject;
+                GameObject newGO = Instantiate(prefab, new Vector2(mapObj.x, mapObj.y), Quaternion.identity) as GameObject;
                 newGO.name = prefab.name;
+                newGO.transform.SetParent(mapGO.transform);
                 Vector3 size = Vector3.one;
                 size.x = mapObj.width;
                 size.y = mapObj.height;
