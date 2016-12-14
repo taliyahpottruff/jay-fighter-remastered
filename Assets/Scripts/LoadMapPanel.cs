@@ -25,8 +25,9 @@ public class LoadMapPanel : MonoBehaviour {
         for (int i = 0; i < mapPaths.Length; i++) {
             string mapName = mapPaths[i].Replace(Application.persistentDataPath, "").Replace(".map", "").Replace("/maps\\", "");
             GameObject prefab = Resources.Load<GameObject>("Prefabs/Load Map Option");
-            GameObject go = Instantiate(prefab, content) as GameObject;
+            GameObject go = Instantiate(prefab, Vector3.zero, Quaternion.identity) as GameObject;
             go.name = prefab.name;
+            go.transform.SetParent(content);
             Text button = go.GetComponentInChildren<Text>();
             LoadMapOption option = go.GetComponent<LoadMapOption>();
             button.text = mapName;
