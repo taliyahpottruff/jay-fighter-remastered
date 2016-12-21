@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 /*
     * AUTHOR: Trenton Pottruff
@@ -24,7 +25,7 @@ public class NetworkPlayerMovement : NetworkBehaviour {
     }
 
     private void DoUpdate() {
-        Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 inputVector = new Vector2(CrossPlatformInputManager.GetAxis("Horizontal"), CrossPlatformInputManager.GetAxis("Vertical"));
         Vector2 directionVector = inputVector.normalized;
         rb.velocity = directionVector * speed;
     }
