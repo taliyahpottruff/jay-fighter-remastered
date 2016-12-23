@@ -1,5 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
+
+/*
+    * AUTHOR: Trenton Pottruff
+*/
 
 public class MenuManager : MonoBehaviour {
     public GameObject[] menus;
@@ -16,5 +21,9 @@ public class MenuManager : MonoBehaviour {
 
     public void ExitGame() {
         Application.Quit();
+    }
+
+    public void LoadScene(string sceneName) {
+        SceneManager.LoadScene(sceneName);
     }
 }
