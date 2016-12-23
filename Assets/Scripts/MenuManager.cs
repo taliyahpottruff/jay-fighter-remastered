@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour {
     public GameObject[] menus;
 
     public void ChangeMenu(int menuIndex) {
+        //Loop through the existing menus. Enable the menu that is being changed to and disable all others.
         for (int i = 0; i < menus.Length; i++) {
             if (i == menuIndex) {
                 menus[i].SetActive(true);
