@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using UnityStandardAssets.CrossPlatformInput;
 
 /*
     * AUTHOR: Trenton Pottruff
@@ -19,7 +20,7 @@ public class NetworkPlayerCombat : PlayerCombat {
     private Vector2 playerPositon = Vector2.zero;
 
     private void Start() {
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/NetworkBullet");
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -32,7 +33,7 @@ public class NetworkPlayerCombat : PlayerCombat {
 
         playerPositon = (Vector2)this.transform.position;
 
-        fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
+        fireVector = new Vector2(CrossPlatformInputManager.GetAxis("FireHorizontal"), CrossPlatformInputManager.GetAxis("FireVertical"));
 
         if (fireVector != Vector2.zero)
             firing = true;

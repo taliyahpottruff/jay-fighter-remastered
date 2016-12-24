@@ -15,6 +15,7 @@ public class Health : MonoBehaviour {
     }
 
     public void DoDamage(float attack) {
+
         if (health < attack) {
             //Entity dies
             GameManager.addScore(100);
