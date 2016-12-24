@@ -20,7 +20,7 @@ public class NetworkPlayerCombat : PlayerCombat {
     private Vector2 playerPositon = Vector2.zero;
 
     private void Start() {
-        bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        bulletPrefab = Resources.Load<GameObject>("Prefabs/NetworkBullet");
 
         rb = GetComponent<Rigidbody2D>();
 

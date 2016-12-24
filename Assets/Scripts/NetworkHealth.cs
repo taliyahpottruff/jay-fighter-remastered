@@ -1,20 +1,23 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
     * AUTHOR: Trenton Pottruff
 */
 
-public class Health : MonoBehaviour {
-    public float health = 100;
+public class NetworkHealth : NetworkBehaviour {
+    [SyncVar] public float health = 100;
     private float maxHeath = 100;
-    public void Start() {}
+    public void Start() { }
 
     public float GetHealth() {
-        return health;    
+        return health;
     }
 
     public void DoDamage(float attack) {
+        if (!isServer)
+            return;
 
         if (health < attack) {
             //Entity dies

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 /*
@@ -30,5 +31,9 @@ public class MapSettingsPanel : MonoBehaviour {
     public void ClosePanel() {
         anim.Play("settingsPanel-Close");
         mode = PanelMode.Close;
+    }
+
+    public void BackToMenu() {
+        SceneManager.LoadScene("MainMenu");
     }
 }

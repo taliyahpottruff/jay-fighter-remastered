@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -6,19 +7,22 @@ using System.Collections;
 */
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour {
+public class NetworkBullet : NetworkBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
     private Rigidbody2D rb;
 
     private void Start() {
+        if (!isLocalPlayer)
+            return;
+
         rb = GetComponent<Rigidbody2D>();
 
         rb.velocity = velocityOnAwake;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Health health = other.GetComponent<Health>();
+        NetworkHealth health = other.GetComponent<NetworkHealth>();
 
         Destroy(this.gameObject);
         //Only if the other object has a health component
