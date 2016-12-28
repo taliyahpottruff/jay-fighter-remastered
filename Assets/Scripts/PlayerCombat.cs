@@ -29,7 +29,8 @@ public class PlayerCombat : NetworkBehaviour {
     }
 
     private void Update() {
-        DoUpdate();
+        if (!Game.PAUSED)
+            DoUpdate();
     }
 
     public void DoUpdate() {
