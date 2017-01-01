@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class PauseScreenManager : MonoBehaviour {
@@ -28,5 +29,9 @@ public class PauseScreenManager : MonoBehaviour {
             CloseScreen();
         else
             OpenScreen();
+    }
+
+    public void ExitGame() {
+        SceneManager.LoadScene("MainMenu");
     }
 }
