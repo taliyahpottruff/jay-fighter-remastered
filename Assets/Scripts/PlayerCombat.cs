@@ -11,11 +11,15 @@ using System.Collections;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerCombat : NetworkBehaviour {
     public bool firing = false;
 
+    public AudioClip gunSound;
+
     private Vector2 fireVector = Vector2.zero;
     private Rigidbody2D rb;
+    private AudioSource aSource;
 
     private GameObject bulletPrefab;
     private Vector2 playerPositon = Vector2.zero;
@@ -24,6 +28,7 @@ public class PlayerCombat : NetworkBehaviour {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
 
         rb = GetComponent<Rigidbody2D>();
+        aSource = GetComponent<AudioSource>();
 
         StartCoroutine(FireBullet());
     }
@@ -59,6 +64,7 @@ public class PlayerCombat : NetworkBehaviour {
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
                 bulletObj.GetComponent<Rigidbody2D>().velocity = rb.velocity + (direction * 10);
+                aSource.PlayOneShot(gunSound);
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);

@@ -12,9 +12,13 @@ using UnityStandardAssets.CrossPlatformInput;
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class NetworkPlayerCombat : PlayerCombat {
+    public new AudioClip gunSound;
+
     private Vector2 fireVector = Vector2.zero;
     private Rigidbody2D rb;
+    private AudioSource aSource;
 
     private GameObject bulletPrefab;
     private Vector2 playerPositon = Vector2.zero;
@@ -23,6 +27,7 @@ public class NetworkPlayerCombat : PlayerCombat {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/NetworkBullet");
 
         rb = GetComponent<Rigidbody2D>();
+        aSource = GetComponent<AudioSource>();
 
         StartCoroutine(FireBullet());
     }
@@ -44,6 +49,7 @@ public class NetworkPlayerCombat : PlayerCombat {
     public override IEnumerator FireBullet() {
         do {
             if (firing) {
+                //aSource.PlayOneShot(gunSound);
                 CmdFire(playerPositon, fireVector.normalized);
             }
             yield return new WaitForSeconds(0.1f);
