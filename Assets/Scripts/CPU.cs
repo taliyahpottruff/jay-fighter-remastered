@@ -31,11 +31,15 @@ public class CPU : MonoBehaviour {
 	}
 	
 	void Update() {
-        Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
-        Vector2 targetDirection = (playerPosition - (Vector2) transform.position).normalized;
-        td = targetDirection;
-        rb.velocity = targetDirection * speed;
-        enemyLogic();
+        if (!Game.PAUSED) {
+            Vector2 playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
+            td = targetDirection;
+            rb.velocity = targetDirection * speed;
+            enemyLogic();
+        } else {
+            rb.velocity = Vector2.zero;
+        }
     }
     private void enemyLogic() {
         float duperate = Mathf.Round(Random.Range(0f, 100f));

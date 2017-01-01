@@ -16,7 +16,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Update() {
-        DoUpdate();
+        if (!Game.PAUSED)
+            DoUpdate();
+        else
+            rb.velocity = Vector2.zero;
     }
 
     private void DoUpdate() {

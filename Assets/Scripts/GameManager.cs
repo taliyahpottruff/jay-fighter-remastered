@@ -34,7 +34,10 @@ public class GameManager : MonoBehaviour {
     private Text scoreText;
     private Text healthText;
     private Text roundText;
-    void Start () {
+
+    private void Start() {
+        Game.PAUSED = false;
+
         basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
         fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Fast Enemy");
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
