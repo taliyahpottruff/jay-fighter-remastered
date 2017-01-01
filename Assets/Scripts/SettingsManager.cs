@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/*
+    * AUTHOR: Trenton Pottruff
+*/
 public class SettingsManager : MonoBehaviour {
     private void Start() {
         GameObject.Find("Fullscreen Toggle").GetComponent<Toggle>().isOn = Screen.fullScreen;
