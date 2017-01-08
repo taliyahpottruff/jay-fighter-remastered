@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour {
     public GameObject GAMEOVER;
 
     private Text scoreText;
-    private Text healthText;
+    private Slider healthText;
     private Text roundText;
 
     private void Start() {
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
         scoreText = SCORE.GetComponent<Text>();
-        healthText = HEALTH.GetComponent<Text>();
+        healthText = HEALTH.GetComponent<Slider>();
         roundText = ROUND.GetComponent<Text>();
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
@@ -61,8 +61,11 @@ public class GameManager : MonoBehaviour {
 	    if(scoreText.text != Score.ToString()) {
             scoreText.text = Score.ToString();
         }
-        if(healthText.text != Health.GetHealth().ToString()) {
-            healthText.text = Health.GetHealth().ToString();
+        if(healthText.value != Health.GetHealth()) {
+            healthText.value = Health.GetHealth();
+        }
+        if(healthText.maxValue != Health.GetMaxHealth()) {
+            healthText.maxValue = Health.GetMaxHealth();
         }
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
