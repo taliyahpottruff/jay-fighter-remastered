@@ -13,6 +13,9 @@ public class Health : MonoBehaviour {
     public float GetHealth() {
         return health;    
     }
+    public float GetMaxHealth() {
+        return maxHeath;
+    }
 
     public void DoDamage(float attack) {
 
