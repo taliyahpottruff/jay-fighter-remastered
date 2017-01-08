@@ -23,6 +23,14 @@ public class SettingsManager : MonoBehaviour {
         resolutionHeight.text = Screen.currentResolution.height.ToString();
     }
 
+    public void OpenScreen() {
+        this.gameObject.SetActive(true);
+    }
+
+    public void CloseScreen() {
+        this.gameObject.SetActive(false);
+    }
+
     public void SetFullscreen(bool fullscreen) {
         Screen.fullScreen = fullscreen;
     }
@@ -56,5 +64,9 @@ public class SettingsManager : MonoBehaviour {
         SetResolutionBoth(parts[0], parts[1]);
         resolutionWidth.text = parts[0];
         resolutionHeight.text = parts[1];
+    }
+
+    public void SetSfxVolume(float value) {
+        Game.SFX_VOLUME = value;
     }
 }

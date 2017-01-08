@@ -39,6 +39,9 @@ public class PlayerCombat : NetworkBehaviour {
     }
 
     public void DoUpdate() {
+        //Set sfx audio volume
+        aSource.volume = Game.SFX_VOLUME;
+
         playerPositon = (Vector2)this.transform.position;
 
         fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));

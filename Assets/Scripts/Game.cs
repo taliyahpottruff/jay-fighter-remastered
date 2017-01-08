@@ -7,6 +7,7 @@ using System.IO;
 public class Game
 {
     public static bool PAUSED = false;
+    public static float SFX_VOLUME = 1f;
     public static string CURRENT_MAP = "Basic";
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
         {"Basic", new Map("Basic", new MapObj[] {
