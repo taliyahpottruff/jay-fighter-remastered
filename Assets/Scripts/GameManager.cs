@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     private GameObject player;
     public bool hasStarted = false;
     public static long Score = 0;
+    public static long Money = 0;
     public int Round = 0;
     private int toSpawn = 1;
     private bool hasDied = false;
@@ -28,11 +29,15 @@ public class GameManager : MonoBehaviour {
 
     public GameObject SCORE;
     public GameObject HEALTH;
+    public GameObject MONEY;
+    public GameObject HEALTHTX;
     public GameObject ROUND;
     public GameObject GAMEOVER;
 
     private Text scoreText;
-    private Slider healthText;
+    private Slider healthSlider;
+    private Text healthText;
+    private Text moneyText;
     private Text roundText;
 
     private void Start() {
@@ -44,7 +49,9 @@ public class GameManager : MonoBehaviour {
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
         scoreText = SCORE.GetComponent<Text>();
-        healthText = HEALTH.GetComponent<Slider>();
+        healthText = HEALTHTX.GetComponent<Text>();
+        healthSlider = HEALTH.GetComponent<Slider>();
+        moneyText = MONEY.GetComponent<Text>();
         roundText = ROUND.GetComponent<Text>();
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
@@ -61,11 +68,17 @@ public class GameManager : MonoBehaviour {
 	    if(scoreText.text != Score.ToString()) {
             scoreText.text = Score.ToString();
         }
-        if(healthText.value != Health.GetHealth()) {
-            healthText.value = Health.GetHealth();
+        if (healthText.text != Health.GetHealth().ToString()) {
+            healthText.text = Health.GetHealth().ToString();
         }
-        if(healthText.maxValue != Health.GetMaxHealth()) {
-            healthText.maxValue = Health.GetMaxHealth();
+        if (moneyText.text != ("$" + Money.ToString())) {
+            moneyText.text = "$" + Money.ToString();
+        }
+        if (healthSlider.value != Health.GetHealth()) {
+            healthSlider.value = Health.GetHealth();
+        }
+        if(healthSlider.maxValue != Health.GetMaxHealth()) {
+            healthSlider.maxValue = Health.GetMaxHealth();
         }
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();

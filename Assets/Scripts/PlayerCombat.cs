@@ -16,6 +16,7 @@ public class PlayerCombat : NetworkBehaviour {
     public bool firing = false;
 
     public AudioClip gunSound;
+    public AudioClip coinpickup;
 
     private Vector2 fireVector = Vector2.zero;
     private Rigidbody2D rb;
@@ -54,7 +55,11 @@ public class PlayerCombat : NetworkBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other) {
         Health health = other.GetComponent<Health>();
+        CoinScript Coin = other.GetComponent<CoinScript>();
         CPU cpu = other.GetComponent<CPU>();
+        if(Coin != null) {
+            aSource.PlayOneShot(coinpickup);
+        }
         if(cpu != null) {
             this.gameObject.GetComponent<Health>().DoDamage(5);
         }
