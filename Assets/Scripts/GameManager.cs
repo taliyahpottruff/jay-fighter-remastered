@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
     private GameObject player;
     public bool hasStarted = false;
     public static long Score = 0;
-    public static long Money = 0;
+    public static long Coins = 0;
     public int Round = 0;
     private int toSpawn = 1;
     private bool hasDied = false;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour {
 
     public GameObject SCORE;
     public GameObject HEALTH;
-    public GameObject MONEY;
+    public GameObject COINS;
     public GameObject HEALTHTX;
     public GameObject ROUND;
     public GameObject GAMEOVER;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
     private Text scoreText;
     private Slider healthSlider;
     private Text healthText;
-    private Text moneyText;
+    private Text coinsText;
     private Text roundText;
 
     private void Start() {
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
         healthSlider = HEALTH.GetComponent<Slider>();
-        moneyText = MONEY.GetComponent<Text>();
+        coinsText = COINS.GetComponent<Text>();
         roundText = ROUND.GetComponent<Text>();
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
@@ -71,8 +71,8 @@ public class GameManager : MonoBehaviour {
         if (healthText.text != Health.GetHealth().ToString()) {
             healthText.text = Health.GetHealth().ToString();
         }
-        if (moneyText.text != ("$" + Money.ToString())) {
-            moneyText.text = "$" + Money.ToString();
+        if (coinsText.text != ("$" + Coins.ToString())) {
+            coinsText.text = "$" + Coins.ToString();
         }
         if (healthSlider.value != Health.GetHealth()) {
             healthSlider.value = Health.GetHealth();
