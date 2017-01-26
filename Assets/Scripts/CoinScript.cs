@@ -10,7 +10,7 @@ public class CoinScript : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         Player player = other.GetComponent<Player>();
         if (player != null) {
-            GameManager.Coins += 100;
+            GameManager.Coins += 1;
             Destroy(this.gameObject);
         }
     }

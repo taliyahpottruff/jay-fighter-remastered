@@ -29,8 +29,8 @@ public class Health : MonoBehaviour {
             CPU cpu = this.gameObject.GetComponent<CPU>();
             if (cpu != null) {
                 Instantiate(Coin, this.gameObject.transform.position, Quaternion.identity);
+                GameManager.addScore(cpu.ScoreOnDeath);
             }
-            GameManager.addScore(100);
             Destroy(this.gameObject);
         }
         else {

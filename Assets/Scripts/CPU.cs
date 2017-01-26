@@ -17,6 +17,7 @@ public class CPU : MonoBehaviour {
     public bool shooter = false;
     public bool duplicator = false;
     public bool firing = false;
+    public int ScoreOnDeath;
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
     private GameObject basicEnemy;
