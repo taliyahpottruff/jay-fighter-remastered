@@ -7,10 +7,12 @@ using UnityEngine;
 */
 
 public class CoinScript : MonoBehaviour {
+
+    public int coinValue;
     private void OnTriggerEnter2D(Collider2D other) {
         Player player = other.GetComponent<Player>();
         if (player != null) {
-            GameManager.Coins += 1;
+            GameManager.Coins += this.coinValue;
             Destroy(this.gameObject);
         }
     }
