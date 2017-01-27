@@ -9,6 +9,7 @@ public class Game
     public static bool PAUSED = false;
     public static float SFX_VOLUME = 1f;
     public static string CURRENT_MAP = "Basic";
+
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
         {"Basic", new Map("Basic", new MapObj[] {
             //Objects
@@ -28,6 +29,9 @@ public class Game
             new MapObj("Test Object", 0, 0, 7, 3, true, false),
             new MapObj("Test Object", 10, 10, 1, 1)
         })}
+    };
+    public static Dictionary<string, Item> ITEMS = new Dictionary<string, Item>() {
+        {"healthPotion", new HealthPotion()}
     };
 
     public static Map LoadCurrentMap() {
