@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Item {
     private int amount;
     private string name;
+    private int cost;
     private Sprite sprite;
     
     public void Consume(Player player) {
@@ -35,6 +36,14 @@ public abstract class Item {
 
     public Sprite GetSprite() {
         return sprite;
+    }
+
+    public int GetCost() {
+        return cost;
+    }
+
+    public void SetCost(int cost) {
+        this.cost = cost;
     }
 
     protected abstract void Action(Player player);

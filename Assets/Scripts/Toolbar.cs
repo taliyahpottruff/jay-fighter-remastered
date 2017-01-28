@@ -9,6 +9,13 @@ public class Toolbar : MonoBehaviour {
         StartCoroutine(DelayedStart());
     }
 
+    public void Update() {
+        if (inventory.inventory.Count <= 0)
+            this.transform.parent.gameObject.SetActive(false);
+        else
+            this.transform.parent.gameObject.SetActive(true);
+    }
+
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.1f);
 

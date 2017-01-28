@@ -7,12 +7,14 @@ public class HealthPotion : Item {
     public HealthPotion() {
         AddItems(1);
         SetName("Health Potion");
+        SetCost(3);
         SetSprite(Resources.Load<Sprite>("Sprites/Items/HealthPotion"));
     }
 
     public HealthPotion(int amount) {
         AddItems(amount);
         SetName("Health Potion");
+        SetCost(3);
         SetSprite(Resources.Load<Sprite>("Sprites/Items/HealthPotion"));
     }
 
