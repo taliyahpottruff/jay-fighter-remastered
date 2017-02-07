@@ -18,6 +18,11 @@ public class PlayerCombat : NetworkBehaviour {
     public AudioClip gunSound;
     public AudioClip coinpickup;
 
+    public GameObject topDown;
+    public GameObject topLeft;
+    public GameObject topRight;
+    public GameObject topUp;
+
     private Vector2 fireVector = Vector2.zero;
     private Rigidbody2D rb;
     private AudioSource aSource;
@@ -51,6 +56,43 @@ public class PlayerCombat : NetworkBehaviour {
             firing = true;
         else
             firing = false;
+
+        float horizontal = Mathf.Abs(fireVector.x);
+        float vertical = Mathf.Abs(fireVector.y);
+
+        if (horizontal != 0 || vertical != 0) {
+            if (horizontal > vertical) {
+                if (fireVector.x > 0) {
+                    //Right
+                    topDown.SetActive(false);
+                    topLeft.SetActive(false);
+                    topRight.SetActive(true);
+                    topUp.SetActive(false);
+                } else {
+                    //Left
+                    topDown.SetActive(false);
+                    topLeft.SetActive(true);
+                    topRight.SetActive(false);
+                    topUp.SetActive(false);
+                }
+            }
+            else {
+                if (fireVector.y > 0) {
+                    //Up
+                    topDown.SetActive(false);
+                    topLeft.SetActive(false);
+                    topRight.SetActive(false);
+                    topUp.SetActive(true);
+                }
+                else {
+                    //Down
+                    topDown.SetActive(true);
+                    topLeft.SetActive(false);
+                    topRight.SetActive(false);
+                    topUp.SetActive(false);
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
