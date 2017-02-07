@@ -30,6 +30,10 @@ public class PlayerCombat : NetworkBehaviour {
     private GameObject bulletPrefab;
     private Vector2 playerPositon = Vector2.zero;
 
+    private Transform shooter0;
+    private Transform shooter1;
+    private bool shooter = false;
+
     private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
 
@@ -68,12 +72,16 @@ public class PlayerCombat : NetworkBehaviour {
                     topLeft.SetActive(false);
                     topRight.SetActive(true);
                     topUp.SetActive(false);
+                    shooter0 = topRight.transform.FindChild("Right Shooter"); 
+                    shooter1 = topRight.transform.FindChild("Right Shooter");
                 } else {
                     //Left
                     topDown.SetActive(false);
                     topLeft.SetActive(true);
                     topRight.SetActive(false);
                     topUp.SetActive(false);
+                    shooter0 = topLeft.transform.FindChild("Left Shooter");
+                    shooter1 = topLeft.transform.FindChild("Left Shooter");
                 }
             }
             else {
@@ -83,6 +91,8 @@ public class PlayerCombat : NetworkBehaviour {
                     topLeft.SetActive(false);
                     topRight.SetActive(false);
                     topUp.SetActive(true);
+                    shooter0 = topUp.transform.FindChild("Left Shooter");
+                    shooter1 = topUp.transform.FindChild("Right Shooter");
                 }
                 else {
                     //Down
@@ -90,6 +100,8 @@ public class PlayerCombat : NetworkBehaviour {
                     topLeft.SetActive(false);
                     topRight.SetActive(false);
                     topUp.SetActive(false);
+                    shooter0 = topDown.transform.Find("Left Shooter");
+                    shooter1 = topDown.transform.Find("Right Shooter");
                 }
             }
         }
@@ -110,7 +122,19 @@ public class PlayerCombat : NetworkBehaviour {
         do {
             if (firing) {
                 Vector2 direction = fireVector.normalized;
-                GameObject bulletObj = Instantiate(bulletPrefab, this.transform.position + (Vector3)direction, Quaternion.identity) as GameObject;
+
+                Vector3 pos = Vector3.zero;
+
+                if (shooter) {
+                    pos = shooter0.position;
+                    shooter = false;
+                }
+                else {
+                    pos = shooter1.position;
+                    shooter = true;
+                }
+
+                GameObject bulletObj = Instantiate(bulletPrefab, pos + (Vector3)direction, Quaternion.identity) as GameObject;
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
                 bulletObj.GetComponent<Rigidbody2D>().velocity = rb.velocity + (direction * 10);
