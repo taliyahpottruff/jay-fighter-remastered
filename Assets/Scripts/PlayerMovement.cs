@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -6,7 +7,7 @@ using System.Collections;
 */
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : NetworkBehaviour {
     public float speed = 5;
     
     public SpriteRenderer baseRenderer;

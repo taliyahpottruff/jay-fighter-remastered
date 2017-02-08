@@ -55,8 +55,8 @@ public class GameManager : MonoBehaviour {
         roundText = ROUND.GetComponent<Text>();
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
-        Health = player.GetComponent<Health>();
+        //player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
+        //Health = player.GetComponent<Health>();
 
         //TP: Added a coroutine
         StartCoroutine(DelayedStartSpawn());
