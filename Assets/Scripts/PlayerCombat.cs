@@ -120,7 +120,7 @@ public class PlayerCombat : NetworkBehaviour {
     }
     public virtual IEnumerator FireBullet() {
         do {
-            if (firing && isLocalPlayer) {
+            if (firing && isLocalPlayer && !Game.PAUSED) {
                 Vector2 direction = fireVector.normalized;
 
                 Vector3 pos = Vector3.zero;
