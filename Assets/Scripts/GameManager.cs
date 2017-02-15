@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour {
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         //player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
-        //Health = player.GetComponent<Health>();
+        
 
         //TP: Added a coroutine
         StartCoroutine(DelayedStartSpawn());
@@ -158,6 +158,8 @@ public class GameManager : MonoBehaviour {
     //AUTHOR: Trenton Pottruff
     private IEnumerator DelayedStartSpawn() {
         yield return new WaitForSeconds(1f);
+        player = GameObject.FindGameObjectWithTag("Player");
+        Health = player.GetComponent<Health>();
 
         //Spawning code originally by Garrett Nicholas
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
