@@ -10,11 +10,21 @@ public class Bullet : MonoBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
     private Rigidbody2D rb;
+    private Vector2 velocity;
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = velocityOnAwake;
+        velocity = velocityOnAwake;
+    }
+
+    private void Update() {
+        if (Game.PAUSED) {
+            rb.velocity = Vector2.zero;
+        } else {
+            rb.velocity = velocity;
+            velocity = rb.velocity;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other) {

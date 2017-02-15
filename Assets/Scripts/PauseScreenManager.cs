@@ -24,6 +24,10 @@ public class PauseScreenManager : MonoBehaviour {
         Game.PAUSED = false;
     }
 
+    public void CloseScreenWithoutUnpausing() {
+
+    }
+
     public void ToggleScreen() {
         if (opened)
             CloseScreen();
