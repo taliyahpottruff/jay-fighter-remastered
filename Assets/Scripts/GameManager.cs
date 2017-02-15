@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 /*
     * AUTHOR: Garrett Nicholas
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
     private Health Health;
     public GameObject[] spawned = new GameObject[900];
     private GameObject[] spawnPoints;
+    private NetworkManager nm;
 
     private GameObject basicEnemy;
     private GameObject fastEnemy;
@@ -56,7 +58,8 @@ public class GameManager : MonoBehaviour {
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         //player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
-        
+
+        nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
 
         //TP: Added a coroutine
         StartCoroutine(DelayedStartSpawn());
@@ -85,6 +88,8 @@ public class GameManager : MonoBehaviour {
         }
         if (hasStarted) {
             if (player == null && hasDied == false) {
+                Debug.Log("Player has died!");
+                nm.StopHost();
                 hasDied = true;
                 GAMEOVER.SetActive(true);
                 for (int i = 0; i < toSpawn; i++) {
@@ -96,10 +101,10 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void resetGame() {
-        Score = 0;
+        /*Score = 0;
         Round = 0;
-        Scene scene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(scene.name);
+        Scene scene = SceneManager.GetActiveScene();*/
+        SceneManager.LoadScene("MainMenu");
     }
     public void handleRound() {
         if (hasDied) return;
@@ -118,6 +123,7 @@ public class GameManager : MonoBehaviour {
                 return false;
             }
         }
+        
         return true;
     }
     //Selects a spawnpoint (this returns an int to be used with the array)

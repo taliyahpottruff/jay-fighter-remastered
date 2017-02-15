@@ -14,4 +14,8 @@ public class Store : MonoBehaviour {
             Game.PAUSED = b;
         }
     }
+
+    public void SetGamePaused(bool b) {
+        Game.PAUSED = b;
+    }
 }

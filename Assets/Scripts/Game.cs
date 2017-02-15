@@ -7,7 +7,7 @@ using System.IO;
 public class Game
 {
     public static bool PAUSED = false;
-    public static float SFX_VOLUME = 1f;
+    public static float SFX_VOLUME = 0.5f;
     public static string CURRENT_MAP = "Basic";
 
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
@@ -31,7 +31,7 @@ public class Game
         })}
     };
     public static Dictionary<string, Item> ITEMS = new Dictionary<string, Item>() {
-        {"healthPotion", new HealthPotion()}
+        {"Health Potion", new HealthPotion()}
     };
 
     public static Map LoadCurrentMap() {
