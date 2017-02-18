@@ -21,12 +21,16 @@ public class CPU : MonoBehaviour {
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
     private GameObject basicEnemy;
+    public GameObject FullHealthBar;
+    public GameObject HealthBar;
     private Vector2 td;
+    private Health health;
 
 	private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
         basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/DupeMinion");
         rb = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
         StartCoroutine(FireBullet());
         speed = Random.Range(minSpeed, maxSpeed);
 	}
@@ -37,6 +41,7 @@ public class CPU : MonoBehaviour {
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
             td = targetDirection;
             rb.velocity = targetDirection * speed;
+            HealthBar.transform.localScale = new Vector3((float)(health.health / 100), 0.9081425f, 0.908152f);
             enemyLogic();
         } else {
             rb.velocity = Vector2.zero;
