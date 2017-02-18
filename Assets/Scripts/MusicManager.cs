@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour {
     public AudioClip[] songs;
+    public MusicNotification musicNotification;
 
     private AudioSource aSource;
 
@@ -34,6 +35,10 @@ public class MusicManager : MonoBehaviour {
             AudioClip nextClip = songs[songQueue[nextSong]];
             aSource.PlayOneShot(nextClip);
             Debug.Log("Now playing " + nextClip.name);
+            string[] parts = nextClip.name.Split('-');
+            musicNotification.artist = parts[0];
+            musicNotification.song = parts[1].Remove(0, 1);
+            musicNotification.Open();
             nextSong++;
 
             return;
