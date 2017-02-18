@@ -54,9 +54,9 @@ public class PlayerCombat : NetworkBehaviour {
 
         playerPositon = (Vector2)this.transform.position;
 
-        fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
+        fireVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position;
 
-        if (fireVector != Vector2.zero)
+        if (Input.GetMouseButton(0))
             firing = true;
         else
             firing = false;
