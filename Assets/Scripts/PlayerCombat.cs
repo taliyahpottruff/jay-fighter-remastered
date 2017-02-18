@@ -34,11 +34,14 @@ public class PlayerCombat : NetworkBehaviour {
     private Transform shooter1;
     private bool shooter = false;
 
+    private Player player;
+
     private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
 
         rb = GetComponent<Rigidbody2D>();
         aSource = GetComponent<AudioSource>();
+        player = GetComponent<Player>();
 
         StartCoroutine(FireBullet());
     }
