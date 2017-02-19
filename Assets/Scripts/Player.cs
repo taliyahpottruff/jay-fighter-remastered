@@ -24,7 +24,7 @@ public class Player : NetworkBehaviour {
     }
 
     private void Update() {
-        if (Input.anyKey && !Input.GetButton("Fire1"))
+        if ((Input.anyKey && !Input.GetButton("Fire1")) || Input.GetMouseButton(0))
             currentScheme = ControlScheme.Keyboard;
         else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             currentScheme = ControlScheme.Gamepad;
