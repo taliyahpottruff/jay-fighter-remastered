@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         Game.PAUSED = false;
 
-        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Bullets"), LayerMask.NameToLayer("Drops"), true);
 
         basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");

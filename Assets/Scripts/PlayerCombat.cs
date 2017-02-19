@@ -62,8 +62,6 @@ public class PlayerCombat : NetworkBehaviour {
         else
             fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
 
-        Debug.Log(fireVector);
-
         if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
             firing = true;
         else
@@ -123,7 +121,8 @@ public class PlayerCombat : NetworkBehaviour {
             aSource.PlayOneShot(coinpickup);
         }
         if(cpu != null) {
-            this.gameObject.GetComponent<Health>().DoDamage(5);
+            //Do damage to player if other is an Enemy
+            //this.gameObject.GetComponent<Health>().DoDamage(5);
         }
     }
     public virtual IEnumerator FireBullet() {
