@@ -34,11 +34,14 @@ public class PlayerCombat : NetworkBehaviour {
     private Transform shooter1;
     private bool shooter = false;
 
+    private Player player;
+
     private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
 
         rb = GetComponent<Rigidbody2D>();
         aSource = GetComponent<AudioSource>();
+        player = GetComponent<Player>();
 
         StartCoroutine(FireBullet());
     }
@@ -54,9 +57,14 @@ public class PlayerCombat : NetworkBehaviour {
 
         playerPositon = (Vector2)this.transform.position;
 
-        fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
+        if (player.currentScheme == ControlScheme.Keyboard)
+            fireVector = Camera.main.ScreenToWorldPoint(Input.mousePosition) - this.transform.position;
+        else
+            fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
 
-        if (fireVector != Vector2.zero)
+        Debug.Log(fireVector);
+
+        if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
             firing = true;
         else
             firing = false;

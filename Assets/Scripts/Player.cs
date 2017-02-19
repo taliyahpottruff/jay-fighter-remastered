@@ -9,6 +9,7 @@ using System.Collections;
 [RequireComponent(typeof(Health))]
 public class Player : NetworkBehaviour {
     public string username = "Player";
+    public ControlScheme currentScheme = ControlScheme.Keyboard;
 
     private SpriteRenderer sr;
     private Health health;
@@ -20,6 +21,13 @@ public class Player : NetworkBehaviour {
 
     public void Start() {
         health = GetComponent<Health>();
+    }
+
+    private void Update() {
+        if (Input.anyKey && !Input.GetButton("Fire1"))
+            currentScheme = ControlScheme.Keyboard;
+        else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+            currentScheme = ControlScheme.Gamepad;
     }
 
     public void GiveHealth(int amount) {
