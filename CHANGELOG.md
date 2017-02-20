@@ -9,3 +9,4 @@
 - Added health bars to enemies.
 - Toolbar is no longer briefly visible at the beginning of a game.
 - Bullets now go through coins.
+- Bullets also no longer collide with or hurt the shooting entity.

@@ -62,8 +62,6 @@ public class PlayerCombat : NetworkBehaviour {
         else
             fireVector = new Vector2(Input.GetAxis("FireHorizontal"), Input.GetAxis("FireVertical"));
 
-        Debug.Log(fireVector);
-
         if (Input.GetMouseButton(0) || Input.GetButton("Fire1"))
             firing = true;
         else
@@ -123,7 +121,8 @@ public class PlayerCombat : NetworkBehaviour {
             aSource.PlayOneShot(coinpickup);
         }
         if(cpu != null) {
-            this.gameObject.GetComponent<Health>().DoDamage(5);
+            //Do damage to player if other is an Enemy
+            //this.gameObject.GetComponent<Health>().DoDamage(5);
         }
     }
     public virtual IEnumerator FireBullet() {
@@ -142,10 +141,12 @@ public class PlayerCombat : NetworkBehaviour {
                     shooter = true;
                 }
 
-                GameObject bulletObj = Instantiate(bulletPrefab, pos + (Vector3)direction, Quaternion.identity) as GameObject;
+                GameObject bulletObj = Instantiate(bulletPrefab, pos, Quaternion.identity) as GameObject;
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
-                bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
-                bulletObj.GetComponent<Rigidbody2D>().velocity = rb.velocity + (direction * 10);
+                bullet.owner = this.transform;
+                Debug.Log(direction);
+                bullet.SetVelocityOnAwake((direction * 10));
+                bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
                 aSource.PlayOneShot(gunSound);
             }
             yield return new WaitForSeconds(0.1f);

@@ -9,6 +9,7 @@ using System.Collections;
 public class Bullet : MonoBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
+    public Transform owner;
     private Rigidbody2D rb;
     private Vector2 velocity;
 
@@ -28,14 +29,15 @@ public class Bullet : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        Health health = other.GetComponent<Health>();
+        if (other.transform != owner) {
+            Health health = other.GetComponent<Health>();
 
-        Destroy(this.gameObject);
-        //Only if the other object has a health component
-        if (health != null) {
-            health.DoDamage(damage);
+            Destroy(this.gameObject);
+            //Only if the other object has a health component
+            if (health != null) {
+                health.DoDamage(damage);
+            }
         }
-
     }
 
     public void SetVelocity(Vector2 newVelocity) {
