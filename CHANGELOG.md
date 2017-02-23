@@ -9,14 +9,13 @@
 - Removed the old camera and replaced it with a smooth camera that only follows the player.
 - Added health bars to enemies.
 - Health bars only show up after hitting an enemy, and disappear after 5 seconds.
+- You can use the ESC key to close the store as well.
+### Bugfixes
 - Toolbar is no longer briefly visible at the beginning of a game.
 - Bullets now go through coins.
 - Bullets also no longer collide with or hurt the shooting entity.
-- you can use the ESC key to close the store as well.
-### Bugfixes
 - Store exit mechanics are a bit smarter now.
 - Game UI properly hides and unhides based on the state of the Pause Menu.
 - Health can no longer go past maxHealth.
 - Fixed issues with melee attacks.
 - You can no longer buy as many items as you want (e.g. added check for coin count)
-
