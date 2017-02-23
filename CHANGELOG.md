@@ -10,6 +10,7 @@
 - Added health bars to enemies.
 - Health bars only show up after hitting an enemy, and disappear after 5 seconds.
 - You can use the ESC key to close the store as well.
+- Coins now "burst" out from a dying enemy.
 ### Bugfixes
 - Toolbar is no longer briefly visible at the beginning of a game.
 - Bullets now go through coins.

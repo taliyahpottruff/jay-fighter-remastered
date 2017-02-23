@@ -19,11 +19,14 @@ public class CPU : MonoBehaviour {
     public bool duplicator = false;
     public bool firing = false;
     public int ScoreOnDeath;
+    public int minCoins;
+    public int maxCoins;
+    public GameObject FullHealthBar;
+    public GameObject HealthBar;
+
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
     private GameObject basicEnemy;
-    public GameObject FullHealthBar;
-    public GameObject HealthBar;
     private Vector2 td;
     private Health health;
     private GameObject player;
@@ -31,8 +34,14 @@ public class CPU : MonoBehaviour {
     private RaycastHit2D meleeHit;
     private Timer HealthBarTimer = new Timer();
     private bool hideHealth;
+    private GameObject BronzeCoin;
+    private GameObject SilverCoin;
+    private GameObject GoldCoin;
 
-	private void Start() {
+    private void Start() {
+        BronzeCoin = Resources.Load<GameObject>("Prefabs/BronzeCoin");
+        SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
+        GoldCoin = Resources.Load<GameObject>("Prefabs/GoldCoin");
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
         basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/DupeMinion");
         rb = GetComponent<Rigidbody2D>();
@@ -61,6 +70,43 @@ public class CPU : MonoBehaviour {
             rb.velocity = Vector2.zero;
         }
     }
+
+    public void DropCoins() {
+        int drop = Random.Range(minCoins, maxCoins+1);
+        int goldCoins = drop / 10;
+        int goldRemain = drop % 10;
+        int silverCoins = goldRemain / 5;
+        int bronzeCoins = goldRemain % 5;
+
+        //Spawn Gold Coins
+        for (int i = 0; i < goldCoins; i++) {
+            GameObject gold = Instantiate(GoldCoin, this.gameObject.transform.position, Quaternion.identity);
+            Rigidbody2D rb = gold.GetComponent<Rigidbody2D>();
+            Vector2 direction = Vector2.up;
+            float angle = Random.Range(0f, 360f);
+            direction = Quaternion.Euler(0, 0, angle) * direction;
+            rb.AddForce(direction * 5, ForceMode2D.Impulse);
+        }
+        //Spawn Silver Coins
+        for (int i = 0; i < silverCoins; i++) {
+            GameObject silver = Instantiate(SilverCoin, this.gameObject.transform.position, Quaternion.identity);
+            Rigidbody2D rb = silver.GetComponent<Rigidbody2D>();
+            Vector2 direction = Vector2.up;
+            float angle = Random.Range(0f, 360f);
+            direction = Quaternion.Euler(0, 0, angle) * direction;
+            rb.AddForce(direction * 5, ForceMode2D.Impulse);
+        }
+        //Spawn Bronze Coins
+        for (int i = 0; i < bronzeCoins; i++) {
+            GameObject bronze = Instantiate(BronzeCoin, this.gameObject.transform.position, Quaternion.identity);
+            Rigidbody2D rb = bronze.GetComponent<Rigidbody2D>();
+            Vector2 direction = Vector2.up;
+            float angle = Random.Range(0f, 360f);
+            direction = Quaternion.Euler(0, 0, angle) * direction;
+            rb.AddForce(direction * 5, ForceMode2D.Impulse);
+        }
+    }
+
     private void EnemyLogic() {
         float duperate = Mathf.Round(Random.Range(0f, 100f));
         float firerate = Mathf.Round(Random.Range(0f, 1.5f));
