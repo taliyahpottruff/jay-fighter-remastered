@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Timers;
 
 /*
     * AUTHOR: Trenton Pottruff
@@ -28,6 +29,8 @@ public class CPU : MonoBehaviour {
     private GameObject player;
     private bool melee = false;
     private RaycastHit2D meleeHit;
+    private Timer HealthBarTimer = new Timer();
+    private bool hideHealth;
 
 	private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
@@ -36,14 +39,17 @@ public class CPU : MonoBehaviour {
         health = GetComponent<Health>();
         speed = Random.Range(minSpeed, maxSpeed);
         player = GameObject.FindGameObjectWithTag("Player");
-
+        FullHealthBar.SetActive(false);
         StartCoroutine(FireBullet());
         StartCoroutine(MeleeAttack());
 	}
-	
-	void Update() {
-        player = GameObject.FindGameObjectWithTag("Player");
 
+    void Update() {
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (hideHealth) {
+            FullHealthBar.SetActive(false);
+            hideHealth = false;
+        }
         if (!Game.PAUSED) {
             Vector2 playerPosition = player.transform.position;
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
@@ -72,9 +78,9 @@ public class CPU : MonoBehaviour {
                 meleeHit = Physics2D.Raycast(this.transform.position, playerDirection, 2f, 1 << LayerMask.NameToLayer("Player"));
                 Debug.DrawRay(this.transform.position, playerDirection * 2, Color.red, 5000);
                 melee = (bool) meleeHit;
-                Debug.Log(melee);
-            }
-            
+            } else {
+                melee = false;
+            }            
         }
     }
 
@@ -100,5 +106,21 @@ public class CPU : MonoBehaviour {
             }
             yield return new WaitForSeconds(1);
         }
+    }
+    public void resetTimer() {
+        FullHealthBar.SetActive(true);
+        HealthBarTimer.Stop();
+        HealthBarTimer.Dispose();
+        HealthBarTimer = new Timer(5000);
+        HealthBarTimer.Elapsed += (sender, e) => HandleTimer();
+        HealthBarTimer.Start();
+    }
+    public void disposeTimer() {
+        HealthBarTimer.Stop();
+        HealthBarTimer.Dispose();
+    }
+    private void HandleTimer() {
+        hideHealth = true;
+        HealthBarTimer.Stop();
     }
 }

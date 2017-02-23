@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +25,7 @@ public class StoreItemButton : MonoBehaviour {
     }
 
     public void BuyItem() {
+        if (GameManager.Coins < cost) return;
         GameManager.Coins -= cost;
 
         //Loop through inventory to see if item already exists

@@ -18,6 +18,11 @@ public class Health : MonoBehaviour {
         SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
         GoldCoin = Resources.Load<GameObject>("Prefabs/GoldCoin");
     }
+    public void Update() {
+        if(health > maxHeath) {
+            health = maxHeath;
+        }
+    }
 
     public float GetHealth() {
         return health;    
@@ -32,6 +37,7 @@ public class Health : MonoBehaviour {
             //Entity dies
             CPU cpu = this.gameObject.GetComponent<CPU>();
             if (cpu != null) {
+                cpu.disposeTimer();
                 if (cpu.shooter) {
                     Instantiate(GoldCoin, this.gameObject.transform.position, Quaternion.identity);
                 }else if (cpu.duplicator) {
@@ -56,6 +62,10 @@ public class Health : MonoBehaviour {
         }
         else {
             health -= attack;
+            CPU cpu = this.gameObject.GetComponent<CPU>();
+            if (cpu != null) {
+                cpu.resetTimer();
+            }
         }
     }
 }
