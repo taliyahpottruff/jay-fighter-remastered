@@ -11,7 +11,7 @@ public class Game
     public static string CURRENT_MAP = "Basic";
 
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
-        {"Basic", new Map("Testing Map", new MapObj[] {
+        {"Basic", new Map("Basic", new MapObj[] {
             //Objects
             new MapObj("Grass", 0, 0, 10, 10, true, false),
             //Colliders
