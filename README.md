@@ -16,6 +16,7 @@ You can view the license [here](https://github.com/TrentonPottruff/jay-fighter-r
 - Coins now "burst" out from a dying enemy.
 - Removed the "Not Basic" map.
 - Renamed "Basic" to "Testing Map."
+
 #### Bugfixes
 - Toolbar is no longer briefly visible at the beginning of a game.
 - Bullets now go through coins.
