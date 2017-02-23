@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -27,7 +27,6 @@ public class PauseScreenManager : MonoBehaviour {
     public void CloseScreenWithoutUnpausing() {
 
     }
-
     public void ToggleScreen() {
         if (opened)
             CloseScreen();
@@ -37,5 +36,8 @@ public class PauseScreenManager : MonoBehaviour {
 
     public void ExitGame() {
         SceneManager.LoadScene("MainMenu");
+    }
+    public bool getOpened() {
+        return opened;
     }
 }

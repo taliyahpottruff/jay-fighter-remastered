@@ -10,13 +10,11 @@ using System.Collections;
 public class Health : MonoBehaviour {
     public float health = 100;
     private float maxHeath = 100;
-    private GameObject BronzeCoin;
-    private GameObject SilverCoin;
-    private GameObject GoldCoin;
-    public void Start() {
-        BronzeCoin = Resources.Load<GameObject>("Prefabs/BronzeCoin");
-        SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
-        GoldCoin = Resources.Load<GameObject>("Prefabs/GoldCoin");
+   
+    public void Update() {
+        if(health > maxHeath) {
+            health = maxHeath;
+        }
     }
 
     public float GetHealth() {
@@ -32,6 +30,8 @@ public class Health : MonoBehaviour {
             //Entity dies
             CPU cpu = this.gameObject.GetComponent<CPU>();
             if (cpu != null) {
+                cpu.disposeTimer();
+                /* OLD COIN CODE
                 if (cpu.shooter) {
                     Instantiate(GoldCoin, this.gameObject.transform.position, Quaternion.identity);
                 }else if (cpu.duplicator) {
@@ -48,14 +48,19 @@ public class Health : MonoBehaviour {
                     } else {
                         Instantiate(BronzeCoin, this.gameObject.transform.position, Quaternion.identity);
                     }
-                }
+                }*/
                 //Instantiate(Coin, this.gameObject.transform.position, Quaternion.identity);
+                cpu.DropCoins();
                 GameManager.addScore(cpu.ScoreOnDeath);
             }
             Destroy(this.gameObject);
         }
         else {
             health -= attack;
+            CPU cpu = this.gameObject.GetComponent<CPU>();
+            if (cpu != null) {
+                cpu.resetTimer();
+            }
         }
     }
 }
