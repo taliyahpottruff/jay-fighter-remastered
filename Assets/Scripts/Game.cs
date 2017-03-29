@@ -13,17 +13,67 @@ public class Game
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
         {"Basic", new Map("Basic", new MapObj[] {
             //Objects
-            new MapObj("Grass", 0, 0, 10, 10, true, false),
+            new MapObj("Grass", 0, 0, 12f, 12f, true, false),
             //Colliders
-            new MapObj("Test Object", 5.5f, 0, 1, 11, true, true),
-            new MapObj("Test Object", -5.5f, 0, 1, 11, true, true),
-            new MapObj("Test Object", 0, 5.5f, 11, 1, true, true),
-            new MapObj("Test Object", 0,-5.5f, 11, 1, true, true),
+                //Right
+                new MapObj("Boulder", 5.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -4.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -3.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -4.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -2.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -1.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -0.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 0.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 1.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 2.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 3.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 4.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 5.5f, 1, 1, true, true),
+                //Left
+                new MapObj("Boulder", -5.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, -4.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, -3.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, -4.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, -2.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, -1.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, -0.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, 0.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, 1.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, 2.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, 3.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, 4.5f, 1, 1, true, true),
+                new MapObj("Boulder", -5.5f, 5.5f, 1, 1, true, true),
+                //Top
+                new MapObj("Boulder", -5.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -4.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -3.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -2.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -1.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -0.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 0.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 1.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 2.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 3.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 4.5f, 5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, 5.5f, 1, 1, true, true),
+                //Bottom
+                new MapObj("Boulder", -5.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -4.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -3.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -2.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -1.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", -0.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 0.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 1.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 2.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 3.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 4.5f, -5.5f, 1, 1, true, true),
+                new MapObj("Boulder", 5.5f, -5.5f, 1, 1, true, true),
             //Spawns
-            new MapObj("Test Object", 5, 5, 1, 1),
-            new MapObj("Test Object", 5, -5, 1, 1),
-            new MapObj("Test Object", -5, 5, 1, 1),
-            new MapObj("Test Object", -5, -5, 1, 1)
+            new MapObj("Test Object", 4, 4, 1, 1),
+            new MapObj("Test Object", 4, -4, 1, 1),
+            new MapObj("Test Object", -4, 4, 1, 1),
+            new MapObj("Test Object", -4, -4, 1, 1)
         })}
     };
     public static Dictionary<string, Item> ITEMS = new Dictionary<string, Item>() {
