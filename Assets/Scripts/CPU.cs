@@ -23,6 +23,7 @@ public class CPU : MonoBehaviour {
     public int maxCoins;
     public GameObject FullHealthBar;
     public GameObject HealthBar;
+    public EnemySpriteManager spriteManager;
 
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
@@ -63,6 +64,27 @@ public class CPU : MonoBehaviour {
             Vector2 playerPosition = player.transform.position;
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
             td = targetDirection;
+
+            //Direction Handling
+            if (spriteManager != null) {
+                if (!targetDirection.Equals(Vector2.zero)) {
+                    Vector2 absVector = new Vector2(Mathf.Abs(targetDirection.x), Mathf.Abs(targetDirection.y));
+
+                    if (absVector.x > absVector.y) {
+                        if (targetDirection.x > 0)
+                            spriteManager.MoveRight();
+                        else
+                            spriteManager.MoveLeft();
+                    }
+                    else {
+                        if (targetDirection.y > 0)
+                            spriteManager.MoveUp();
+                        else
+                            spriteManager.MoveDown();
+                    }
+                }
+            }
+
             rb.velocity = targetDirection * speed;
             HealthBar.transform.localScale = new Vector3((float)(health.health / 100), 0.9081425f, 0.908152f);
             EnemyLogic();

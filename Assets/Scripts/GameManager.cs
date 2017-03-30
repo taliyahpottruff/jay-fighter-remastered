@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Bullets"), LayerMask.NameToLayer("Drops"), true);
 
-        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
-        fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Fast Enemy");
+        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Drone");
+        fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Speedster");
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
