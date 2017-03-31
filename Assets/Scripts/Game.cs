@@ -13,7 +13,7 @@ public class Game
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
         {"Basic", new Map("Basic", new MapObj[] {
             //Objects
-            new MapObj("Grass", 0, 0, 12f, 12f, true, false),
+            new MapObj("Grass", 0, -0.33f, 10.9f, 10.9f, true, false),
             //Colliders
                 //Right
                 new MapObj("Boulder", 5.5f, -5.5f, 1, 1, true, true),
