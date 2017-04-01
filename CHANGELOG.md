@@ -1,4 +1,13 @@
 # Changelog
+## v0.4.0a
+### Changes
+- Implemented new sprites and animations for Drones, Speedsters and Savages (names are also new).
+- Updated the basic map.
+
+### Bugfixes
+- Fixed player not spawning after leaving and re-joining singleplayer game from pause menu.
+- Pressing escape to leave the settings menu no longer causes a weird glitch with the pause menu.
+
 ## v0.3.0a
 ### Changes
 - Added Main Menu music.
