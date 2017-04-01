@@ -158,9 +158,12 @@ public class CPU : MonoBehaviour {
         if (shooter && (firerate == 0f)) {
             firing = true;
         } else firing = false;
-        if(duplicator && (duperate == 0f)) {
-            Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity);
+        #region Savage Spawn Code
+        if (duplicator && (duperate == 0f)) {
+            spriteManager.SpecialAttack();
+            StartCoroutine(SpawnMinions());
         }
+        #endregion
 
         if (!shooter) {
             float distance = Vector2.Distance(player.transform.position, this.transform.position);
@@ -202,6 +205,13 @@ public class CPU : MonoBehaviour {
             }
             yield return new WaitForSeconds(1);
         }
+    }
+    #endregion
+
+    #region Minion Spawning
+    private IEnumerator SpawnMinions() {
+        yield return new WaitForSeconds(1f);
+        Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity); //Spawn Minions
     }
     #endregion
     #endregion

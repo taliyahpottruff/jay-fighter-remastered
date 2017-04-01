@@ -7,12 +7,15 @@ using System.Collections.Generic;
     * AUTHOR: Trenton Pottruff
 */
 public class SettingsManager : MonoBehaviour {
+    public GameObject panel;
     public Dropdown resolutionDropdown;
     public InputField resolutionWidth;
     public InputField resolutionHeight;
+    public Slider sfxSlider;
+    public Slider musicSlider;
 
     private void Start() {
-        GameObject.Find("Fullscreen Toggle").GetComponent<Toggle>().isOn = Screen.fullScreen;
+        //GameObject.Find("Fullscreen Toggle").GetComponent<Toggle>().isOn = Screen.fullScreen;
 
         Resolution[] resolutions = Screen.resolutions;
         for (int i = 0; i < resolutions.Length; i++) {
@@ -21,14 +24,20 @@ public class SettingsManager : MonoBehaviour {
 
         resolutionWidth.text = Screen.currentResolution.width.ToString();
         resolutionHeight.text = Screen.currentResolution.height.ToString();
+
+        //Set slider positions to current values on load
+        Debug.Log(Game.SFX_VOLUME);
+        sfxSlider.value = Game.SFX_VOLUME;
+        
+        musicSlider.value = Game.MUSIC_VOLUME;
     }
 
     public void OpenScreen() {
-        this.gameObject.SetActive(true);
+        panel.SetActive(true);
     }
 
     public void CloseScreen() {
-        this.gameObject.SetActive(false);
+        panel.SetActive(false);
     }
 
     public void SetFullscreen(bool fullscreen) {
@@ -68,5 +77,9 @@ public class SettingsManager : MonoBehaviour {
 
     public void SetSfxVolume(float value) {
         Game.SFX_VOLUME = value;
+    }
+
+    public void SetMusicVolume(float value) {
+        Game.MUSIC_VOLUME = value;
     }
 }

@@ -5,9 +5,10 @@ using System.IO;
 public class GameMap : MonoBehaviour {
     private Map map;
 
-    private string directory = Application.persistentDataPath + "/maps";
+    private string directory;
 
     private void Awake() {
+        directory = Application.persistentDataPath + "/maps";
         Utilities.ClearChildren(this.transform);
         map = Game.LoadCurrentMap();
         LoadMap();

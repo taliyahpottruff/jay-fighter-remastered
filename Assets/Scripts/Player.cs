@@ -16,7 +16,8 @@ public class Player : NetworkBehaviour {
 
     public override void OnStartLocalPlayer() {
         sr = GetComponent<SpriteRenderer>();
-        sr.color = Color.blue;
+        if (sr != null)
+            sr.color = Color.blue;
     }
 
     public void Start() {

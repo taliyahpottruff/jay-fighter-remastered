@@ -52,6 +52,10 @@ public class DroneSpriteManager : EnemySpriteManager {
     }
 
     public override void HandleIdle() {
-        //DoNothing
+        //Do Nothing
+    }
+
+    public override void SpecialAttack() {
+        //Do Nothing
     }
 }

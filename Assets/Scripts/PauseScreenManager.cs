@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -35,6 +36,9 @@ public class PauseScreenManager : MonoBehaviour {
     }
 
     public void ExitGame() {
+        NetworkManager nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
+        nm.StopHost();
+
         SceneManager.LoadScene("MainMenu");
     }
     public bool getOpened() {

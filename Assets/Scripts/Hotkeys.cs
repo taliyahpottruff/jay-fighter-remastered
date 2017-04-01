@@ -7,30 +7,34 @@ using System.Collections;
 
 public class Hotkeys : MonoBehaviour {
     private PauseScreenManager pauseScreenManager;
-    public GameObject Store;
-    private GameObject GameUI;
+    public GameObject store;
+    public SettingsManager settings;
+    private GameObject gameUI;
 
     private void Start() {
         //Grab manager components
         pauseScreenManager = GameObject.FindGameObjectWithTag("PauseScreen").GetComponent<PauseScreenManager>();
-        GameUI = GameObject.FindGameObjectWithTag("GameUI");
+        gameUI = GameObject.FindGameObjectWithTag("GameUI");
     }
 
     private void Update() {
         //Pause Screen Hotkey
         if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (Store.activeSelf) {
-                Store.SetActive(false);
+            if (store.activeSelf) {
+                store.SetActive(false);
                 if (!pauseScreenManager.getOpened()) {
-                    GameUI.SetActive(true);
+                    gameUI.SetActive(true);
                     Game.PAUSED = false;
                 }
+            } else if (settings.panel.activeSelf) {
+                settings.CloseScreen();
+                pauseScreenManager.OpenScreen();
             } else {
                 pauseScreenManager.ToggleScreen();
                 if (pauseScreenManager.getOpened()) {
-                    GameUI.SetActive(false);
+                    gameUI.SetActive(false);
                 } else {
-                    GameUI.SetActive(true);
+                    gameUI.SetActive(true);
                 }
             }
         }

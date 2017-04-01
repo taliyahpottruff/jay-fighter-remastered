@@ -17,6 +17,8 @@ public class MusicManager : MonoBehaviour {
     }
 
     private void Update() {
+        aSource.volume = Game.MUSIC_VOLUME;
+
         if (nextSong >= songQueue.Length) {
             songQueue = new int[songs.Length];
 

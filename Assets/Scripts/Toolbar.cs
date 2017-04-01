@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,23 +20,25 @@ public class Toolbar : MonoBehaviour {
     public void Update() {
         //Debug.Log("Inventory contains " + inventory.inventory.Count + " items!");
 
-        if (inventory.inventory.Count <= 0) {
-            panelBody.enabled = false;
-            panelStrip.enabled = false;
-        }
-        else {
-            panelBody.enabled = true;
-            panelStrip.enabled = true;
-        }
+        try {
+            if (inventory.inventory.Count <= 0) {
+                panelBody.enabled = false;
+                panelStrip.enabled = false;
+            }
+            else {
+                panelBody.enabled = true;
+                panelStrip.enabled = true;
+            }
 
-        int currCount = inventory.inventory.Count;
+            int currCount = inventory.inventory.Count;
 
-        if (prevCount != currCount && hasStarted) {
-            Clear();
-            AddAllItems();
-        }
+            if (prevCount != currCount && hasStarted) {
+                Clear();
+                AddAllItems();
+            }
 
-        prevCount = currCount;
+            prevCount = currCount;
+        } catch (Exception e) { }
     }
 
     private IEnumerator DelayedStart() {

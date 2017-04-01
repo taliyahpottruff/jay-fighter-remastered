@@ -28,6 +28,10 @@ public class SavageSpriteManager : EnemySpriteManager {
         legAnimator.Play("savage-Idle");
     }
 
+    public override void SpecialAttack() {
+        topAnimator.Play("protectors-Attack");
+    }
+
     private void PlayWalk() {
         //Play Walking Animation
         legAnimator.Play("savage-Walk");

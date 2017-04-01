@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour {
     public GameObject ROUND;
     public GameObject GAMEOVER;
 
+    #region Trenton Pottruff: Animators
+    public Animator healthAnim;
+    public Animator statsAnim;
+    #endregion
+
     private Text scoreText;
     private Slider healthSlider;
     private Text healthText;
@@ -74,17 +79,19 @@ public class GameManager : MonoBehaviour {
 	    if(scoreText.text != Score.ToString()) {
             scoreText.text = Score.ToString();
         }
-        if (healthText.text != Health.GetHealth().ToString()) {
-            healthText.text = Health.GetHealth().ToString();
-        }
-        if (coinsText.text != ("$" + Coins.ToString())) {
-            coinsText.text = "$" + Coins.ToString();
-        }
-        if (healthSlider.value != Health.GetHealth()) {
-            healthSlider.value = Health.GetHealth();
-        }
-        if(healthSlider.maxValue != Health.GetMaxHealth()) {
-            healthSlider.maxValue = Health.GetMaxHealth();
+        if (Health != null) {
+            if (healthText.text != Health.GetHealth().ToString()) {
+                healthText.text = Health.GetHealth().ToString();
+            }
+            if (coinsText.text != ("$" + Coins.ToString())) {
+                coinsText.text = "$" + Coins.ToString();
+            }
+            if (healthSlider.value != Health.GetHealth()) {
+                healthSlider.value = Health.GetHealth();
+            }
+            if (healthSlider.maxValue != Health.GetMaxHealth()) {
+                healthSlider.maxValue = Health.GetMaxHealth();
+            }
         }
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
@@ -172,6 +179,10 @@ public class GameManager : MonoBehaviour {
         yield return new WaitForSeconds(1f);
         player = GameObject.FindGameObjectWithTag("Player");
         Health = player.GetComponent<Health>();
+
+        //Play HUD Animations
+        healthAnim.Play("healthPanel-in");
+        statsAnim.Play("statsPanel-in");
 
         //Spawning code originally by Garrett Nicholas
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");

@@ -8,4 +8,5 @@ public abstract class EnemySpriteManager : MonoBehaviour {
     public abstract void MoveLeft();
     public abstract void MoveRight();
     public abstract void HandleIdle();
+    public abstract void SpecialAttack();
 }
