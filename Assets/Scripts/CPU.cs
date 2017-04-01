@@ -12,6 +12,7 @@ using System.Timers;
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
 public class CPU : MonoBehaviour {
+    #region Member Variables
     public float minSpeed = 1;
     public float maxSpeed = 3;
     public float speed = 3;
@@ -24,7 +25,9 @@ public class CPU : MonoBehaviour {
     public GameObject FullHealthBar;
     public GameObject HealthBar;
     public EnemySpriteManager spriteManager;
+    #endregion
 
+    #region Private Variables
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
     private GameObject basicEnemy;
@@ -38,7 +41,9 @@ public class CPU : MonoBehaviour {
     private GameObject BronzeCoin;
     private GameObject SilverCoin;
     private GameObject GoldCoin;
+    #endregion
 
+    #region Initialize
     private void Start() {
         BronzeCoin = Resources.Load<GameObject>("Prefabs/BronzeCoin");
         SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
@@ -53,37 +58,47 @@ public class CPU : MonoBehaviour {
         StartCoroutine(FireBullet());
         StartCoroutine(MeleeAttack());
 	}
+    #endregion
 
+    #region Update
     void Update() {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player"); //Grab the player object
+        #region Health Hiding
         if (hideHealth) {
             FullHealthBar.SetActive(false);
             hideHealth = false;
         }
+        #endregion
+        #region Game Logic
         if (!Game.PAUSED) {
             Vector2 playerPosition = player.transform.position;
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
             td = targetDirection;
 
-            //Direction Handling
+            #region Direction Handling
             if (spriteManager != null) {
                 if (!targetDirection.Equals(Vector2.zero)) {
                     Vector2 absVector = new Vector2(Mathf.Abs(targetDirection.x), Mathf.Abs(targetDirection.y));
 
+                    #region Handle Horizontal
                     if (absVector.x > absVector.y) {
                         if (targetDirection.x > 0)
                             spriteManager.MoveRight();
                         else
                             spriteManager.MoveLeft();
                     }
+                    #endregion
+                    #region Handle Vertical
                     else {
                         if (targetDirection.y > 0)
                             spriteManager.MoveUp();
                         else
                             spriteManager.MoveDown();
                     }
+                    #endregion
                 }
             }
+            #endregion
 
             rb.velocity = targetDirection * speed;
             HealthBar.transform.localScale = new Vector3((float)(health.health / 100), 0.9081425f, 0.908152f);
@@ -91,8 +106,11 @@ public class CPU : MonoBehaviour {
         } else {
             rb.velocity = Vector2.zero;
         }
+        #endregion
     }
+    #endregion
 
+    #region Coin Dropping
     public void DropCoins() {
         int drop = Random.Range(minCoins, maxCoins+1);
         int goldCoins = drop / 10;
@@ -100,7 +118,7 @@ public class CPU : MonoBehaviour {
         int silverCoins = goldRemain / 5;
         int bronzeCoins = goldRemain % 5;
 
-        //Spawn Gold Coins
+        #region Spawn Gold Coins
         for (int i = 0; i < goldCoins; i++) {
             GameObject gold = Instantiate(GoldCoin, this.gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = gold.GetComponent<Rigidbody2D>();
@@ -109,7 +127,8 @@ public class CPU : MonoBehaviour {
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
         }
-        //Spawn Silver Coins
+        #endregion
+        #region Spawn Silver Coins
         for (int i = 0; i < silverCoins; i++) {
             GameObject silver = Instantiate(SilverCoin, this.gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = silver.GetComponent<Rigidbody2D>();
@@ -118,7 +137,8 @@ public class CPU : MonoBehaviour {
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
         }
-        //Spawn Bronze Coins
+        #endregion
+        #region Spawn Bronze Coins
         for (int i = 0; i < bronzeCoins; i++) {
             GameObject bronze = Instantiate(BronzeCoin, this.gameObject.transform.position, Quaternion.identity);
             Rigidbody2D rb = bronze.GetComponent<Rigidbody2D>();
@@ -127,8 +147,11 @@ public class CPU : MonoBehaviour {
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
         }
+        #endregion
     }
+    #endregion
 
+    #region Garrett Nicholas: Enemy Logic
     private void EnemyLogic() {
         float duperate = Mathf.Round(Random.Range(0f, 100f));
         float firerate = Mathf.Round(Random.Range(0f, 1.5f));
@@ -151,7 +174,10 @@ public class CPU : MonoBehaviour {
             }            
         }
     }
+    #endregion
 
+    #region Co-Routines
+    #region Bullet Firing
     private IEnumerator FireBullet() {
         do {
             if (firing) {
@@ -165,7 +191,9 @@ public class CPU : MonoBehaviour {
             yield return new WaitForSeconds(0.1f);
         } while (true);
     }
+    #endregion
 
+    #region Melee Attack
     private IEnumerator MeleeAttack() {
         while (true) {
             if (melee) {
@@ -175,6 +203,10 @@ public class CPU : MonoBehaviour {
             yield return new WaitForSeconds(1);
         }
     }
+    #endregion
+    #endregion
+
+    #region Garrett Nicholas: Health Bar
     public void resetTimer() {
         FullHealthBar.SetActive(true);
         HealthBarTimer.Stop();
@@ -191,4 +223,5 @@ public class CPU : MonoBehaviour {
         hideHealth = true;
         HealthBarTimer.Stop();
     }
+    #endregion
 }

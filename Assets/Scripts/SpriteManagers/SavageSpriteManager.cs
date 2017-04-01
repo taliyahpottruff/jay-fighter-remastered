@@ -4,19 +4,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SavageSpriteManager : EnemySpriteManager {
+    public Animator legAnimator;
+    public Animator topAnimator;
+
     public override void MoveDown() {
-        throw new NotImplementedException();
+        PlayWalk();
     }
 
     public override void MoveLeft() {
-        throw new NotImplementedException();
+        PlayWalk();
     }
 
     public override void MoveRight() {
-        throw new NotImplementedException();
+        PlayWalk();
     }
 
     public override void MoveUp() {
-        throw new NotImplementedException();
+        PlayWalk();
+    }
+
+    public override void HandleIdle() {
+        //Play Idle Animation
+        legAnimator.Play("savage-Idle");
+    }
+
+    private void PlayWalk() {
+        //Play Walking Animation
+        legAnimator.Play("savage-Walk");
     }
 }

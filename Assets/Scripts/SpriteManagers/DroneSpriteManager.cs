@@ -50,4 +50,8 @@ public class DroneSpriteManager : EnemySpriteManager {
         faces[2].SetActive(false);
         faces[3].SetActive(false);
     }
+
+    public override void HandleIdle() {
+        //DoNothing
+    }
 }
