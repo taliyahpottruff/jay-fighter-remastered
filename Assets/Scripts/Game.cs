@@ -82,14 +82,21 @@ public class Game
     };
 
     public static Map LoadCurrentMap() {
-        return MAPS[CURRENT_MAP];
+        if (MAPS.ContainsKey(CURRENT_MAP))
+            return MAPS[CURRENT_MAP];
+
+        FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + CURRENT_MAP + ".map", FileMode.Open);
+        using (StreamReader reader = new StreamReader(fs)) {
+            string json = Utilities.Base64Decode(reader.ReadToEnd());
+            return JsonUtility.FromJson<Map>(json);
+        }
     }
 
-    public void LoadMap(string mapName) {
+    public Map LoadMap(string mapName) {
         FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + mapName + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
             string json = Utilities.Base64Decode(reader.ReadToEnd());
-            MAPS[mapName] = JsonUtility.FromJson<Map>(json);
+            return JsonUtility.FromJson<Map>(json);
         }
     }
 }
