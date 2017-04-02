@@ -3,6 +3,7 @@
 ### Changes
 - Implemented new sprites and animations for Drones, Speedsters and Savages (names are also new).
 - Updated the basic map.
+- Enemies now using pathfinding to walk around obstacles and get to the player.
 
 ### Bugfixes
 - Fixed player not spawning after leaving and re-joining singleplayer game from pause menu.

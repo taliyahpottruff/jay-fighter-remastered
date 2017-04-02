@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Timers;
 
 /*
@@ -41,9 +42,14 @@ public class CPU : MonoBehaviour {
     private GameObject BronzeCoin;
     private GameObject SilverCoin;
     private GameObject GoldCoin;
+    private Pathfinding pathfinder;
     #endregion
 
     #region Initialize
+    private void Awake() {
+        pathfinder = GameObject.FindGameObjectWithTag("Pathfinder").GetComponent<Pathfinding>();
+    }
+
     private void Start() {
         BronzeCoin = Resources.Load<GameObject>("Prefabs/BronzeCoin");
         SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
@@ -71,7 +77,10 @@ public class CPU : MonoBehaviour {
         #endregion
         #region Game Logic
         if (!Game.PAUSED) {
+            List<Node> path = pathfinder.FindPath(this.transform.position, player.transform.position);
             Vector2 playerPosition = player.transform.position;
+            if (path != null)
+                playerPosition = path[0].position;
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
             td = targetDirection;
 
