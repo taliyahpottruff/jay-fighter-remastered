@@ -6,7 +6,8 @@
 - Enemies now using pathfinding to walk around obstacles and get to the player.
 
 ### Bugfixes
-- Fixed an issue where the coins variable wouldnt reset after restarting a game in Singleplayer
+- Fixed the blur disappearing when opening the settings menu.
+- Fixed an issue where the coins variable wouldn't reset after restarting a game in singleplayer.
 - Fixed player not spawning after leaving and re-joining singleplayer game from pause menu.
 - Pressing escape to leave the settings menu no longer causes a weird glitch with the pause menu.
 
