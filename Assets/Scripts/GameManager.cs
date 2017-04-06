@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void resetGame() {
+        nm.StopHost();
         Score = 0;
         Round = 0;
         Scene scene = SceneManager.GetActiveScene();
