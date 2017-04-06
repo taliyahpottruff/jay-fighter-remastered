@@ -23,7 +23,7 @@ public class Hotkeys : MonoBehaviour {
             if (store.activeSelf) {
                 store.SetActive(false);
                 if (!pauseScreenManager.getOpened()) {
-                    gameUI.SetActive(true);
+                    //gameUI.SetActive(true);
                     Game.PAUSED = false;
                 }
             } else if (settings.panel.activeSelf) {
@@ -32,9 +32,9 @@ public class Hotkeys : MonoBehaviour {
             } else {
                 pauseScreenManager.ToggleScreen();
                 if (pauseScreenManager.getOpened()) {
-                    gameUI.SetActive(false);
+                    //gameUI.SetActive(false);
                 } else {
-                    gameUI.SetActive(true);
+                    //gameUI.SetActive(true);
                 }
             }
         }
