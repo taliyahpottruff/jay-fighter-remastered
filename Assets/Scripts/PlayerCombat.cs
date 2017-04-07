@@ -144,7 +144,6 @@ public class PlayerCombat : NetworkBehaviour {
                 GameObject bulletObj = Instantiate(bulletPrefab, pos, Quaternion.identity) as GameObject;
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.owner = this.transform;
-                Debug.Log(direction);
                 bullet.SetVelocityOnAwake((direction * 10));
                 bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
                 aSource.PlayOneShot(gunSound);

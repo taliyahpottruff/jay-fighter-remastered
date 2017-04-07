@@ -6,6 +6,7 @@
 - Enemies now using pathfinding to walk around obstacles and get to the player.
 
 ### Bugfixes
+- Menu selection no longer bugs out if the "maps" folder doesn't exist.
 - Fixed the HUD from re-appearing after exiting the pause menu.
 - Fixed the blur disappearing when opening the settings menu.
 - Fixed an issue where the coins variable wouldn't reset after restarting a game in singleplayer.

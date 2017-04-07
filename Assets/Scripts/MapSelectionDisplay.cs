@@ -15,7 +15,10 @@ public class MapSelectionDisplay : MonoBehaviour {
     private void PopulateList() {
         Map[] maps = new Map[Game.MAPS.Count];
         Game.MAPS.Values.CopyTo(maps, 0);
-        string[] mapPaths = Directory.GetFiles(Application.persistentDataPath + "/maps");
+        string[] mapPaths = new string[] { };
+
+        if (Directory.Exists(Application.persistentDataPath + "/maps"))
+            mapPaths = Directory.GetFiles(Application.persistentDataPath + "/maps");
 
         string[] names = new string[maps.Length + mapPaths.Length];
 

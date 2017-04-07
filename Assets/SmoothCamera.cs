@@ -12,7 +12,6 @@ public class SmoothCamera : MonoBehaviour {
     public void FixedUpdate() {
         try {
             if (lookAt == null) {
-                Debug.Log("lookAt is null!");
                 lookAt = GameObject.FindGameObjectWithTag("Player").transform;
                 return;
             }

@@ -26,7 +26,6 @@ public class SettingsManager : MonoBehaviour {
         resolutionHeight.text = Screen.currentResolution.height.ToString();
 
         //Set slider positions to current values on load
-        Debug.Log(Game.SFX_VOLUME);
         sfxSlider.value = Game.SFX_VOLUME;
         
         musicSlider.value = Game.MUSIC_VOLUME;
