@@ -27,7 +27,8 @@ public class SettingsManager : MonoBehaviour {
 
         //Set slider positions to current values on load
         sfxSlider.value = Game.SFX_VOLUME;
-        
+
+        Game.MUSIC_VOLUME = Game.GetMusicVolume();
         musicSlider.value = Game.MUSIC_VOLUME;
     }
 
@@ -80,5 +81,7 @@ public class SettingsManager : MonoBehaviour {
 
     public void SetMusicVolume(float value) {
         Game.MUSIC_VOLUME = value;
+        PlayerPrefs.SetFloat("musicVolume", Game.MUSIC_VOLUME);
+        PlayerPrefs.Save();
     }
 }

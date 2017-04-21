@@ -11,6 +11,7 @@ public class Game
     public static float MUSIC_VOLUME = 0.05f;
     public static string CURRENT_MAP = "Basic";
 
+    #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
         {"Basic", new Map("Basic", new MapObj[] {
             //Objects
@@ -77,9 +78,12 @@ public class Game
             new MapObj("Test Object", -4, -4, 1, 1)
         })}
     };
+    #endregion
+    #region Items
     public static Dictionary<string, Item> ITEMS = new Dictionary<string, Item>() {
         {"Health Potion", new HealthPotion()}
     };
+    #endregion
 
     public static Map LoadCurrentMap() {
         if (MAPS.ContainsKey(CURRENT_MAP))
@@ -98,5 +102,16 @@ public class Game
             string json = Utilities.Base64Decode(reader.ReadToEnd());
             return JsonUtility.FromJson<Map>(json);
         }
+    }
+
+    public static float GetMusicVolume() {
+        if (!PlayerPrefs.HasKey("musicVolume")) { //If music volume is not saved into PlayerPrefs
+            PlayerPrefs.SetFloat("musicVolume", MUSIC_VOLUME);
+            PlayerPrefs.Save();
+            return MUSIC_VOLUME;
+        }
+
+        MUSIC_VOLUME = PlayerPrefs.GetFloat("musicVolume");
+        return MUSIC_VOLUME;
     }
 }

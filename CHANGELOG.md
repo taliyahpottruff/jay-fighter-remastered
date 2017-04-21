@@ -4,6 +4,7 @@
 - Implemented new sprites and animations for Drones, Speedsters and Savages (names are also new).
 - Updated the basic map.
 - Enemies now using pathfinding to walk around obstacles and get to the player.
+- Made the music volume setting persistent.
 
 ### Bugfixes
 - Menu selection no longer bugs out if the "maps" folder doesn't exist.
