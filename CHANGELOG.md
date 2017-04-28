@@ -5,6 +5,7 @@
 - Updated the basic map.
 - Enemies now using pathfinding to walk around obstacles and get to the player.
 - Made the music volume setting persistent.
+- Added a new Multiplayer menu.
 
 ### Bugfixes
 - Menu selection no longer bugs out if the "maps" folder doesn't exist.
