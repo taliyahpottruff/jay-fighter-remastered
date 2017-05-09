@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using UnityEngine.Networking;
 
 /*
     * AUTHOR: Trenton Pottruff
@@ -12,7 +13,7 @@ using System.Timers;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
-public class CPU : MonoBehaviour {
+public class CPU : NetworkBehaviour {
     #region Member Variables
     public float minSpeed = 1;
     public float maxSpeed = 3;

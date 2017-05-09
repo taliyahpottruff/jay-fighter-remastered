@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour {
             for(int i = 0; i < toSpawn; i++) {
                 int sp = selectSP();
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
+                NetworkServer.Spawn(spawned[i]);
             }
         }
     }
@@ -195,6 +196,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < toSpawn; i++) {
             int sp = selectSP();
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
+            NetworkServer.Spawn(spawned[i]);
         }
         hasStarted = true;
     }
