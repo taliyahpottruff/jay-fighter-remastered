@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -6,10 +7,10 @@ using System.Collections;
 */
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Bullet : MonoBehaviour {
+public class Bullet : NetworkBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
-    public Transform owner;
+    public NetworkIdentity owner;
     private Rigidbody2D rb;
     private Vector2 velocity;
 
@@ -29,7 +30,7 @@ public class Bullet : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.transform != owner) {
+        if (other.GetComponent<NetworkIdentity>() != owner) {
             Health health = other.GetComponent<Health>();
 
             Destroy(this.gameObject);

@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour {
-    public AudioClip[] songs;
+    public List<AudioClip> songs;
     public MusicNotification musicNotification;
 
     private AudioSource aSource;
-
+    
     private int[] songQueue = new int[0];
     private int nextSong = 0;
 
@@ -17,8 +18,11 @@ public class MusicManager : MonoBehaviour {
     }
 
     private void Update() {
+        //aSource.volume = Game.MUSIC_VOLUME;
+        aSource.volume = Game.GetMusicVolume();
+
         if (nextSong >= songQueue.Length) {
-            songQueue = new int[songs.Length];
+            songQueue = new int[songs.Count];
 
             for (int i = 0; i < songQueue.Length; i++) {
                 songQueue[i] = i;

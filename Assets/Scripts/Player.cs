@@ -16,7 +16,12 @@ public class Player : NetworkBehaviour {
 
     public override void OnStartLocalPlayer() {
         sr = GetComponent<SpriteRenderer>();
-        sr.color = Color.blue;
+        if (sr != null)
+            sr.color = Color.blue;
+
+        //Set local camera to follow this player
+        SmoothCamera sc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothCamera>();
+        if (sc != null) sc.lookAt = this.transform;
     }
 
     public void Start() {

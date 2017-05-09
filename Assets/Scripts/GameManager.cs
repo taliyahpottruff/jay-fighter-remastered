@@ -36,6 +36,11 @@ public class GameManager : MonoBehaviour {
     public GameObject ROUND;
     public GameObject GAMEOVER;
 
+    #region Trenton Pottruff: Animators
+    public Animator healthAnim;
+    public Animator statsAnim;
+    #endregion
+
     private Text scoreText;
     private Slider healthSlider;
     private Text healthText;
@@ -48,8 +53,8 @@ public class GameManager : MonoBehaviour {
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Enemy"), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Bullets"), LayerMask.NameToLayer("Drops"), true);
 
-        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Enemy");
-        fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Fast Enemy");
+        basicEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Drone");
+        fastEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Speedster");
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
@@ -74,17 +79,19 @@ public class GameManager : MonoBehaviour {
 	    if(scoreText.text != Score.ToString()) {
             scoreText.text = Score.ToString();
         }
-        if (healthText.text != Health.GetHealth().ToString()) {
-            healthText.text = Health.GetHealth().ToString();
-        }
-        if (coinsText.text != ("$" + Coins.ToString())) {
-            coinsText.text = "$" + Coins.ToString();
-        }
-        if (healthSlider.value != Health.GetHealth()) {
-            healthSlider.value = Health.GetHealth();
-        }
-        if(healthSlider.maxValue != Health.GetMaxHealth()) {
-            healthSlider.maxValue = Health.GetMaxHealth();
+        if (Health != null) {
+            if (healthText.text != Health.GetHealth().ToString()) {
+                healthText.text = Health.GetHealth().ToString();
+            }
+            if (coinsText.text != ("$" + Coins.ToString())) {
+                coinsText.text = "$" + Coins.ToString();
+            }
+            if (healthSlider.value != Health.GetHealth()) {
+                healthSlider.value = Health.GetHealth();
+            }
+            if (healthSlider.maxValue != Health.GetMaxHealth()) {
+                healthSlider.maxValue = Health.GetMaxHealth();
+            }
         }
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
@@ -104,7 +111,9 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void resetGame() {
+        nm.StopHost();
         Score = 0;
+        Coins = 0;
         Round = 0;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
@@ -120,6 +129,7 @@ public class GameManager : MonoBehaviour {
             for(int i = 0; i < toSpawn; i++) {
                 int sp = selectSP();
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
+                NetworkServer.Spawn(spawned[i]);
             }
         }
     }
@@ -173,6 +183,10 @@ public class GameManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         Health = player.GetComponent<Health>();
 
+        //Play HUD Animations
+        healthAnim.Play("healthPanel-in");
+        statsAnim.Play("statsPanel-in");
+
         //Spawning code originally by Garrett Nicholas
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
         //DEBUG OUT
@@ -182,6 +196,7 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < toSpawn; i++) {
             int sp = selectSP();
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
+            NetworkServer.Spawn(spawned[i]);
         }
         hasStarted = true;
     }

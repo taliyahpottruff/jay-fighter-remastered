@@ -141,15 +141,26 @@ public class PlayerCombat : NetworkBehaviour {
                     shooter = true;
                 }
 
-                GameObject bulletObj = Instantiate(bulletPrefab, pos, Quaternion.identity) as GameObject;
+                /*GameObject bulletObj = Instantiate(bulletPrefab, pos, Quaternion.identity) as GameObject;
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.owner = this.transform;
-                Debug.Log(direction);
                 bullet.SetVelocityOnAwake((direction * 10));
                 bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
-                aSource.PlayOneShot(gunSound);
+                aSource.PlayOneShot(gunSound);*/
+                CmdFire(pos, direction, GetComponent<NetworkIdentity>());
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);
+    }
+
+    [Command]
+    private void CmdFire(Vector2 position, Vector2 direction, NetworkIdentity _owner) {
+        GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.identity) as GameObject;
+        Bullet bullet = bulletObj.GetComponent<Bullet>();
+        bullet.owner = _owner;
+        bullet.SetVelocityOnAwake((direction * 10));
+        bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
+        aSource.PlayOneShot(gunSound);
+        NetworkServer.Spawn(bulletObj);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,15 +10,16 @@ public class SmoothCamera : MonoBehaviour {
     private Vector3 offset = new Vector3(0, 0, -10);
 
     public void FixedUpdate() {
-        if (lookAt == null) {
-            Debug.Log("lookAt is null!");
-            lookAt = GameObject.FindGameObjectWithTag("Player").transform;
-            return;
-        }
+        try {
+            if (lookAt == null) {
+                lookAt = GameObject.FindGameObjectWithTag("Player").transform;
+                return;
+            }
 
-        Vector3 newPosition = lookAt.position + offset;
+            Vector3 newPosition = lookAt.position + offset;
 
-        //Smooth
-        transform.position -= (transform.position - newPosition) * smoothSpeed * Time.deltaTime;
+            //Smooth
+            transform.position -= (transform.position - newPosition) * smoothSpeed * Time.deltaTime;
+        } catch (Exception e) { }
     }
 }
