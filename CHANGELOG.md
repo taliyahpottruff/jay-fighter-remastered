@@ -8,6 +8,7 @@
 - Added a new Multiplayer menu.
 - You can now Host & Join games. The current form it's in won't stay. We're working hard on a final lobby system.
 - The camera now follows the player in multiplayer.
+- Re-vamped the splash screen.
 
 ### Bugfixes
 - Menu selection no longer bugs out if the "maps" folder doesn't exist.
