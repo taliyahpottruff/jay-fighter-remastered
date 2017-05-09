@@ -69,7 +69,7 @@ public class CPU : NetworkBehaviour {
 
     #region Update
     void Update() {
-        player = GameObject.FindGameObjectWithTag("Player"); //Grab the player object
+        player = GetClosestPlayer(); //Grab the player object
         #region Health Hiding
         if (hideHealth) {
             FullHealthBar.SetActive(false);
@@ -117,6 +117,26 @@ public class CPU : NetworkBehaviour {
             rb.velocity = Vector2.zero;
         }
         #endregion
+    }
+    #endregion
+
+    #region Player Chooser
+    public GameObject GetClosestPlayer() {
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        if (objs.Length > 0) {
+            float shortestDistance = Vector2.Distance(this.transform.position, objs[0].transform.position);
+            GameObject go = objs[0];
+
+            for (int i = 1; i < objs.Length; i++) {
+                float newDistance = Vector2.Distance(this.transform.position, objs[i].transform.position);
+
+                if (newDistance < shortestDistance) go = objs[i];
+            }
+
+            return go;
+        }
+
+        return null;
     }
     #endregion
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -7,7 +8,8 @@ using System.Collections;
     * (added the checks for the enemy death then spawns a coin)
 */
 
-public class Health : MonoBehaviour {
+public class Health : NetworkBehaviour {
+    [SyncVar]
     public float health = 100;
     private float maxHeath = 100;
    
