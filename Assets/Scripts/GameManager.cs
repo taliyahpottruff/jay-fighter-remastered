@@ -29,23 +29,23 @@ public class GameManager : MonoBehaviour {
     private GameObject dupeEnemy;
     
 
-    public GameObject SCORE;
+    /*public GameObject SCORE;
     public GameObject HEALTH;
     public GameObject COINS;
     public GameObject HEALTHTX;
-    public GameObject ROUND;
+    public GameObject ROUND;*/
     public GameObject GAMEOVER;
 
-    #region Trenton Pottruff: Animators
-    public Animator healthAnim;
-    public Animator statsAnim;
+    /*#region Trenton Pottruff: Animators
+    //public Animator healthAnim;
+    //public Animator statsAnim;
     #endregion
 
     private Text scoreText;
     private Slider healthSlider;
     private Text healthText;
     private Text coinsText;
-    private Text roundText;
+    private Text roundText;*/
 
     private void Start() {
         Game.PAUSED = false;
@@ -58,11 +58,12 @@ public class GameManager : MonoBehaviour {
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
+        /* Now in ScoreManager
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
         healthSlider = HEALTH.GetComponent<Slider>();
         coinsText = COINS.GetComponent<Text>();
-        roundText = ROUND.GetComponent<Text>();
+        roundText = ROUND.GetComponent<Text>();*/
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         //player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour {
         Score += s;
     }
 	void Update () {
+        /* Now in ScoreManager
 	    if(scoreText.text != Score.ToString()) {
             scoreText.text = Score.ToString();
         }
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour {
         }
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
-        }
+        }*/
         if (hasStarted) {
             if (player == null && hasDied == false) {
                 Debug.Log("Player has died!");
@@ -184,8 +186,8 @@ public class GameManager : MonoBehaviour {
         Health = player.GetComponent<Health>();
 
         //Play HUD Animations
-        healthAnim.Play("healthPanel-in");
-        statsAnim.Play("statsPanel-in");
+        /*healthAnim.Play("healthPanel-in");
+        statsAnim.Play("statsPanel-in");*/
 
         //Spawning code originally by Garrett Nicholas
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
