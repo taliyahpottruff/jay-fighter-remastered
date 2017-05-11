@@ -24,10 +24,14 @@ public class ScoreManager : NetworkBehaviour {
     private Text coinsText;
     private Text roundText;
 
-    //Unknown
+    //Player Stuff
+    private GameObject playerObj;
     private Health health;
 
     private void Start() {
+        playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
+        health = playerObj.GetComponent<Health>();
+
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
         healthSlider = HEALTH.GetComponent<Slider>();
@@ -39,6 +43,8 @@ public class ScoreManager : NetworkBehaviour {
     }
 
     private void Update() {
+        health = playerObj.GetComponent<Health>();
+
         if (scoreText.text != score.ToString()) {
             scoreText.text = score.ToString();
         }
