@@ -157,7 +157,7 @@ public class PlayerCombat : NetworkBehaviour {
     private void CmdFire(Vector2 position, Vector2 direction, NetworkIdentity _owner) {
         GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.identity) as GameObject;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
-        bullet.owner = _owner;
+        bullet.playerBullet = true;
         bullet.SetVelocityOnAwake((direction * 10));
         bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
         aSource.PlayOneShot(gunSound);

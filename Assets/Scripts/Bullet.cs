@@ -10,7 +10,7 @@ using System.Collections;
 public class Bullet : NetworkBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
-    public NetworkIdentity owner;
+    public bool playerBullet;
     private Rigidbody2D rb;
     private Vector2 velocity;
 
@@ -30,13 +30,15 @@ public class Bullet : NetworkBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (other.GetComponent<NetworkIdentity>() != owner) {
-            Health health = other.GetComponent<Health>();
+        if (isServer) {
+            if ((other.gameObject.tag.Equals("Player") && !playerBullet) || (!other.gameObject.tag.Equals("Player") && playerBullet)) {
+                Health health = other.GetComponent<Health>();
 
-            Destroy(this.gameObject);
-            //Only if the other object has a health component
-            if (health != null) {
-                health.DoDamage(damage);
+                Destroy(this.gameObject);
+                //Only if the other object has a health component
+                if (health != null) {
+                    health.DoDamage(damage);
+                }
             }
         }
     }
