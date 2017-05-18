@@ -26,7 +26,7 @@ public class Health : NetworkBehaviour {
         return maxHeath;
     }
 
-    public void DoDamage(float attack) {
+    public bool DoDamage(float attack) {
 
         if (health <= attack) { //The attack will kill player
             //Entity dies
@@ -37,6 +37,7 @@ public class Health : NetworkBehaviour {
                 GameManager.addScore(cpu.ScoreOnDeath);
             }
             Destroy(this.gameObject);
+            return true;
         }
         else {
             health -= attack;
@@ -44,6 +45,7 @@ public class Health : NetworkBehaviour {
             if (cpu != null) {
                 cpu.resetTimer();
             }
+            return false;
         }
     }
 }
