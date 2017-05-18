@@ -156,6 +156,7 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
+            NetworkServer.Spawn(gold);
         }
         #endregion
         #region Spawn Silver Coins
@@ -166,6 +167,7 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
+            NetworkServer.Spawn(silver);
         }
         #endregion
         #region Spawn Bronze Coins
@@ -176,6 +178,7 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
+            NetworkServer.Spawn(bronze);
         }
         #endregion
     }
