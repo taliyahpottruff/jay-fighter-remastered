@@ -6,8 +6,7 @@ using UnityEngine.Networking;
 
 public class ScoreManager : NetworkBehaviour {
     private Player player;
-
-    public long coins = 0;
+    
     public int round = 0;
 
     public GameObject SCORE;
@@ -54,8 +53,8 @@ public class ScoreManager : NetworkBehaviour {
             if (healthText.text != health.GetHealth().ToString()) {
                 healthText.text = health.GetHealth().ToString();
             }
-            if (coinsText.text != ("$" + coins.ToString())) {
-                coinsText.text = "$" + coins.ToString();
+            if (coinsText.text != ("$" + player.coins.ToString())) {
+                coinsText.text = "$" + player.coins.ToString();
             }
             if (healthSlider.value != health.GetHealth()) {
                 healthSlider.value = health.GetHealth();

@@ -11,6 +11,7 @@ public class Player : NetworkBehaviour {
     public string username = "Player";
     public ControlScheme currentScheme = ControlScheme.Keyboard;
     [SyncVar] public float score;
+    [SyncVar] public int coins;
 
     private SpriteRenderer sr;
     private Health health;
