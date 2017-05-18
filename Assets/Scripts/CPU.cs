@@ -27,6 +27,8 @@ public class CPU : NetworkBehaviour {
     public GameObject FullHealthBar;
     public GameObject HealthBar;
     public EnemySpriteManager spriteManager;
+    [SyncVar]
+    public bool hideHealth;
     #endregion
 
     #region Private Variables
@@ -39,7 +41,6 @@ public class CPU : NetworkBehaviour {
     private bool melee = false;
     private RaycastHit2D meleeHit;
     private Timer HealthBarTimer = new Timer();
-    private bool hideHealth;
     private GameObject BronzeCoin;
     private GameObject SilverCoin;
     private GameObject GoldCoin;
