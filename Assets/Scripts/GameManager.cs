@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
     public bool hasStarted = false;
     public static long Score = 0;
     public static long Coins = 0;
-    public int Round = 0;
+    public int round = 0;
     private int toSpawn = 1;
     private bool hasDied = false;
     private Health Health;
@@ -29,23 +29,23 @@ public class GameManager : MonoBehaviour {
     private GameObject dupeEnemy;
     
 
-    public GameObject SCORE;
+    /*public GameObject SCORE;
     public GameObject HEALTH;
     public GameObject COINS;
     public GameObject HEALTHTX;
-    public GameObject ROUND;
+    public GameObject ROUND;*/
     public GameObject GAMEOVER;
 
-    #region Trenton Pottruff: Animators
-    public Animator healthAnim;
-    public Animator statsAnim;
+    /*#region Trenton Pottruff: Animators
+    //public Animator healthAnim;
+    //public Animator statsAnim;
     #endregion
 
     private Text scoreText;
     private Slider healthSlider;
     private Text healthText;
     private Text coinsText;
-    private Text roundText;
+    private Text roundText;*/
 
     private void Start() {
         Game.PAUSED = false;
@@ -58,11 +58,12 @@ public class GameManager : MonoBehaviour {
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
+        /* Now in ScoreManager
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
         healthSlider = HEALTH.GetComponent<Slider>();
         coinsText = COINS.GetComponent<Text>();
-        roundText = ROUND.GetComponent<Text>();
+        roundText = ROUND.GetComponent<Text>();*/
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
         //player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour {
         Score += s;
     }
 	void Update () {
+        /* Now in ScoreManager
 	    if(scoreText.text != Score.ToString()) {
             scoreText.text = Score.ToString();
         }
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour {
         }
         if(roundText.text != Round.ToString()) {
             roundText.text = Round.ToString();
-        }
+        }*/
         if (hasStarted) {
             if (player == null && hasDied == false) {
                 Debug.Log("Player has died!");
@@ -114,7 +116,7 @@ public class GameManager : MonoBehaviour {
         nm.StopHost();
         Score = 0;
         Coins = 0;
-        Round = 0;
+        round = 0;
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
@@ -124,8 +126,8 @@ public class GameManager : MonoBehaviour {
     public void handleRound() {
         if (hasDied) return;
         if(checkDead()) {
-            Round++;
-            toSpawn = 1 + Round + (int)(Mathf.Round(Random.Range(0f, Round)));
+            round++;
+            toSpawn = 1 + round + (int)(Mathf.Round(Random.Range(0f, round)));
             for(int i = 0; i < toSpawn; i++) {
                 int sp = selectSP();
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
@@ -149,11 +151,11 @@ public class GameManager : MonoBehaviour {
 
     //This returns a random enemy prefab based on what round the game is on
     private GameObject getEnemy() {
-        if(Round < 5) {
+        if(round < 5) {
             return basicEnemy;
         } else {
             float ran = Mathf.Round(Random.Range(0f, 3f));
-            if(Round >= 15) {
+            if(round >= 15) {
                 if (ran == 0) {
                     return fastEnemy;
                 } else if (ran == 1) {
@@ -161,7 +163,7 @@ public class GameManager : MonoBehaviour {
                 } else if (ran == 2) {
                     return dupeEnemy;
                 } else return basicEnemy;
-            } else if(Round >= 10) {
+            } else if(round >= 10) {
                 if(ran == 0) {
                     return fastEnemy;
                 }else if(ran == 1) {
@@ -184,15 +186,15 @@ public class GameManager : MonoBehaviour {
         Health = player.GetComponent<Health>();
 
         //Play HUD Animations
-        healthAnim.Play("healthPanel-in");
-        statsAnim.Play("statsPanel-in");
+        /*healthAnim.Play("healthPanel-in");
+        statsAnim.Play("statsPanel-in");*/
 
         //Spawning code originally by Garrett Nicholas
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
         //DEBUG OUT
         Debug.Log("I found " + spawnPoints.Length + " Spawn Points!");
-        Round++;
-        toSpawn = Round + (int)(Mathf.Round(Random.Range(0f, Round)));
+        round++;
+        toSpawn = round + (int)(Mathf.Round(Random.Range(0f, round)));
         for (int i = 0; i < toSpawn; i++) {
             int sp = selectSP();
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);

@@ -8,19 +8,21 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Bullet : NetworkBehaviour {
-    private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
     public bool playerBullet;
+    public NetworkIdentity owner;
     private Rigidbody2D rb;
     private Vector2 velocity;
 
     private void Start() {
-        rb = GetComponent<Rigidbody2D>();
+        if (!isLocalPlayer) return;
 
-        velocity = velocityOnAwake;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
+        if (!isLocalPlayer) return;
+
         if (Game.PAUSED) {
             rb.velocity = Vector2.zero;
         } else {
@@ -37,7 +39,12 @@ public class Bullet : NetworkBehaviour {
                 Destroy(this.gameObject);
                 //Only if the other object has a health component
                 if (health != null) {
-                    health.DoDamage(damage);
+                    if (health.DoDamage(damage)) {
+                        if (playerBullet) {
+                            Player p = owner.GetComponent<Player>();
+                            p.score += 1f;
+                        }
+                    }
                 }
             }
         }
@@ -45,9 +52,5 @@ public class Bullet : NetworkBehaviour {
 
     public void SetVelocity(Vector2 newVelocity) {
         rb.velocity = newVelocity;
-    }
-
-    public void SetVelocityOnAwake(Vector2 velocity) {
-        velocityOnAwake = velocity;
     }
 }

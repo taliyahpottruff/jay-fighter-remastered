@@ -27,6 +27,8 @@ public class CPU : NetworkBehaviour {
     public GameObject FullHealthBar;
     public GameObject HealthBar;
     public EnemySpriteManager spriteManager;
+    [SyncVar]
+    public bool hideHealth;
     #endregion
 
     #region Private Variables
@@ -39,7 +41,6 @@ public class CPU : NetworkBehaviour {
     private bool melee = false;
     private RaycastHit2D meleeHit;
     private Timer HealthBarTimer = new Timer();
-    private bool hideHealth;
     private GameObject BronzeCoin;
     private GameObject SilverCoin;
     private GameObject GoldCoin;
@@ -156,6 +157,7 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
+            NetworkServer.Spawn(gold);
         }
         #endregion
         #region Spawn Silver Coins
@@ -166,6 +168,7 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
+            NetworkServer.Spawn(silver);
         }
         #endregion
         #region Spawn Bronze Coins
@@ -176,6 +179,7 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
+            NetworkServer.Spawn(bronze);
         }
         #endregion
     }
@@ -219,7 +223,7 @@ public class CPU : NetworkBehaviour {
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.playerBullet = false;
                 bullet.damage = 5;
-                bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
+                bulletObj.GetComponent<Rigidbody2D>().velocity = (rb.velocity + (direction * 10));
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);
