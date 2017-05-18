@@ -11,6 +11,7 @@ public class Bullet : NetworkBehaviour {
     private Vector2 velocityOnAwake = Vector2.zero;
     public int damage = 10;
     public bool playerBullet;
+    public NetworkIdentity owner;
     private Rigidbody2D rb;
     private Vector2 velocity;
 
@@ -37,7 +38,12 @@ public class Bullet : NetworkBehaviour {
                 Destroy(this.gameObject);
                 //Only if the other object has a health component
                 if (health != null) {
-                    health.DoDamage(damage);
+                    if (health.DoDamage(damage)) {
+                        if (playerBullet) {
+                            Player p = owner.GetComponent<Player>();
+                            p.score += 1f;
+                        }
+                    }
                 }
             }
         }

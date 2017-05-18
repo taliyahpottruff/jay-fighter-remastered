@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class ScoreManager : NetworkBehaviour {
-    public long score = 0;
+    private Player player;
+
     public long coins = 0;
     public int round = 0;
 
@@ -31,6 +32,7 @@ public class ScoreManager : NetworkBehaviour {
     private void Start() {
         playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
         health = playerObj.GetComponent<Health>();
+        player = playerObj.GetComponent<Player>();
 
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
@@ -45,8 +47,8 @@ public class ScoreManager : NetworkBehaviour {
     private void Update() {
         health = playerObj.GetComponent<Health>();
 
-        if (scoreText.text != score.ToString()) {
-            scoreText.text = score.ToString();
+        if (scoreText.text != Mathf.FloorToInt(player.score * 1).ToString()) {
+            scoreText.text = Mathf.FloorToInt(player.score * 1).ToString();
         }
         if (health != null) {
             if (healthText.text != health.GetHealth().ToString()) {
