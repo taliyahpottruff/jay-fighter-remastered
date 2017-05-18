@@ -159,9 +159,9 @@ public class PlayerCombat : NetworkBehaviour {
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.playerBullet = true;
         bullet.owner = _owner;
-        bullet.SetVelocityOnAwake((direction * 10));
-        bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
         aSource.PlayOneShot(gunSound);
+        bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
         NetworkServer.Spawn(bulletObj);
+        bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
     }
 }

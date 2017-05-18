@@ -222,7 +222,7 @@ public class CPU : NetworkBehaviour {
                 Bullet bullet = bulletObj.GetComponent<Bullet>();
                 bullet.playerBullet = false;
                 bullet.damage = 5;
-                bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
+                bulletObj.GetComponent<Rigidbody2D>().velocity = (rb.velocity + (direction * 10));
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);

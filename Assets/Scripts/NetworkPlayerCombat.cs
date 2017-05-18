@@ -60,7 +60,6 @@ public class NetworkPlayerCombat : PlayerCombat {
     private void CmdFire(Vector2 position, Vector2 direction) {
         GameObject bulletObj = Instantiate(bulletPrefab, position + direction, Quaternion.identity) as GameObject;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
-        bullet.SetVelocityOnAwake(rb.velocity + (direction * 10));
         bulletObj.GetComponent<Rigidbody2D>().velocity = rb.velocity + (direction * 10);
         NetworkServer.Spawn(bulletObj);
     }
