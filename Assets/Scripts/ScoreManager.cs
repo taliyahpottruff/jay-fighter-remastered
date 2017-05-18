@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 public class ScoreManager : NetworkBehaviour {
     private Player player;
     
-    public int round = 0;
+    public GameManager gameManager;
 
     public GameObject SCORE;
     public GameObject HEALTH;
@@ -63,8 +63,8 @@ public class ScoreManager : NetworkBehaviour {
                 healthSlider.maxValue = health.GetMaxHealth();
             }
         }
-        if (roundText.text != round.ToString()) {
-            roundText.text = round.ToString();
+        if (roundText.text != gameManager.round.ToString()) {
+            roundText.text = gameManager.round.ToString();
         }
     }
 }
