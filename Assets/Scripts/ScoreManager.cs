@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+/*
+ * AUTHOR: Trenton Pottruff
+*/
+
 public class ScoreManager : NetworkBehaviour {
     private Player player;
     
@@ -14,6 +18,7 @@ public class ScoreManager : NetworkBehaviour {
     public GameObject COINS;
     public GameObject HEALTHTX;
     public GameObject ROUND;
+    public Text storeCoinCount;
     
     public Animator healthAnim;
     public Animator statsAnim;
@@ -52,9 +57,8 @@ public class ScoreManager : NetworkBehaviour {
         health = playerObj.GetComponent<Health>();
         player = playerObj.GetComponent<Player>();
 
-        if (scoreText == null) {
-            Debug.LogError("Uh oh");
-        }
+        //Update the current coin count in the store
+        storeCoinCount.text = "$" + player.coins;
 
         if (scoreText.text != Mathf.FloorToInt(player.score * 1).ToString()) {
             scoreText.text = Mathf.FloorToInt(player.score * 1).ToString();
