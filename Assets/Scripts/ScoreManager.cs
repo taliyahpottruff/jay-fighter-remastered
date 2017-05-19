@@ -29,9 +29,6 @@ public class ScoreManager : NetworkBehaviour {
     private Health health;
 
     private void Start() {
-        playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
-        health = playerObj.GetComponent<Health>();
-        player = playerObj.GetComponent<Player>();
 
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
@@ -41,10 +38,23 @@ public class ScoreManager : NetworkBehaviour {
 
         healthAnim.Play("healthPanel-in");
         statsAnim.Play("statsPanel-in");
+
+        health = playerObj.GetComponent<Health>();
+        player = playerObj.GetComponent<Player>();
     }
 
     private void Update() {
+        if (playerObj == null) {
+            playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
+            return;
+        }
+
         health = playerObj.GetComponent<Health>();
+        player = playerObj.GetComponent<Player>();
+
+        if (scoreText == null) {
+            Debug.LogError("Uh oh");
+        }
 
         if (scoreText.text != Mathf.FloorToInt(player.score * 1).ToString()) {
             scoreText.text = Mathf.FloorToInt(player.score * 1).ToString();
