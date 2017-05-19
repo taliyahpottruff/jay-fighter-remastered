@@ -148,6 +148,7 @@ public class PlayerCombat : NetworkBehaviour {
                 bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
                 aSource.PlayOneShot(gunSound);*/
                 CmdFire(pos, direction, GetComponent<NetworkIdentity>());
+                aSource.PlayOneShot(gunSound);
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);
@@ -159,7 +160,7 @@ public class PlayerCombat : NetworkBehaviour {
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.playerBullet = true;
         bullet.owner = _owner;
-        aSource.PlayOneShot(gunSound);
+        
         bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
         NetworkServer.Spawn(bulletObj);
         bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);

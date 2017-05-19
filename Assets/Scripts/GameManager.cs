@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour {
         if (hasStarted) {
             if (player == null && hasDied == false) {
                 Debug.Log("Player has died!");
-                nm.StopHost();
+                NetworkManager.singleton.StopHost();
                 hasDied = true;
                 GAMEOVER.SetActive(true);
                 for (int i = 0; i < toSpawn; i++) {
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour {
 	}
 
     public void resetGame() {
-        nm.StopHost();
+        NetworkManager.singleton.StopHost();
         Score = 0;
         Coins = 0;
         round = 0;
