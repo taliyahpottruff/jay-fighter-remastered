@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+/*
+ * AUTHOR: Trenton Pottruff
+*/
+
 public class StoreItemButton : MonoBehaviour {
     public string itemName;
     public int cost;
 
+    public Image itemIcon;
+
     private Text button;
     private Player player;
     private Inventory playerInventory;
+    private Button itemButton;
 
     private void Start() {
         StartCoroutine(DelayedStart());
+        itemButton = GetComponent<Button>();
     }
 
     private IEnumerator DelayedStart() {
@@ -25,7 +33,21 @@ public class StoreItemButton : MonoBehaviour {
     }
 
     private void Update() {
+        //Check to see if the player can afford the item
+        bool itemAvailable = false;
+        if (player != null) {
+            if (player.coins > cost)
+                itemAvailable = true;
+        }
+
+        itemButton.interactable = itemAvailable;
+
+        if (button == null) {
+            button = GetComponentInChildren<Text>();
+        }
+
         button.text = itemName + "\n($" + cost + ")";
+        itemIcon.sprite = Game.ITEMS[itemName].GetSprite();
     }
 
     public void BuyItem() {
