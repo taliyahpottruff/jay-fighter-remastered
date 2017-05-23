@@ -9,6 +9,9 @@ using System.Collections;
 */
 
 public class Health : NetworkBehaviour {
+    [SerializeField]
+    private bool invincible;
+
     [SyncVar]
     public float health = 100;
     private float maxHeath = 100;
@@ -27,25 +30,28 @@ public class Health : NetworkBehaviour {
     }
 
     public bool DoDamage(float attack) {
+        if (!invincible) {
+            if (health <= attack) { //The attack will kill player
+                                    //Entity dies
+                CPU cpu = this.gameObject.GetComponent<CPU>();
+                if (cpu != null) {
+                    cpu.disposeTimer();
+                    cpu.DropCoins();
+                    GameManager.addScore(cpu.ScoreOnDeath);
+                }
+                Destroy(this.gameObject);
+                return true;
+            }
+            else {
+                health -= attack;
+                CPU cpu = this.gameObject.GetComponent<CPU>();
+                if (cpu != null) {
+                    cpu.resetTimer();
+                }
+                return false;
+            }
+        }
 
-        if (health <= attack) { //The attack will kill player
-            //Entity dies
-            CPU cpu = this.gameObject.GetComponent<CPU>();
-            if (cpu != null) {
-                cpu.disposeTimer();
-                cpu.DropCoins();
-                GameManager.addScore(cpu.ScoreOnDeath);
-            }
-            Destroy(this.gameObject);
-            return true;
-        }
-        else {
-            health -= attack;
-            CPU cpu = this.gameObject.GetComponent<CPU>();
-            if (cpu != null) {
-                cpu.resetTimer();
-            }
-            return false;
-        }
+        return false;
     }
 }
