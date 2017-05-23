@@ -36,7 +36,7 @@ public class StoreItemButton : MonoBehaviour {
         //Check to see if the player can afford the item
         bool itemAvailable = false;
         if (player != null) {
-            if (player.coins > cost)
+            if (player.coins >= cost)
                 itemAvailable = true;
         }
 
