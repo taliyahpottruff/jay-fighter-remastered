@@ -8,7 +8,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Health))]
 public class Player : NetworkBehaviour {
-    public string username = "Player";
+    [SyncVar] public string username = "Player";
     public ControlScheme currentScheme = ControlScheme.Keyboard;
     [SyncVar] public float score;
     [SyncVar] public int coins;
@@ -28,6 +28,8 @@ public class Player : NetworkBehaviour {
 
     public void Start() {
         health = GetComponent<Health>();
+
+        if (isLocalPlayer) username = PlayerPrefs.GetString("username");
     }
 
     private void Update() {

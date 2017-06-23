@@ -81,7 +81,7 @@ public class CPU : NetworkBehaviour {
         if (!Game.PAUSED) {
             List<Node> path = pathfinder.FindPath(this.transform.position, player.transform.position);
             Vector2 playerPosition = player.transform.position;
-            if (path != null)
+            if (path != null && path.Count > 0)
                 playerPosition = path[0].position;
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
             td = targetDirection;

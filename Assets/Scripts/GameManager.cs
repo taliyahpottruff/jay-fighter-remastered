@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 /*
     * AUTHOR: Garrett Nicholas
-    * ADDITIONAL: Trenton Pottruff
+    * MODIFICATIONS: Trenton Pottruff
 */
 
 public class GameManager : MonoBehaviour {
@@ -22,31 +22,14 @@ public class GameManager : MonoBehaviour {
     public GameObject[] spawned = new GameObject[900];
     private GameObject[] spawnPoints;
     private NetworkManager nm;
+    public GameObject GAMEOVER;
 
     private GameObject basicEnemy;
     private GameObject fastEnemy;
     private GameObject shootEnemy;
     private GameObject dupeEnemy;
+    private GameObject[] players;
     
-
-    /*public GameObject SCORE;
-    public GameObject HEALTH;
-    public GameObject COINS;
-    public GameObject HEALTHTX;
-    public GameObject ROUND;*/
-    public GameObject GAMEOVER;
-
-    /*#region Trenton Pottruff: Animators
-    //public Animator healthAnim;
-    //public Animator statsAnim;
-    #endregion
-
-    private Text scoreText;
-    private Slider healthSlider;
-    private Text healthText;
-    private Text coinsText;
-    private Text roundText;*/
-
     private void Start() {
         Game.PAUSED = false;
 
@@ -77,43 +60,32 @@ public class GameManager : MonoBehaviour {
         Score += s;
     }
 	void Update () {
-        /* Now in ScoreManager
-	    if(scoreText.text != Score.ToString()) {
-            scoreText.text = Score.ToString();
-        }
-        if (Health != null) {
-            if (healthText.text != Health.GetHealth().ToString()) {
-                healthText.text = Health.GetHealth().ToString();
-            }
-            if (coinsText.text != ("$" + Coins.ToString())) {
-                coinsText.text = "$" + Coins.ToString();
-            }
-            if (healthSlider.value != Health.GetHealth()) {
-                healthSlider.value = Health.GetHealth();
-            }
-            if (healthSlider.maxValue != Health.GetMaxHealth()) {
-                healthSlider.maxValue = Health.GetMaxHealth();
-            }
-        }
-        if(roundText.text != Round.ToString()) {
-            roundText.text = Round.ToString();
-        }*/
+        #region Trenton Pottruff: Get Player List
+        players = GameObject.FindGameObjectsWithTag("Player");
+        #endregion
+
         if (hasStarted) {
-            if (player == null && hasDied == false) {
+            /* Old Game Over Code
+             * if (player == null && hasDied == false) {
                 Debug.Log("Player has died!");
-                nm.StopHost();
+                NetworkManager.singleton.StopHost();
                 hasDied = true;
                 GAMEOVER.SetActive(true);
                 for (int i = 0; i < toSpawn; i++) {
                     Destroy(spawned[i]);
                 }
+            }*/
+            #region Trenton Pottruff: Game Over
+            if (players.Length < 1) {
+                NetworkManager.singleton.StopHost();
             }
+            #endregion
             handleRound();
         }
 	}
 
     public void resetGame() {
-        nm.StopHost();
+        NetworkManager.singleton.StopHost();
         Score = 0;
         Coins = 0;
         round = 0;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Toolbar : MonoBehaviour {
     public Image panelBody;
@@ -42,9 +43,11 @@ public class Toolbar : MonoBehaviour {
     }
 
     private IEnumerator DelayedStart() {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.11f);
+        Debug.Log("Toolbar Delayed Start Executing...");
 
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        //inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        inventory = NetworkManager.singleton.client.connection.playerControllers[0].gameObject.GetComponent<Inventory>();
         prevCount = inventory.inventory.Count;
 
         Clear();
