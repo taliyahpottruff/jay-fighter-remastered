@@ -17,7 +17,7 @@ public class PlayerTag : NetworkBehaviour {
 
     private void Update() {
         if (isLocalPlayer)
-            playerTag.SetActive(false);
+            playerTag.SetActive(true);
 
         name.text = player.username;
     }

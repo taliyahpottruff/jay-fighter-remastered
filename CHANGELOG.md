@@ -6,10 +6,12 @@
 - Enemies now using pathfinding to walk around obstacles and get to the player.
 - Made the music volume setting persistent.
 - Added a new Multiplayer menu.
-- You can now Host & Join games. The current form it's in won't stay. We're working hard on a final lobby system.
+- You can now Host & Join games. The current form that it's in won't stay. We're working hard on a final lobby system.
 - The camera now follows the player in multiplayer.
 - Re-vamped the splash screen.
 - Items now have icons both in the store and in the toolbar.
+- Steam is now implemented into the game. The game will use your Steam Display Name as your in=game name.
+- New bullet sprites that rotate to face the direction they are fired in.
 
 ### Bugfixes
 - Menu selection no longer bugs out if the "maps" folder doesn't exist.

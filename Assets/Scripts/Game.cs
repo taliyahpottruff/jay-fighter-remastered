@@ -10,6 +10,7 @@ public class Game
     public static float SFX_VOLUME = 0.25f;
     public static float MUSIC_VOLUME = 0.05f;
     public static string CURRENT_MAP = "Basic";
+    public static SteamClient STEAM;
 
     #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {

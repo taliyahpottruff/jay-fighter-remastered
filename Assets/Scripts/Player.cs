@@ -29,7 +29,7 @@ public class Player : NetworkBehaviour {
     public void Start() {
         health = GetComponent<Health>();
 
-        if (isLocalPlayer) username = PlayerPrefs.GetString("username");
+        if (isLocalPlayer) username = Game.STEAM.GetUsername();
     }
 
     private void Update() {
