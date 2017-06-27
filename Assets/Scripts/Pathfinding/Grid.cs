@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour {
     public LayerMask unwalkableMask;
+    public GameMap gameMap;
     public Vector2 gridSize;
     public float nodeRadius;
     Node[,] grid;
@@ -12,10 +13,18 @@ public class Grid : MonoBehaviour {
     int gridSizeX, gridSizeY;
 
     private void Start() {
+        
+
+        StartCoroutine(DelayedStart());
+    }
+
+    private IEnumerator DelayedStart() {
+        yield return new WaitForEndOfFrame();
+
+        gridSize = gameMap.size;
         nodeDiameter = nodeRadius * 2;
         gridSizeX = Mathf.RoundToInt(gridSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridSize.y / nodeDiameter);
-
         CreateGrid();
     }
 
