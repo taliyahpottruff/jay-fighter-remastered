@@ -1,4 +1,8 @@
 # Changelog
+## v0.5.0b
+### Changes
+- Did a little housekeeping on the Main Menu. Moved the version text to the bottom right, added copyright information and added a little notification for which Steam account is playing the game.
+
 ## v0.4.0a
 ### Changes
 - Implemented new sprites and animations for Drones, Speedsters and Savages (names are also new).
@@ -12,6 +16,7 @@
 - Items now have icons both in the store and in the toolbar.
 - Steam is now implemented into the game. The game will use your Steam Display Name as your in=game name.
 - New bullet sprites that rotate to face the direction they are fired in.
+- Added Mines as items. They can be purchased through the store.
 
 ### Bugfixes
 - Menu selection no longer bugs out if the "maps" folder doesn't exist.
@@ -20,6 +25,7 @@
 - Fixed an issue where the coins variable wouldn't reset after restarting a game in singleplayer.
 - Fixed player not spawning after leaving and re-joining singleplayer game from pause menu.
 - Pressing escape to leave the settings menu no longer causes a weird glitch with the pause menu.
+- The settings menu is now accessible from the menu.
 
 ## v0.3.0a
 ### Changes

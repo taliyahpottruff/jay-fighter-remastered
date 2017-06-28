@@ -42,4 +42,11 @@ public class Player : NetworkBehaviour {
     public void GiveHealth(int amount) {
         health.health += amount;
     }
+
+    [Command]
+    public void CmdSpawnItem(string name) {
+        GameObject prefab = Resources.Load<GameObject>("Prefabs/" + name);
+        GameObject go = Instantiate<GameObject>(prefab, this.transform.position, Quaternion.identity);
+        NetworkServer.Spawn(go);
+    }
 }

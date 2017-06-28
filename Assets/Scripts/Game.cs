@@ -36,7 +36,8 @@ public class Game
     #endregion
     #region Items
     public static Dictionary<string, Item> ITEMS = new Dictionary<string, Item>() {
-        {"Repair Kit", new HealthPotion()}
+        {"Repair Kit", new HealthPotion()},
+        {"Mine", new MineItem()}
     };
     #endregion
 
