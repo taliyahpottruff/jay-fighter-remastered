@@ -2,6 +2,7 @@
 ## v0.5.0b
 ### Changes
 - Did a little housekeeping on the Main Menu. Moved the version text to the bottom right, added copyright information, added a little notification for which Steam account is playing the game, changed the way things scale a little bit and replaced the music.
+- Made some minor changes to the way that the font size on Main Menu buttons scale.
 
 ## v0.4.0a
 ### Changes
