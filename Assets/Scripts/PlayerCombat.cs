@@ -156,7 +156,7 @@ public class PlayerCombat : NetworkBehaviour {
 
     [Command]
     private void CmdFire(Vector2 position, Vector2 direction, NetworkIdentity _owner) {
-        GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.identity) as GameObject;
+        GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.playerBullet = true;
         bullet.owner = _owner;

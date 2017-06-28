@@ -3,13 +3,17 @@
 [Serializable]
 public class Map {
     public string name;
+    public int width;
+    public int height;
     public MapObj[] objects;
 
     public Map() {
 
     }
     
-    public Map(string name, MapObj[] objects) {
+    public Map(string name, int width, int height, MapObj[] objects) {
+        this.width = width;
+        this.height = height;
         this.name = name;
         this.objects = objects;
     }

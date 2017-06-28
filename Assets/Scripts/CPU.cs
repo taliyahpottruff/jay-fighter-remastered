@@ -45,6 +45,7 @@ public class CPU : NetworkBehaviour {
     private GameObject SilverCoin;
     private GameObject GoldCoin;
     private Pathfinding pathfinder;
+    private float previousHealth;
     #endregion
 
     #region Initialize
@@ -63,6 +64,7 @@ public class CPU : NetworkBehaviour {
         speed = Random.Range(minSpeed, maxSpeed);
         player = GameObject.FindGameObjectWithTag("Player");
         FullHealthBar.SetActive(false);
+        previousHealth = health.health;
         StartCoroutine(FireBullet());
         StartCoroutine(MeleeAttack());
 	}
@@ -72,10 +74,15 @@ public class CPU : NetworkBehaviour {
     void Update() {
         player = GetClosestPlayer(); //Grab the player object
         #region Health Hiding
+        if (previousHealth != health.health)
+            resetTimer();
+
         if (hideHealth) {
             FullHealthBar.SetActive(false);
             hideHealth = false;
         }
+
+        previousHealth = health.health;
         #endregion
         #region Game Logic
         if (!Game.PAUSED) {
