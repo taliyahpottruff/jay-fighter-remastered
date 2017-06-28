@@ -30,7 +30,7 @@ public class Health : NetworkBehaviour {
     }
 
     public bool DoDamage(float attack) {
-        if (!invincible) {
+        if (!invincible && isServer) {
             if (health <= attack) { //The attack will kill player
                                     //Entity dies
                 CPU cpu = this.gameObject.GetComponent<CPU>();
