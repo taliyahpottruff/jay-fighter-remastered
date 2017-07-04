@@ -34,15 +34,14 @@ public class ScoreManager : NetworkBehaviour {
     private Health health;
 
     private void Start() {
+        healthAnim.Play("healthPanel-in");
+        statsAnim.Play("statsPanel-in");
 
         scoreText = SCORE.GetComponent<Text>();
         healthText = HEALTHTX.GetComponent<Text>();
         healthSlider = HEALTH.GetComponent<Slider>();
         coinsText = COINS.GetComponent<Text>();
         roundText = ROUND.GetComponent<Text>();
-
-        healthAnim.Play("healthPanel-in");
-        statsAnim.Play("statsPanel-in");
 
         health = playerObj.GetComponent<Health>();
         player = playerObj.GetComponent<Player>();
