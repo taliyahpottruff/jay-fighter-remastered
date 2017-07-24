@@ -39,6 +39,13 @@ public class Game
         {"Yard", new Map("Yard", 25, 40, new MapObj[] {
             //Objects
             new MapObj("Grass", -3.5f, 3.17f, 8, 8, true, false),
+            new MapObj("Grass", -8, 1.17f, 5, 4, true, false),
+            new MapObj("Grass", 4, 1.17f, 5, 4, true, false),
+            new MapObj("Grass", -11.5f, 9.17f, 4, 20, true, false),
+            new MapObj("Grass", -8.5f, -6.83f, 21, 4, true, false),
+            new MapObj("Grass", 8.5f, 9.17f, 4, 17, true, false),
+            new MapObj("Grass", -8.5f, 9.17f, 18, 4, true, false),
+            new MapObj("Grass", -1.5f, 12, 4, 3, true, false),
             //Colliders
             new MapObj("Boulder", 4f, 4f, 1, 3, true, false),
             new MapObj("Boulder", 4f, -2f, 1, 3, true, false),
