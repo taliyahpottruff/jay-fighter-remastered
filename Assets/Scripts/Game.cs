@@ -33,6 +33,32 @@ public class Game
             new MapObj("Test Object", 4, -4, 1, 1),
             new MapObj("Test Object", -4, 4, 1, 1),
             new MapObj("Test Object", -4, -4, 1, 1)
+        })},
+        {"Yard", new Map("Yard", 25, 40, new MapObj[] {
+            //Objects
+            new MapObj("Grass", -3.5f, 3.17f, 8, 8, true, false),
+            //Colliders
+            new MapObj("Boulder", 4f, 4f, 1, 3, true, true),
+            new MapObj("Boulder", 4f, -2f, 1, 3, true, true),
+
+            new MapObj("Boulder", 4f, 2f, 5, 1, true, true),
+            new MapObj("Boulder", 4f, -2f, 5, 1, true, true),
+
+            new MapObj("Boulder", -4f, 4f, 1, 3, true, true),
+            new MapObj("Boulder", -4f, -2f, 1, 3, true, true),
+
+            new MapObj("Boulder", -8f, 2f, 4, 1, true, true),
+            new MapObj("Boulder", -8f, -2f, 4, 1, true, true),
+
+            new MapObj("Boulder", -3f, -4f, 2, 1, true, true),
+            new MapObj("Boulder", 2f, -4f, 2, 1, true, true),
+
+            new MapObj("Boulder", -2f, -5f, 1, 2, true, true),
+            new MapObj("Boulder", 2f, -5f, 1, 2, true, true),
+
+            new MapObj("Boulder", -4f, 4f, 8, 1, true, true),
+            //Spawns
+            new MapObj("Test Object", -2, 16, 1, 1)
         })}
     };
     #endregion
