@@ -16,6 +16,7 @@ public class Game
 
     #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
+        #region Basic Map
         {"Basic", new Map("Basic", 30, 30, new MapObj[] {
             //Objects
             new MapObj("Grass", -14.5f, 14.17f, 30f, 30f, true, false),
@@ -34,29 +35,65 @@ public class Game
             new MapObj("Test Object", -4, 4, 1, 1),
             new MapObj("Test Object", -4, -4, 1, 1)
         })},
+        #endregion
         {"Yard", new Map("Yard", 25, 40, new MapObj[] {
             //Objects
             new MapObj("Grass", -3.5f, 3.17f, 8, 8, true, false),
             //Colliders
-            new MapObj("Boulder", 4f, 4f, 1, 3, true, true),
-            new MapObj("Boulder", 4f, -2f, 1, 3, true, true),
+            new MapObj("Boulder", 4f, 4f, 1, 3, true, false),
+            new MapObj("Boulder", 4f, -2f, 1, 3, true, false),
 
-            new MapObj("Boulder", 4f, 2f, 5, 1, true, true),
-            new MapObj("Boulder", 4f, -2f, 5, 1, true, true),
+            new MapObj("Boulder", 4f, 2f, 5, 1, true, false),
+            new MapObj("Boulder", 4f, -2f, 5, 1, true, false),
 
-            new MapObj("Boulder", -4f, 4f, 1, 3, true, true),
-            new MapObj("Boulder", -4f, -2f, 1, 3, true, true),
+            new MapObj("Boulder", -4f, 4f, 1, 3, true, false),
+            new MapObj("Boulder", -4f, -2f, 1, 3, true, false),
 
-            new MapObj("Boulder", -8f, 2f, 4, 1, true, true),
-            new MapObj("Boulder", -8f, -2f, 4, 1, true, true),
+            new MapObj("Boulder", -8f, 2f, 4, 1, true, false),
+            new MapObj("Boulder", -8f, -2f, 4, 1, true, false),
 
-            new MapObj("Boulder", -3f, -4f, 2, 1, true, true),
-            new MapObj("Boulder", 2f, -4f, 2, 1, true, true),
+            new MapObj("Boulder", -3f, -4f, 2, 1, true, false),
+            new MapObj("Boulder", 2f, -4f, 2, 1, true, false),
 
-            new MapObj("Boulder", -2f, -5f, 1, 2, true, true),
-            new MapObj("Boulder", 2f, -5f, 1, 2, true, true),
+            new MapObj("Boulder", -2f, -5f, 1, 2, true, false),
+            new MapObj("Boulder", 2f, -5f, 1, 2, true, false),
 
-            new MapObj("Boulder", -4f, 4f, 8, 1, true, true),
+            new MapObj("Boulder", -4f, -10f, 9, 1, true, false),
+            new MapObj("Boulder", -4, -11, 1, 2, true, false),
+            new MapObj("Boulder", 4, -11, 1, 2, true, false),
+            new MapObj("Boulder", -3, -12, 7, 1, true, false),
+
+            new MapObj("Boulder", -12, 10, 1, 21, true, false),
+            new MapObj("Boulder", -11, 10, 10, 1, true, false),
+            new MapObj("Boulder", -2, 12, 1, 2, true, false),
+            new MapObj("Boulder", -3, 13, 1, 2, true, false),
+            new MapObj("Boulder", -4, 18, 1, 6, true, false),
+            new MapObj("Boulder", -3, 19, 1, 2, true, false),
+            new MapObj("Boulder", -2, 19, 6, 1, true, false),
+            new MapObj("Boulder", 3, 18, 2, 1, true, false),
+            new MapObj("Boulder", 4, 17, 1, 5, true, false),
+            new MapObj("Boulder", 3, 13, 1, 2, true, false),
+            new MapObj("Boulder", 2, 12, 1, 3, true, false),
+            new MapObj("Boulder", 3, 10, 10, 1, true, false),
+            new MapObj("Boulder", 12, 9, 1, 20, true, false),
+            new MapObj("Boulder", 8, -10, 4, 1, true, false),
+            new MapObj("Boulder", 8, -11, 1, 10, true, false),
+            new MapObj("Boulder", -8, -20, 16, 1, true, false),
+            new MapObj("Boulder", -8, -10, 1, 10, true, false),
+            new MapObj("Boulder", -12, -10, 4, 1, true, false),
+
+            new MapObj("Boulder", -8, 6, 17, 1, true, false),
+            new MapObj("Boulder", -8, 5, 1, 3, true, false),
+            new MapObj("Boulder", 8, 5, 1, 3, true, false),
+
+            new MapObj("Boulder", -8, -3, 1, 4, true, false),
+            new MapObj("Boulder", -7, -6, 5, 1, true, false),
+
+            new MapObj("Boulder", 3, -6, 6, 1, true, false),
+            new MapObj("Boulder", 8, -3, 1, 3, true, false),
+
+
+            new MapObj("Boulder", -4f, 4f, 8, 1, true, false),
             //Spawns
             new MapObj("Test Object", -2, 16, 1, 1)
         })}
