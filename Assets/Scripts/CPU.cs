@@ -252,7 +252,8 @@ public class CPU : NetworkBehaviour {
     #region Minion Spawning
     private IEnumerator SpawnMinions() {
         yield return new WaitForSeconds(1f);
-        Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity); //Spawn Minions
+        GameObject go = Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity); //Spawn Minions
+        NetworkServer.Spawn(go);
     }
     #endregion
     #endregion

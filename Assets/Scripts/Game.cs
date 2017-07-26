@@ -109,7 +109,15 @@ public class Game
 
             new MapObj("Boulder", -4f, 4f, 8, 1, true, false),
             //Spawns
-            new MapObj("Test Object", -2, 16, 1, 1)
+            new MapObj("Test Object", -2, 16, 1, 1),
+            new MapObj("Test Object", 2, 16, 1, 1),
+            new MapObj("Test Object", -6, -8, 1, 1),
+            new MapObj("Test Object", 6, -8, 1, 1),
+            new MapObj("Test Object", 0, -5, 1, 1),
+            new MapObj("Test Object", -3, -14, 1, 1),
+            new MapObj("Test Object", 3, -14, 1, 1),
+            new MapObj("Test Object", -5, -17, 1, 1),
+            new MapObj("Test Object", 5, -17, 1, 1)
         })}
     };
     #endregion
