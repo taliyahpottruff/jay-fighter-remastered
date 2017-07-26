@@ -19,7 +19,7 @@ public class MapObject : MonoBehaviour {
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
 
-        if (transform.localScale.x > 1) {
+        /*if (transform.localScale.x > 1) {
             Vector2 off = col.offset;
             off.x = 0.455f;
             col.offset = off;
@@ -29,7 +29,7 @@ public class MapObject : MonoBehaviour {
             Vector2 off = col.offset;
             off.y = -0.455f;
             col.offset = off;
-        }
+        }*/
     }
 
     private void Update() {

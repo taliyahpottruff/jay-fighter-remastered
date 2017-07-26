@@ -6,7 +6,7 @@ public class Explosion : MonoBehaviour {
         Health health = collision.gameObject.GetComponent<Health>();
         
         if (health != null) {
-            health.DoDamage(25);
+            health.DoDamage(50);
         }
     }
 
