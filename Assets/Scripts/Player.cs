@@ -43,6 +43,10 @@ public class Player : NetworkBehaviour {
         health.health += amount;
     }
 
+    public void IncreaseMaxHealth(int amount) {
+        health.IncreaseMax(amount);
+    }
+
     [Command]
     public void CmdSpawnItem(string name) {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + name);

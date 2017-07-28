@@ -29,6 +29,10 @@ public class Health : NetworkBehaviour {
         return maxHeath;
     }
 
+    public void IncreaseMax(int amount) {
+        maxHeath += amount;
+    }
+
     public bool DoDamage(float attack) {
         if (!invincible && isServer) {
             if (health <= attack) { //The attack will kill player
