@@ -8,6 +8,7 @@ using System.IO;
 
 public class MapSelectionDisplay : MonoBehaviour {
     public MenuManager menuManager;
+    public GameLoader gameLoader;
 
     [SerializeField]
     private Transform officialMapHolder;
@@ -61,7 +62,8 @@ public class MapSelectionDisplay : MonoBehaviour {
     }
 
     public void PlayGame() {
-        SceneManager.LoadScene("Game");
+        //SceneManager.LoadScene("Game");
+        gameLoader.LoadGame();
     }
 
     public void BackToMain() {
