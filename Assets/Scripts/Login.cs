@@ -15,7 +15,7 @@ public class Login : MonoBehaviour {
         UnityWebRequest www = UnityWebRequest.Post("http://localhost:3000/methods/loginToken", data);
         yield return www.Send();
 
-        if (www.isError) {
+        if (www.isNetworkError) {
             Debug.Log(www.error);
         }
         else {
