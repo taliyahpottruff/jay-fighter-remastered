@@ -78,16 +78,16 @@ public class PlayerCombat : NetworkBehaviour {
                     topLeft.SetActive(false);
                     topRight.SetActive(true);
                     topUp.SetActive(false);
-                    shooter0 = topRight.transform.FindChild("Right Shooter"); 
-                    shooter1 = topRight.transform.FindChild("Right Shooter");
+                    shooter0 = topRight.transform.Find("Right Shooter"); 
+                    shooter1 = topRight.transform.Find("Right Shooter");
                 } else {
                     //Left
                     topDown.SetActive(false);
                     topLeft.SetActive(true);
                     topRight.SetActive(false);
                     topUp.SetActive(false);
-                    shooter0 = topLeft.transform.FindChild("Left Shooter");
-                    shooter1 = topLeft.transform.FindChild("Left Shooter");
+                    shooter0 = topLeft.transform.Find("Left Shooter");
+                    shooter1 = topLeft.transform.Find("Left Shooter");
                 }
             }
             else {
@@ -97,8 +97,8 @@ public class PlayerCombat : NetworkBehaviour {
                     topLeft.SetActive(false);
                     topRight.SetActive(false);
                     topUp.SetActive(true);
-                    shooter0 = topUp.transform.FindChild("Left Shooter");
-                    shooter1 = topUp.transform.FindChild("Right Shooter");
+                    shooter0 = topUp.transform.Find("Left Shooter");
+                    shooter1 = topUp.transform.Find("Right Shooter");
                 }
                 else {
                     //Down

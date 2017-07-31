@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.IO;
+using UnityEngine.Networking;
 
-public class GameMap : MonoBehaviour {
+public class GameMap : NetworkBehaviour {
     public Vector2 size;
 
     private Map map;
@@ -23,6 +22,7 @@ public class GameMap : MonoBehaviour {
             MapObj mapObj = map.objects[i];
             GameObject prefab = Resources.Load<GameObject>("Prefabs/MapObjects/" + mapObj.name);
             GameObject newGO = Instantiate(prefab, new Vector2(mapObj.x, mapObj.y), Quaternion.identity) as GameObject;
+            newGO.name = mapObj.name;
 
             Vector3 size = Vector3.one;
             size.x = mapObj.width;
@@ -36,6 +36,8 @@ public class GameMap : MonoBehaviour {
             newMapObj.visible = mapObj.visible;
             newMapObj.hasCollider = mapObj.collider;
             newMapObj.isSpawn = mapObj.spawn;
+
+            NetworkServer.Spawn(newGO);
         }
         
     }

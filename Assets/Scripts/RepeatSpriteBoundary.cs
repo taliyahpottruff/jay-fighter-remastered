@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.Networking;
 
 // @NOTE the attached sprite's position should be "top left" or the children will not align properly
 // Strech out the image as you need in the sprite render, the following script will auto-correct it when rendered in the game
@@ -7,7 +7,7 @@ using System.Collections;
 
 // Generates a nice set of repeated sprites inside a streched sprite renderer
 // @NOTE Vertical only, you can easily expand this to horizontal with a little tweaking
-public class RepeatSpriteBoundary : MonoBehaviour {
+public class RepeatSpriteBoundary : NetworkBehaviour {
     SpriteRenderer sprite;
 
     void Start() {
@@ -26,9 +26,10 @@ public class RepeatSpriteBoundary : MonoBehaviour {
         GameObject child;
         for (int i = 0; i < (int)Mathf.Round(sprite.bounds.size.x); i++) {
             for (int j = 0; j < (int)Mathf.Round(sprite.bounds.size.y); j++) {
-                child = Instantiate(childPrefab) as GameObject;
+                child = Instantiate(Resources.Load<GameObject>("Prefabs/MapSprites/" + this.gameObject.name)) as GameObject;
                 child.transform.position = transform.position - (new Vector3(0, spriteSize.y, 0) * j) + (new Vector3(spriteSize.x, 0, 0) * i) - new Vector3(0.5f, -0.5f, 0);
                 child.transform.parent = transform;
+                NetworkServer.Spawn(child);
             }
         }
 
