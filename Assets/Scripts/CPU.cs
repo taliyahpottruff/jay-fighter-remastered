@@ -13,6 +13,7 @@ using UnityEngine.Networking;
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class CPU : NetworkBehaviour {
     #region Member Variables
     public float minSpeed = 1;
@@ -27,6 +28,7 @@ public class CPU : NetworkBehaviour {
     public GameObject FullHealthBar;
     public GameObject HealthBar;
     public EnemySpriteManager spriteManager;
+    public AudioClip spawnSound;
     [SyncVar]
     public bool hideHealth;
     #endregion
@@ -46,6 +48,7 @@ public class CPU : NetworkBehaviour {
     private GameObject GoldCoin;
     private Pathfinding pathfinder;
     private float previousHealth;
+    private AudioSource aSource;
     #endregion
 
     #region Initialize
@@ -65,6 +68,13 @@ public class CPU : NetworkBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         FullHealthBar.SetActive(false);
         previousHealth = health.health;
+        aSource = GetComponent<AudioSource>();
+
+        //Play Spawn Sound, If Exists
+        if (spawnSound != null) {
+            aSource.PlayOneShot(spawnSound);
+        }
+
         StartCoroutine(FireBullet());
         StartCoroutine(MeleeAttack());
 	}
