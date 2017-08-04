@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class Map {
@@ -16,6 +17,18 @@ public class Map {
         this.height = height;
         this.name = name;
         this.objects = objects;
+    }
+
+    public Map(string name) {
+        //Load Map For Image
+        string location = "Maps/" + name;
+        Texture2D mapImg = Resources.Load<Texture2D>(location);
+
+        this.name = name;
+        width = mapImg.width;
+        height = mapImg.height;
+        objects = MapColorDictionary.ConvertImgToMapObjs(mapImg);
+        Debug.LogWarning(objects.Length);
     }
 }
 
