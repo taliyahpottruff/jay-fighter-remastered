@@ -14,12 +14,19 @@ public class JoinGame : MonoBehaviour {
     GameObject roomListItemPrefab;
     [SerializeField]
     Transform roomListParent;
+    [SerializeField]
+    Transform playerListings;
+    GameObject playerListingPrefab;
+    [SerializeField]
+    MenuManager menuManager;
 
     private NetworkManager manager;
 
     private void Start() {
         manager = NetworkManager.singleton;
         if (manager.matchMaker == null) manager.StartMatchMaker();
+
+        playerListingPrefab = Resources.Load<GameObject>("Prefabs/Player Listing");
 
         RefreshRoomList();
     }
@@ -71,5 +78,21 @@ public class JoinGame : MonoBehaviour {
         manager.matchMaker.JoinMatch(match.networkId, "", "", "", 0, 0, manager.OnMatchJoined);
         ClearRoomList();
         status.text = "Joining...";
+    }
+
+    public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo) {
+        if (success) {
+            menuManager.ChangeMenu(3);
+            Utilities.ClearChildren(playerListings);
+            foreach (NetworkConnection p in NetworkServer.connections) {
+                GameObject go = Instantiate(playerListingPrefab, playerListings);
+                Text t = go.GetComponentInChildren<Text>();
+                t.text = p.address;
+            }
+
+            return;
+        }
+
+        Debug.LogError(extendedInfo);
     }
 }
