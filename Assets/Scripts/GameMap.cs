@@ -20,6 +20,7 @@ public class GameMap : NetworkBehaviour {
         Debug.Log("There are " + map.objects.Length + " objects in the new map!");
         for (int i = 0; i < map.objects.Length; i++) {
             MapObj mapObj = map.objects[i];
+            Debug.Log(mapObj.name);
             GameObject prefab = Resources.Load<GameObject>("Prefabs/MapObjects/" + mapObj.name);
             GameObject newGO = Instantiate(prefab, new Vector2(mapObj.x, mapObj.y), Quaternion.identity) as GameObject;
             newGO.name = mapObj.name;
