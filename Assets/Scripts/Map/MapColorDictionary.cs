@@ -5,7 +5,19 @@ public class MapColorDictionary {
     private static MapColor[] mapColors = new MapColor[] {
         new MapColor(new Color(1, 1, 0), "Enemy Spawn"),
         new MapColor(new Color((112f/255f), 112f/255f, 112f/255f), "Boulder"),
-        new MapColor(new Color(38f/255f, 130f/255f, 40f/255f), "Grass")
+        new MapColor(new Color(38f/255f, 130f/255f, 40f/255f), "Grass"),
+        new MapColor(new Color(91f/255f, 127f/255f, 0f), "Grass_Top_1"),
+        new MapColor(new Color(127f/255f, 106f/255f, 0f), "Grass_Bottom_1"),
+        new MapColor(new Color(91f/255f, 107f/255f, 0f), "Grass_Left_1"),
+        new MapColor(new Color(69f/255f, 81f/255f, 0f), "Grass_Right_1"),
+        new MapColor(new Color(127f/255f, 0f, 0f), "Grass_TopLeft_1"),
+        new MapColor(new Color(61f/255f, 42f/255f, 0f), "Grass_TopRight_1"),
+        new MapColor(new Color(0f, 127f/255f, 70f/255f), "Grass_BottomLeft_1"),
+        new MapColor(new Color(0f, 168f/255f, 92f/255f), "Grass_BottomRight_1"),
+        new MapColor(new Color(182f/255f, 1f, 0f), "Grass_TLCorner_1"),
+        new MapColor(new Color(183f/255f, 1f, 0f), "Grass_TRCorner_1"),
+        new MapColor(new Color(184f/255f, 1f, 0f), "Grass_BRCorner_1"),
+        new MapColor(new Color(185f/255f, 1f, 0f), "Grass_BLCorner_1")
     };
 
     public static string ColorToID(Color c) {
