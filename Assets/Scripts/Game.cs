@@ -36,7 +36,8 @@ public class Game
             new MapObj("Test Object", -4, -4, 1, 1)
         })},
         #endregion
-        {"Yard", new Map("Yard")}
+        {"Yard", new Map("Yard")},
+        {"Lava Twins", new Map("Lava Twins")}
     };
     #endregion
     #region Items

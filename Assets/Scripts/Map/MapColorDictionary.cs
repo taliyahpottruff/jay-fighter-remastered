@@ -17,7 +17,8 @@ public class MapColorDictionary {
         new MapColor(new Color(182f/255f, 1f, 0f), "Grass_TLCorner_1"),
         new MapColor(new Color(183f/255f, 1f, 0f), "Grass_TRCorner_1"),
         new MapColor(new Color(184f/255f, 1f, 0f), "Grass_BRCorner_1"),
-        new MapColor(new Color(185f/255f, 1f, 0f), "Grass_BLCorner_1")
+        new MapColor(new Color(185f/255f, 1f, 0f), "Grass_BLCorner_1"),
+        new MapColor(new Color(1f, 106f/255f, 0f), "Lava")
     };
 
     public static string ColorToID(Color c) {
@@ -39,7 +40,20 @@ public class MapColorDictionary {
                 Color c = texture.GetPixel(x, y);
                 string id = ColorToID(c);
                 if (!id.Equals("")) {
-                    objects.Add(new MapObj(id, -(texture.width/2)+x, -(texture.height/2)+y, 1, 1, true, false));
+                    bool visible = true;
+                    bool collider = false;
+
+                    if (id.Equals("Boulder")) { //Add any IDs here that you want to have colliders
+                        collider = true;
+                    }
+
+                    //Check if the ID is an Enemy Spawn, add object normally if not
+                    if (id.Equals("Enemy Spawn")) {
+                        objects.Add(new MapObj("Test Object", -(texture.width / 2) + x, -(texture.height / 2) + y, 1, 1));
+                    }
+                    else {
+                        objects.Add(new MapObj(id, -(texture.width / 2) + x, -(texture.height / 2) + y, 1, 1, visible, collider));
+                    }
                 }
             }
         }

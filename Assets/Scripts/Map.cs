@@ -28,20 +28,24 @@ public class Map {
         string location = "Maps/" + name;
         Texture2D floorImg = Resources.Load<Texture2D>(location + "-Floor"); //Load Floor Image for selected map
         Texture2D wallImg = Resources.Load<Texture2D>(location + "-Walls"); //Load Wall Image for selected map
+        Texture2D spawnImg = Resources.Load<Texture2D>(location + "-Spawns"); //Load Spawn Image for selected map
 
         this.name = name;
         width = Math.Max(floorImg.width, wallImg.height); //Get the largest width of all the map images
         height = Math.Max(floorImg.height, wallImg.height); //Get the largest height of all the map images
         MapObj[] floorLayer = MapColorDictionary.ConvertImgToMapObjs(floorImg); //Get the floor objs from the image
         MapObj[] wallLayer = MapColorDictionary.ConvertImgToMapObjs(wallImg); //Get the wall objs from the image
+        MapObj[] spawnLayer = MapColorDictionary.ConvertImgToMapObjs(spawnImg); //Get the spawn objs from the image
 
         //Combine the layers
         int floorLayerCount = floorLayer.Length;
         int wallLayerCount = wallLayer.Length;
-        int combinedCount = floorLayerCount + wallLayerCount; //Combined length of all layers
+        int spawnLayerCount = spawnLayer.Length;
+        int combinedCount = floorLayerCount + wallLayerCount + spawnLayerCount; //Combined length of all layers
         MapObj[] combinedLayers = new MapObj[combinedCount];
         floorLayer.CopyTo(combinedLayers, 0); //Copy floor layer to the combined layer array
         wallLayer.CopyTo(combinedLayers, floorLayerCount); //Copy the wall layer to the combined layer array
+        spawnLayer.CopyTo(combinedLayers, floorLayerCount + wallLayerCount); //Copy the spawn layer to the combined layer array
         objects = combinedLayers; //Set the actual object array equal to the new combined layer array
     }
 }
