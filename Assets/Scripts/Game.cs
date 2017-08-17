@@ -37,7 +37,8 @@ public class Game
         })},
         #endregion
         {"Yard", new Map("Yard")},
-        {"Lava Twins", new Map("Lava Twins")}
+        {"Lava Twins", new Map("Lava Twins")},
+        {"Four Squares", new Map("Four Squares")}
     };
     #endregion
     #region Items
