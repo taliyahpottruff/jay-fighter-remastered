@@ -13,9 +13,13 @@ public class EditorMap : MonoBehaviour {
     public string json;
 
     private Map map;
-    private string directory = Application.persistentDataPath + "/maps";
+    private string directory;
 
     private InputField mapNameField;
+
+    private void Awake() {
+        directory = Application.persistentDataPath + "/maps";
+    }
 
     private void Start() {
         mapNameField = GameObject.FindGameObjectWithTag("MapNameInput").GetComponent<InputField>();

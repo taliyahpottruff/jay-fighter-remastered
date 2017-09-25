@@ -1,48 +1,81 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.IO;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class Game
 {
     public static bool PAUSED = false;
-    public static float SFX_VOLUME = 1f;
+    public static float SFX_VOLUME = 0.25f;
+    public static float MUSIC_VOLUME = 0.05f;
     public static string CURRENT_MAP = "Basic";
+    public static SteamClient STEAM;
 
+    #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
-        {"Basic", new Map("Basic", new MapObj[] {
+        #region Basic Map
+        {"Basic", new Map("Basic", 30, 30, new MapObj[] {
             //Objects
-            new MapObj("Grass", 0, 0, 10, 10, true, false),
+            new MapObj("Grass", -14.5f, 14.17f, 30f, 30f, true, false),
             //Colliders
-            new MapObj("Test Object", 5.5f, 0, 1, 11, true, true),
-            new MapObj("Test Object", -5.5f, 0, 1, 11, true, true),
-            new MapObj("Test Object", 0, 5.5f, 11, 1, true, true),
-            new MapObj("Test Object", 0,-5.5f, 11, 1, true, true),
+                //Right
+                new MapObj("Boulder", 15f, 15f, 1, 31, true, true),
+                //Left
+                new MapObj("Boulder", -15f, 15f, 1, 30, true, true),
+                //Top
+                new MapObj("Boulder", -15f, 15f, 30, 1, true, true),
+                //Bottom
+                new MapObj("Boulder", -15f, -15f, 31, 1, true, true),
             //Spawns
-            new MapObj("Test Object", 5, 5, 1, 1),
-            new MapObj("Test Object", 5, -5, 1, 1),
-            new MapObj("Test Object", -5, 5, 1, 1),
-            new MapObj("Test Object", -5, -5, 1, 1)
+            new MapObj("Test Object", 4, 4, 1, 1),
+            new MapObj("Test Object", 4, -4, 1, 1),
+            new MapObj("Test Object", -4, 4, 1, 1),
+            new MapObj("Test Object", -4, -4, 1, 1)
         })},
-        {"Not Basic", new Map("Not Basic", new MapObj[] {
-            new MapObj("Test Object", 0, 0, 7, 3, true, false),
-            new MapObj("Test Object", 10, 10, 1, 1)
-        })}
+        #endregion
+        {"Yard", new Map("Yard")},
+        {"Lava Twins", new Map("Lava Twins")},
+        {"Four Squares", new Map("Four Squares")}
     };
+    #endregion
+    #region Items
     public static Dictionary<string, Item> ITEMS = new Dictionary<string, Item>() {
-        {"healthPotion", new HealthPotion()}
+        {"Repair Kit", new HealthPotion()},
+        {"Mine", new MineItem()},
+        {"Plating Upgrade", new PlatingUpgrade()}
     };
+    #endregion
 
     public static Map LoadCurrentMap() {
-        return MAPS[CURRENT_MAP];
+        if (MAPS.ContainsKey(CURRENT_MAP))
+            return MAPS[CURRENT_MAP];
+
+        FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + CURRENT_MAP + ".map", FileMode.Open);
+        using (StreamReader reader = new StreamReader(fs)) {
+            string json = Utilities.Base64Decode(reader.ReadToEnd());
+            return JsonUtility.FromJson<Map>(json);
+        }
     }
 
-    public void LoadMap(string mapName) {
+    public Map LoadMap(string mapName) {
         FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + mapName + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
             string json = Utilities.Base64Decode(reader.ReadToEnd());
-            MAPS[mapName] = JsonUtility.FromJson<Map>(json);
+            return JsonUtility.FromJson<Map>(json);
         }
+    }
+
+    public static float GetMusicVolume() {
+        if (!PlayerPrefs.HasKey("musicVolume")) { //If music volume is not saved into PlayerPrefs
+            PlayerPrefs.SetFloat("musicVolume", MUSIC_VOLUME);
+            PlayerPrefs.Save();
+            return MUSIC_VOLUME;
+        }
+
+        MUSIC_VOLUME = PlayerPrefs.GetFloat("musicVolume");
+        return MUSIC_VOLUME;
     }
 }

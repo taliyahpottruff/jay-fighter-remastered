@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.Networking.Match;
 
 public class PauseScreenManager : MonoBehaviour {
     private bool opened = false;
@@ -27,7 +29,6 @@ public class PauseScreenManager : MonoBehaviour {
     public void CloseScreenWithoutUnpausing() {
 
     }
-
     public void ToggleScreen() {
         if (opened)
             CloseScreen();
@@ -36,6 +37,20 @@ public class PauseScreenManager : MonoBehaviour {
     }
 
     public void ExitGame() {
+        NetworkManager nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
+        nm.StopHost();
+
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Disconnect() {
+        NetworkManager nm = NetworkManager.singleton;
+        MatchInfo match = nm.matchInfo;
+        nm.matchMaker.DropConnection(match.networkId, match.nodeId, 0, nm.OnDropConnection);
+        nm.StopHost();
+    }
+
+    public bool getOpened() {
+        return opened;
     }
 }

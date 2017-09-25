@@ -1,28 +1,59 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class Toolbar : MonoBehaviour {
+    public Image panelBody;
+    public Image panelStrip;
     public Inventory inventory;
 
+    private int prevCount = 0;
+    private bool hasStarted = false;
+
     public void Start() {
+        
         StartCoroutine(DelayedStart());
     }
 
     public void Update() {
-        if (inventory.inventory.Count <= 0)
-            this.transform.parent.gameObject.SetActive(false);
-        else
-            this.transform.parent.gameObject.SetActive(true);
+        //Debug.Log("Inventory contains " + inventory.inventory.Count + " items!");
+
+        try {
+            if (inventory.inventory.Count <= 0) {
+                panelBody.enabled = false;
+                panelStrip.enabled = false;
+            }
+            else {
+                panelBody.enabled = true;
+                panelStrip.enabled = true;
+            }
+
+            int currCount = inventory.inventory.Count;
+
+            if (prevCount != currCount && hasStarted) {
+                Clear();
+                AddAllItems();
+            }
+
+            prevCount = currCount;
+        } catch (Exception e) { }
     }
 
     private IEnumerator DelayedStart() {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.11f);
+        Debug.Log("Toolbar Delayed Start Executing...");
 
-        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        //inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        inventory = NetworkManager.singleton.client.connection.playerControllers[0].gameObject.GetComponent<Inventory>();
+        prevCount = inventory.inventory.Count;
 
         Clear();
         AddAllItems();
+
+        hasStarted = true;
     }
 
     public void Clear() {
