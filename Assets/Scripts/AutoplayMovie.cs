@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 [RequireComponent(typeof(RawImage))]
 public class AutoplayMovie : MonoBehaviour {
     private void Start() {

@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(Animator))]
 public class MapSettingsPanel : MonoBehaviour {
@@ -16,6 +15,9 @@ public class MapSettingsPanel : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Toggles the panel in and out
+    /// </summary>
     public void TogglePanel() {
         if (mode == PanelMode.Open)
             ClosePanel();
@@ -23,16 +25,25 @@ public class MapSettingsPanel : MonoBehaviour {
             OpenPanel();
     }
 
+    /// <summary>
+    /// Opens the panel regardless of its current status
+    /// </summary>
     public void OpenPanel() {
         anim.Play("settingsPanel-Open");
         mode = PanelMode.Open;
     }
 
+    /// <summary>
+    /// Clsoes the panel regardless of its current status
+    /// </summary>
     public void ClosePanel() {
         anim.Play("settingsPanel-Close");
         mode = PanelMode.Close;
     }
 
+    /// <summary>
+    /// Returns the user to the main menu
+    /// </summary>
     public void BackToMenu() {
         SceneManager.LoadScene("MainMenu");
     }

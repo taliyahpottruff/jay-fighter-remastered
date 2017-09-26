@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using UnityEngine.EventSystems;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class MapEditorUI : MonoBehaviour {
     public GameObject selected = null;
@@ -96,6 +95,10 @@ public class MapEditorUI : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Sets the selected objects x position
+    /// </summary>
+    /// <param name="x">The x position to set in the form of a string</param>
     public void SetObjX(string x) {
         if (selected != null) {
             float newVal = 0f;
@@ -110,6 +113,10 @@ public class MapEditorUI : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Sets the selected objects y position
+    /// </summary>
+    /// <param name="y">The y position to set in the form of a string</param>
     public void SetObjY(string y) {
         if (selected != null) {
             float newVal = 0f;

@@ -3,10 +3,10 @@ using UnityEngine.Networking;
 using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-    * CONTRIBUTOR: Garrett Nicholas
-    * (added the checks for the enemy death then spawns a coin)
-*/
+ * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
+ * (added the checks for the enemy death then spawns a coin)
+ */
 
 public class Health : NetworkBehaviour {
     [SerializeField]
@@ -22,17 +22,35 @@ public class Health : NetworkBehaviour {
         }
     }
 
+    /// <summary>
+    /// Gets the current health
+    /// </summary>
+    /// <returns>The current health level of this entit.y</returns>
     public float GetHealth() {
         return health;    
     }
+
+    /// <summary>
+    /// Gets the max health
+    /// </summary>
+    /// <returns>The maximum health level of this entity.</returns>
     public float GetMaxHealth() {
         return maxHeath;
     }
 
+    /// <summary>
+    /// Increases the entity's max health.
+    /// </summary>
+    /// <param name="amount">The amount to increase max health by</param>
     public void IncreaseMax(int amount) {
         maxHeath += amount;
     }
 
+    /// <summary>
+    /// Does damage to this enemy.
+    /// </summary>
+    /// <param name="attack">The amount of damage to deal</param>
+    /// <returns>True if the damage killed the entity and False if it didn't</returns>
     public bool DoDamage(float attack) {
         if (!invincible && isServer) {
             if (health <= attack) { //The attack will kill player

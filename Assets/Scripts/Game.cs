@@ -4,6 +4,9 @@ using System.IO;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * 
+ * This is the main class for information storing.
+ * Almost everything goes through here one way or another.
  */
 
 public class Game
@@ -12,7 +15,7 @@ public class Game
     public static float SFX_VOLUME = 0.25f;
     public static float MUSIC_VOLUME = 0.05f;
     public static string CURRENT_MAP = "Basic";
-    public static SteamClient STEAM;
+    public static SteamClient STEAM; //Steam Integration
 
     #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
@@ -49,25 +52,38 @@ public class Game
     };
     #endregion
 
+    /// <summary>
+    /// Load whatever map is specified by the "CURRENT_MAP" global variable.
+    /// </summary>
+    /// <returns>The map</returns>
     public static Map LoadCurrentMap() {
         if (MAPS.ContainsKey(CURRENT_MAP))
             return MAPS[CURRENT_MAP];
 
         FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + CURRENT_MAP + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
-            string json = Utilities.Base64Decode(reader.ReadToEnd());
-            return JsonUtility.FromJson<Map>(json);
+            string json = Utilities.Base64Decode(reader.ReadToEnd()); //Decode
+            return JsonUtility.FromJson<Map>(json); //Parse
         }
     }
 
+    /// <summary>
+    /// Load a map based on a map ID.
+    /// </summary>
+    /// <param name="mapName">The map to load</param>
+    /// <returns>The map</returns>
     public Map LoadMap(string mapName) {
         FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + mapName + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
-            string json = Utilities.Base64Decode(reader.ReadToEnd());
-            return JsonUtility.FromJson<Map>(json);
+            string json = Utilities.Base64Decode(reader.ReadToEnd()); //Decode
+            return JsonUtility.FromJson<Map>(json); //Parse
         }
     }
 
+    /// <summary>
+    /// Gets the current music volume.
+    /// </summary>
+    /// <returns>The music volume</returns>
     public static float GetMusicVolume() {
         if (!PlayerPrefs.HasKey("musicVolume")) { //If music volume is not saved into PlayerPrefs
             PlayerPrefs.SetFloat("musicVolume", MUSIC_VOLUME);

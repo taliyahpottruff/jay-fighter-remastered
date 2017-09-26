@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
+﻿using UnityEngine.Networking;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public abstract class EnemySpriteManager : NetworkBehaviour {
     public abstract void MoveUp();

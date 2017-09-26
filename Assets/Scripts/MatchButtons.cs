@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
+//TODO I think this is another class that needs to be deleted
 public class MatchButtons : MonoBehaviour {
     public NetworkManager manager;
 

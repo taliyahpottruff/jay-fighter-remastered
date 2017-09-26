@@ -1,6 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class CreditsHolder : MonoBehaviour {
     public MenuManager menuManager;

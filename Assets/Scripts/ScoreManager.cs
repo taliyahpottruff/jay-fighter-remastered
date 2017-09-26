@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
-*/
+ */
 
 public class ScoreManager : NetworkBehaviour {
     private Player player;
@@ -59,6 +57,7 @@ public class ScoreManager : NetworkBehaviour {
         //Update the current coin count in the store
         storeCoinCount.text = "$" + player.coins;
 
+        //Display stats
         if (scoreText.text != Mathf.FloorToInt(player.score * 1).ToString()) {
             scoreText.text = Mathf.FloorToInt(player.score * 1).ToString();
         }

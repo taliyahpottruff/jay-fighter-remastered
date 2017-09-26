@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.IO;
 
 /*
@@ -18,7 +17,7 @@ public class MapSelectionDisplay : MonoBehaviour {
     public GameObject mapSelectButtonPrefab;
 
     private void Start() {
-        PopulateList();
+        PopulateList(); //Populate the list as soon as possible
     }
 
     private void PopulateList() {
@@ -31,9 +30,6 @@ public class MapSelectionDisplay : MonoBehaviour {
 
         string[] names = new string[mapPaths.Length];
 
-        /*for (int i = 0; i < maps.Length; i++) {
-            names[i] = maps[i].name;
-        }*/
         for (int i = 0; i < mapPaths.Length; i++) {
             names[i] = mapPaths[i].Replace(Application.persistentDataPath, "").Replace(".map", "").Replace("/maps\\", "");
         }
@@ -61,11 +57,16 @@ public class MapSelectionDisplay : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Plays the game
+    /// </summary>
     public void PlayGame() {
-        //SceneManager.LoadScene("Game");
         gameLoader.LoadGame();
     }
 
+    /// <summary>
+    /// Returns the user to the main menu
+    /// </summary>
     public void BackToMain() {
         menuManager.ChangeMenu(0);
     }

@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class SavageSpriteManager : EnemySpriteManager {
     public Animator legAnimator;

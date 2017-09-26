@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
-   * Author: Garrett Nicholas
-*/
+ * Author: Garrett Nicholas
+ */
 
 public class EditorCam : MonoBehaviour {
     public Camera cam;
@@ -16,6 +15,7 @@ public class EditorCam : MonoBehaviour {
     public float minOrtho = 1.0f;
     public float maxOrtho = 15.0f;
     public bool canMove = true;
+
     void Start() {
         if (cam == null) {
             cam = GetComponent<Camera>();
@@ -29,6 +29,7 @@ public class EditorCam : MonoBehaviour {
         rig = cam.transform.parent;
         targetOrtho = cam.orthographicSize;
     }
+
     void Update() {
         if (canMove) {
             mouseMovement();
@@ -36,6 +37,7 @@ public class EditorCam : MonoBehaviour {
             updateCamMoveSpeed();
         }
     }
+
     void updateCamMoveSpeed() {
         if (targetOrtho < 2.5) {
             moveSpeed = 150;
@@ -50,6 +52,7 @@ public class EditorCam : MonoBehaviour {
             moveSpeed = 25;
         }
     }
+
     void camZoom() {
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0.0f) {
@@ -59,6 +62,7 @@ public class EditorCam : MonoBehaviour {
 
         Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
     }
+
     void mouseMovement() {
         if (Input.GetMouseButtonDown(1) == true) {
             lastPos = Input.mousePosition;

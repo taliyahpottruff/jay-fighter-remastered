@@ -1,13 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class SingplayerGame : MonoBehaviour {
     NetworkManager net;
 
     private void Start() {
         net = GetComponent<NetworkManager>();
-        net.StartHost();
+        net.StartHost(); //Starts a single player game
     }
 }

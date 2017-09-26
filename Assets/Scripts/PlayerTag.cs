@@ -1,8 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class PlayerTag : NetworkBehaviour {
     [SerializeField]
@@ -16,8 +18,7 @@ public class PlayerTag : NetworkBehaviour {
     }
 
     private void Update() {
-        if (isLocalPlayer)
-            playerTag.SetActive(false);
+        if (isLocalPlayer) playerTag.SetActive(false); //Don't show someone their own name
 
         name.text = player.username;
     }

@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 public class PlayingAsDisplay : MonoBehaviour {
     private Text text;
     [SerializeField]

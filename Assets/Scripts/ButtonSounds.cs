@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 /*
  * AUTHOR: Trenton Pottruff
-*/
+ */
 
 [RequireComponent(typeof(AudioSource))]
 public class ButtonSounds : MonoBehaviour {
