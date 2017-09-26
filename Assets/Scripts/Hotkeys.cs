@@ -1,9 +1,8 @@
 using UnityEngine;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class Hotkeys : MonoBehaviour {
     private PauseScreenManager pauseScreenManager;
@@ -23,7 +22,6 @@ public class Hotkeys : MonoBehaviour {
             if (store.activeSelf) {
                 store.SetActive(false);
                 if (!pauseScreenManager.getOpened()) {
-                    //gameUI.SetActive(true);
                     Game.PAUSED = false;
                 }
             } else if (settings.panel.activeSelf) {
@@ -31,11 +29,6 @@ public class Hotkeys : MonoBehaviour {
                 pauseScreenManager.OpenScreen();
             } else {
                 pauseScreenManager.ToggleScreen();
-                if (pauseScreenManager.getOpened()) {
-                    //gameUI.SetActive(false);
-                } else {
-                    //gameUI.SetActive(true);
-                }
             }
         }
     }

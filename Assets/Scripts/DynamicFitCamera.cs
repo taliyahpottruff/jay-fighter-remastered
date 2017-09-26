@@ -1,10 +1,5 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-
-/*
-    * AUTHOR: Trenton Pottruff
-*/
 
 public class DynamicFitCamera : MonoBehaviour {
     private List<GameObject> entities = new List<GameObject>();
@@ -43,9 +38,6 @@ public class DynamicFitCamera : MonoBehaviour {
         //Set the view width and height
         viewWidth = max.x - min.x;
         viewHeight = max.y - min.y;
-
-        //commented out because of console spam
-        //Debug.Log(viewHeight);
 
         meanVector /= entities.Count;
         transform.position = new Vector3(meanVector.x, meanVector.y, -10);

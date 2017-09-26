@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 [RequireComponent(typeof(Collider2D))]
 public class Explosion : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
