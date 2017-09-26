@@ -14,6 +14,7 @@ public class Map {
 
     public Map() {
         //Why is this blank?
+        //Idk...
     }
     
     public Map(string name, int width, int height, MapObj[] objects) {

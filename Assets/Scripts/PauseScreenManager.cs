@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using System.Collections;
 using UnityEngine.Networking.Match;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 public class PauseScreenManager : MonoBehaviour {
-    private bool opened = false;
+    private bool opened = false; //Is the pause screen open?
 
     private Animator anim;
 
@@ -14,12 +17,18 @@ public class PauseScreenManager : MonoBehaviour {
         anim = GetComponent<Animator>();
     }
 
+    /// <summary>
+    /// Opens the pause screen
+    /// </summary>
     public void OpenScreen() {
         anim.Play("pauseScreen-Open");
         opened = true;
         Game.PAUSED = true;
     }
 
+    /// <summary>
+    /// Closes the pause screen
+    /// </summary>
     public void CloseScreen() {
         anim.Play("pauseScreen-Close");
         opened = false;
@@ -27,8 +36,12 @@ public class PauseScreenManager : MonoBehaviour {
     }
 
     public void CloseScreenWithoutUnpausing() {
-
+        //UNDONE This shouldn't be empty?
     }
+
+    /// <summary>
+    /// Toggles the pause screen
+    /// </summary>
     public void ToggleScreen() {
         if (opened)
             CloseScreen();
@@ -36,6 +49,10 @@ public class PauseScreenManager : MonoBehaviour {
             OpenScreen();
     }
 
+
+    /// <summary>
+    /// Exits the game and returns the user to the main menu
+    /// </summary>
     public void ExitGame() {
         NetworkManager nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
         nm.StopHost();
@@ -43,6 +60,9 @@ public class PauseScreenManager : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
+    /// <summary>
+    /// Disconnects the user from the match
+    /// </summary>
     public void Disconnect() {
         NetworkManager nm = NetworkManager.singleton;
         MatchInfo match = nm.matchInfo;
@@ -50,6 +70,10 @@ public class PauseScreenManager : MonoBehaviour {
         nm.StopHost();
     }
 
+    /// <summary>
+    /// Gets wether the pause screen is open or not
+    /// </summary>
+    /// <returns>True if the pause screen is open, False if it's closed</returns>
     public bool getOpened() {
         return opened;
     }

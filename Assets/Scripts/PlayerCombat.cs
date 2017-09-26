@@ -3,11 +3,8 @@ using UnityEngine.Networking;
 using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-    * 
-    * CONTRIBUTOR: Garrett Nicholas
-    * (added the checks for the player getting hurt by coliding with an enemy)
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
@@ -70,6 +67,7 @@ public class PlayerCombat : NetworkBehaviour {
         float horizontal = Mathf.Abs(fireVector.x);
         float vertical = Mathf.Abs(fireVector.y);
 
+        //Set directional data
         if (horizontal != 0 || vertical != 0) {
             if (horizontal > vertical) {
                 if (fireVector.x > 0) {
@@ -120,10 +118,6 @@ public class PlayerCombat : NetworkBehaviour {
         if(Coin != null) {
             aSource.PlayOneShot(coinpickup);
         }
-        if(cpu != null) {
-            //Do damage to player if other is an Enemy
-            //this.gameObject.GetComponent<Health>().DoDamage(5);
-        }
     }
     public virtual IEnumerator FireBullet() {
         do {
@@ -140,13 +134,7 @@ public class PlayerCombat : NetworkBehaviour {
                     pos = shooter1.position;
                     shooter = true;
                 }
-
-                /*GameObject bulletObj = Instantiate(bulletPrefab, pos, Quaternion.identity) as GameObject;
-                Bullet bullet = bulletObj.GetComponent<Bullet>();
-                bullet.owner = this.transform;
-                bullet.SetVelocityOnAwake((direction * 10));
-                bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
-                aSource.PlayOneShot(gunSound);*/
+                
                 CmdFire(pos, direction, GetComponent<NetworkIdentity>());
                 aSource.PlayOneShot(gunSound);
             }

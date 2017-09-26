@@ -62,8 +62,8 @@ public class Game
 
         FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + CURRENT_MAP + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
-            string json = Utilities.Base64Decode(reader.ReadToEnd());
-            return JsonUtility.FromJson<Map>(json);
+            string json = Utilities.Base64Decode(reader.ReadToEnd()); //Decode
+            return JsonUtility.FromJson<Map>(json); //Parse
         }
     }
 
@@ -75,11 +75,15 @@ public class Game
     public Map LoadMap(string mapName) {
         FileStream fs = new FileStream(Application.persistentDataPath + "/maps/" + mapName + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
-            string json = Utilities.Base64Decode(reader.ReadToEnd());
-            return JsonUtility.FromJson<Map>(json);
+            string json = Utilities.Base64Decode(reader.ReadToEnd()); //Decode
+            return JsonUtility.FromJson<Map>(json); //Parse
         }
     }
 
+    /// <summary>
+    /// Gets the current music volume.
+    /// </summary>
+    /// <returns>The music volume</returns>
     public static float GetMusicVolume() {
         if (!PlayerPrefs.HasKey("musicVolume")) { //If music volume is not saved into PlayerPrefs
             PlayerPrefs.SetFloat("musicVolume", MUSIC_VOLUME);

@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using UnityEngine;
+
+//TODO Debate whether to keep in-game music or not
 
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour {

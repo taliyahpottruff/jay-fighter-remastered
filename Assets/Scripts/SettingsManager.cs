@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.Collections.Generic;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
+ //TODO Finish documenting this code
 public class SettingsManager : MonoBehaviour {
     public GameObject panel;
     public Dropdown resolutionDropdown;
@@ -15,8 +15,6 @@ public class SettingsManager : MonoBehaviour {
     public Slider musicSlider;
 
     private void Start() {
-        //GameObject.Find("Fullscreen Toggle").GetComponent<Toggle>().isOn = Screen.fullScreen;
-
         Resolution[] resolutions = Screen.resolutions;
         for (int i = 0; i < resolutions.Length; i++) {
             resolutionDropdown.AddOptions(new List<string> { resolutions[i].width + "x" + resolutions[i].height });

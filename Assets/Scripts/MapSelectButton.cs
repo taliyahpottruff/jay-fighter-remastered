@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class MapSelectButton : MonoBehaviour {
     public Text title;
@@ -17,10 +20,16 @@ public class MapSelectButton : MonoBehaviour {
         this.description.text = description;
     }
 
+    /// <summary>
+    /// Selects this map
+    /// </summary>
     public void SelectMap() {
         Game.CURRENT_MAP = title.text;
     }
 
+    /// <summary>
+    /// Selects this map and begind the game
+    /// </summary>
     public void SelectAndPlay() {
         SelectMap();
         display.PlayGame();

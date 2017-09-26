@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 
+//TODO Likely remove this
+
 // @NOTE the attached sprite's position should be "top left" or the children will not align properly
 // Strech out the image as you need in the sprite render, the following script will auto-correct it when rendered in the game
 [RequireComponent(typeof(SpriteRenderer))]

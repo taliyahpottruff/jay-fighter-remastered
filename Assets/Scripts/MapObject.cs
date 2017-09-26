@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider2D))]
@@ -18,18 +17,6 @@ public class MapObject : MonoBehaviour {
     private void Start() {
         sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
-
-        /*if (transform.localScale.x > 1) {
-            Vector2 off = col.offset;
-            off.x = 0.455f;
-            col.offset = off;
-        }
-
-        if (transform.localScale.y > 1) {
-            Vector2 off = col.offset;
-            off.y = -0.455f;
-            col.offset = off;
-        }*/
     }
 
     private void Update() {

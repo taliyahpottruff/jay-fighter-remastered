@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : NetworkBehaviour {

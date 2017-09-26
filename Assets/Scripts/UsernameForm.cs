@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//TODO Likely remove this
+
 public class UsernameForm : MonoBehaviour {
     public InputField usernameField;
 

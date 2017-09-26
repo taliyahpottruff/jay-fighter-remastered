@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(Health))]
 public class Player : NetworkBehaviour {
@@ -23,7 +22,7 @@ public class Player : NetworkBehaviour {
 
         //Set local camera to follow this player
         SmoothCamera sc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothCamera>();
-        if (sc != null) sc.lookAt = this.transform;
+        if (sc != null) sc.lookAt = this.transform; //Have the smooth camera target the player
     }
 
     public void Start() {
@@ -33,6 +32,7 @@ public class Player : NetworkBehaviour {
     }
 
     private void Update() {
+        //Set the control scheme to whatever is being used
         if ((Input.anyKey && !Input.GetButton("Fire1")) || Input.GetMouseButton(0))
             currentScheme = ControlScheme.Keyboard;
         else if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
