@@ -15,6 +15,12 @@ public class MapSelectButton : MonoBehaviour {
         display = GetComponentInParent<MapSelectionDisplay>();
     }
 
+    /// <summary>
+    /// Sets the info for the button
+    /// </summary>
+    /// <param name="title">The title of the map</param>
+    /// <param name="description">The description of the map</param>
+    /// <param name="buttonIndex">The index of the button</param>
     public void SetInfo(string title, string description) {
         this.title.text = title;
         this.description.text = description;
@@ -28,7 +34,7 @@ public class MapSelectButton : MonoBehaviour {
     }
 
     /// <summary>
-    /// Selects this map and begind the game
+    /// Selects this map and starts the game
     /// </summary>
     public void SelectAndPlay() {
         SelectMap();

@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+using UnityEngine.UI;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class HostGame : MonoBehaviour {
     [SerializeField]
@@ -9,6 +14,7 @@ public class HostGame : MonoBehaviour {
 
     public MenuManager menuManager;
     public Transform playerListings;
+    public Button hostGameButton;
 
     private NetworkManager manager;
 
@@ -23,10 +29,21 @@ public class HostGame : MonoBehaviour {
         playerListingPrefab = Resources.Load<GameObject>("Prefabs/Player Listing");
     }
 
+    /// <summary>
+    /// Sets the room name of the match.
+    /// </summary>
+    /// <param name="name">The new name for the match</param>
     public void SetRoomName(string name) {
-        roomName = name;
+        if (!name.Equals("")) {
+            hostGameButton.interactable = true;
+            roomName = name;
+        }
+        else hostGameButton.interactable = false;
     }
 
+    /// <summary>
+    /// Creates a multiplayer match.
+    /// </summary>
     public void CreateRoom() {
         if (roomName != "" && roomName != null) {
             Debug.Log("Creating Room:" + roomName + " with " + roomSize + " slots!");

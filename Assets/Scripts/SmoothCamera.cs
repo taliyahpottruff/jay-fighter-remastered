@@ -22,6 +22,7 @@ public class SmoothCamera : MonoBehaviour {
 
             //Smooth
             transform.position -= (transform.position - newPosition) * smoothSpeed * Time.deltaTime;
-        } catch (Exception e) { //Do nothing }
+        }
+        catch (Exception e) { /*Do nothing*/ }
     }
 }
