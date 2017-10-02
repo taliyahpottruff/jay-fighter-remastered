@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.IO;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 /*
  * AUTHOR: Trenton Pottruff
@@ -16,7 +18,11 @@ public class MapSelectionDisplay : MonoBehaviour {
 
     public GameObject mapSelectButtonPrefab;
 
+    private ToggleGroup tg;
+
     private void Start() {
+        tg = GetComponent<ToggleGroup>();
+
         PopulateList(); //Populate the list as soon as possible
     }
 
@@ -33,7 +39,9 @@ public class MapSelectionDisplay : MonoBehaviour {
         for (int i = 0; i < mapPaths.Length; i++) {
             names[i] = mapPaths[i].Replace(Application.persistentDataPath, "").Replace(".map", "").Replace("/maps\\", "");
         }
-    
+
+        int index = 0;
+
         //Populate the official maps
         Utilities.ClearChildren(officialMapHolder);
         for (int i = 0; i < maps.Length; i++) {
@@ -43,6 +51,9 @@ public class MapSelectionDisplay : MonoBehaviour {
             MapSelectButton msb = go.GetComponent<MapSelectButton>();
             
             msb.SetInfo(maps[i].name, "This is a map!");
+            go.GetComponent<Toggle>().group = tg;
+
+            if (maps[i].name.Equals(Game.CURRENT_MAP)) go.GetComponent<Toggle>().isOn = true;
         }
 
         //Populate the custom maps
@@ -54,6 +65,7 @@ public class MapSelectionDisplay : MonoBehaviour {
             MapSelectButton msb = go.GetComponent<MapSelectButton>();
 
             msb.SetInfo(names[i], "This is a map!");
+            go.GetComponent<Toggle>().group = tg;
         }
     }
 
