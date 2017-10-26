@@ -10797,7 +10797,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -11240,7 +11240,7 @@ Prefab:
     - target: {fileID: 114000011728333386, guid: 82f966de24bb9724185709556cba1025,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RefreshRoomList
+      value: JoinRandom
       objectReference: {fileID: 0}
     - target: {fileID: 114000011728333386, guid: 82f966de24bb9724185709556cba1025,
         type: 2}

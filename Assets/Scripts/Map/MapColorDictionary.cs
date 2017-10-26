@@ -18,7 +18,16 @@ public class MapColorDictionary {
         new MapColor(new Color(183f/255f, 1f, 0f), "Grass_TRCorner_1"),
         new MapColor(new Color(184f/255f, 1f, 0f), "Grass_BRCorner_1"),
         new MapColor(new Color(185f/255f, 1f, 0f), "Grass_BLCorner_1"),
-        new MapColor(new Color(1f, 106f/255f, 0f), "Lava")
+        new MapColor(new Color(1f, 106f/255f, 0f), "Lava"),
+        new MapColor(new Color(17f/255f, 17f/255f, 17f/255f), "Gravel"),
+        new MapColor(new Color(30f/255f, 30f/255f, 30f/255f), "Gravel_Left"),
+        new MapColor(new Color(31f/255f, 31f/255f, 31f/255f), "Gravel_Right"),
+        new MapColor(new Color(32f/255f, 32f/255f, 32f/255f), "Gravel_Top"),
+        new MapColor(new Color(33f/255f, 33f/255f, 33f/255f), "Gravel_Bottom"),
+        new MapColor(new Color(34f/255f, 34f/255f, 34f/255f), "Gravel_BRCorner"),
+        new MapColor(new Color(35f/255f, 35f/255f, 35f/255f), "Gravel_BLCorner"),
+        new MapColor(new Color(36f/255f, 36f/255f, 36f/255f), "Gravel_TLCorner"),
+        new MapColor(new Color(37f/255f, 37f/255f, 37f/255f), "Gravel_TRCorner")
     };
 
     public static string ColorToID(Color c) {
