@@ -53,4 +53,11 @@ public class Player : NetworkBehaviour {
         GameObject go = Instantiate<GameObject>(prefab, this.transform.position, Quaternion.identity);
         NetworkServer.Spawn(go);
     }
+
+    public PlayerMovement movemement
+    {
+        get {
+            return GetComponent<PlayerMovement>();
+        }
+    }
 }

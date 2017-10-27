@@ -8,6 +8,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : NetworkBehaviour {
     public float speed = 5;
+    private float current_speed;
     
     public SpriteRenderer baseRenderer;
     public SpriteRenderer wheelsRenderer;
@@ -20,6 +21,7 @@ public class PlayerMovement : NetworkBehaviour {
 
     private void Start() {
         rb = GetComponent<Rigidbody2D>();
+        current_speed = speed;
     }
 
     private void Update() {
@@ -46,6 +48,10 @@ public class PlayerMovement : NetworkBehaviour {
             }
         }
 
-        rb.velocity = directionVector * speed;
+        rb.velocity = directionVector * current_speed;
+    }
+
+    public void SetSpeed(float multiplier) {
+        current_speed = speed * multiplier;
     }
 }

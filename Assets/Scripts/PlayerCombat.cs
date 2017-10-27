@@ -64,6 +64,12 @@ public class PlayerCombat : NetworkBehaviour {
         else
             firing = false;
 
+        //If the player is firing slow them down
+        if (firing)
+            player.movemement.SetSpeed(0.5f);
+        else
+            player.movemement.SetSpeed(1f);
+
         float horizontal = Mathf.Abs(fireVector.x);
         float vertical = Mathf.Abs(fireVector.y);
 
