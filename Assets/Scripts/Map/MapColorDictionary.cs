@@ -33,7 +33,7 @@ public class MapColorDictionary {
         new MapColor(new Color(40f/255f, 40f/255f, 40f/255f), "Gravel_BottomRight"),
         new MapColor(new Color(41f/255f, 41f/255f, 41f/255f), "Gravel_BottomLeft"),
         new MapColor(new Color(42f/255f, 42f/255f, 42f/255f), "Gravel_Edge"),
-        new MapColor(new Color(255f/255f, 255f/255f, 12f/255f), "Lava_BottomCliff"),
+        new MapColor(new Color(255f/255f, 255f/255f, 50f/255f), "Lava_BCliff"),
         new MapColor(new Color(255f/255f, 255f/255f, 1f/255f), "Lava_TopCliff"),
         new MapColor(new Color(255f/255f, 255f/255f, 2f/255f), "Lava_LeftCliff"),
         new MapColor(new Color(255f/255f, 255f/255f, 3f/255f), "Lava_RightCliff"),
@@ -44,7 +44,15 @@ public class MapColorDictionary {
         new MapColor(new Color(255f/255f, 255f/255f, 8f/255f), "Lava_TLCCliff"),
         new MapColor(new Color(255f/255f, 255f/255f, 9f/255f), "Lava_TRCCliff"),
         new MapColor(new Color(255f/255f, 255f/255f, 10f/255f), "Lava_BLCCliff"),
-        new MapColor(new Color(255f/255f, 255f/255f, 11f/255f), "Lava_BRCCliff")
+        new MapColor(new Color(255f/255f, 255f/255f, 11f/255f), "Lava_BRCCliff"),
+        new MapColor(new Color(255f/255f, 255f/255f, 12f/255f), "Lava_RightSpecial"),
+        new MapColor(new Color(255f/255f, 255f/255f, 13f/255f), "Lava_LeftSpecial"),
+        new MapColor(new Color(255f/255f, 255f/255f, 14f/255f), "Lava_TopSpecial"),
+        new MapColor(new Color(255f/255f, 255f/255f, 15f/255f), "Lava_BottomSpecial"),
+        new MapColor(new Color(255f/255f, 255f/255f, 16f/255f), "Lava_RightEdges"),
+        new MapColor(new Color(255f/255f, 255f/255f, 17f/255f), "Lava_LeftEdges"),
+        new MapColor(new Color(255f/255f, 255f/255f, 18f/255f), "Lava_TopEdges"),
+        new MapColor(new Color(255f/255f, 255f/255f, 19f/255f), "Lava_BottomEdges")
     };
 
     public static string ColorToID(Color c) {

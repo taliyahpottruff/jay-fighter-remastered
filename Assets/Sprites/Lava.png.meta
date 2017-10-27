@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: fe3115b006c5fd44786410467d787b83
-timeCreated: 1509081957
+timeCreated: 1509125618
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -17,6 +17,14 @@ TextureImporter:
     21300020: Lava_10
     21300022: Lava_11
     21300024: Lava_12
+    21300026: Lava_13
+    21300028: Lava_14
+    21300030: Lava_15
+    21300032: Lava_16
+    21300034: Lava_17
+    21300036: Lava_18
+    21300038: Lava_19
+    21300040: Lava_20
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -241,7 +249,7 @@ TextureImporter:
       name: Lava_9
       rect:
         serializedVersion: 2
-        x: 300
+        x: 333
         y: 1
         width: 32
         height: 32
@@ -255,7 +263,7 @@ TextureImporter:
       name: Lava_10
       rect:
         serializedVersion: 2
-        x: 333
+        x: 300
         y: 1
         width: 32
         height: 32
@@ -269,7 +277,7 @@ TextureImporter:
       name: Lava_11
       rect:
         serializedVersion: 2
-        x: 366
+        x: 400
         y: 1
         width: 32
         height: 32
@@ -283,7 +291,119 @@ TextureImporter:
       name: Lava_12
       rect:
         serializedVersion: 2
-        x: 399
+        x: 367
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_13
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_14
+      rect:
+        serializedVersion: 2
+        x: 467
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_15
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_16
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_17
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_18
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 1
+        width: 32
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_19
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 1
+        width: 33
+        height: 32
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Lava_20
+      rect:
+        serializedVersion: 2
+        x: 669
         y: 1
         width: 32
         height: 32
