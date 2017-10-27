@@ -51,9 +51,11 @@ public class MapSelectionDisplay : MonoBehaviour {
             MapSelectButton msb = go.GetComponent<MapSelectButton>();
             
             msb.SetInfo(maps[i].name, "This is a map!");
-            go.GetComponent<Toggle>().group = tg;
+            if (tg != null) {
+                go.GetComponent<Toggle>().group = tg;
 
-            if (maps[i].name.Equals(Game.CURRENT_MAP)) go.GetComponent<Toggle>().isOn = true;
+                if (maps[i].name.Equals(Game.CURRENT_MAP)) go.GetComponent<Toggle>().isOn = true;
+            }
         }
 
         //Populate the custom maps

@@ -1,12 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+using System.Collections;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class JoinGame : MonoBehaviour {
     private List<GameObject> roomList = new List<GameObject>();
+    private List<MatchInfoSnapshot> matchList = new List<MatchInfoSnapshot>();
 
     [SerializeField]
     Text status;
@@ -38,6 +43,7 @@ public class JoinGame : MonoBehaviour {
     }
 
     public void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matches) {
+        matchList = matches;
         status.text = "";
         
         if (!success) {
@@ -94,5 +100,11 @@ public class JoinGame : MonoBehaviour {
         }
 
         Debug.LogError(extendedInfo);
+    }
+
+    public void JoinRandom() {
+        RefreshRoomList();
+        int rand = Random.Range(0, matchList.Count);
+        JoinRoom(matchList[rand]);
     }
 }
