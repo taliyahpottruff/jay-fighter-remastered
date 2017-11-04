@@ -107,7 +107,11 @@ public class MapEditorUI : MonoBehaviour {
                         else if (pos.y < 0)
                             pos.y = (int)(pos.y);
 
-                        GameObject go = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/MapEditorObjects/" + objToSpawn), pos, Quaternion.identity);
+                        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+                        if (hit) Destroy(hit.collider.gameObject);
+
+                        GameObject go = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/MapEditorObjects/" + objToSpawn), pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Map").transform);
                         go.name = objToSpawn;
                     }
                     break;
@@ -193,5 +197,9 @@ public class MapEditorUI : MonoBehaviour {
 
     public void SetPaint(bool b) {
         if (b) SetTool(1);
+    }
+
+    public void SetSpawningObject(string obj) {
+        objToSpawn = obj;
     }
 }
