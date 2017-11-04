@@ -16,8 +16,6 @@ public class MapEditorUI : MonoBehaviour {
     public Toggle selectedObjSpawnToggle;
     public InputField xField;
     public InputField yField;
-    public InputField widthField;
-    public InputField heightField;
 
     private MapEditorObject selectedMapObj;
     private bool moveMode;
@@ -32,18 +30,17 @@ public class MapEditorUI : MonoBehaviour {
 
             if (moveMode) {
                 Vector2 pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                
+                //Lock to grid
+                if (pos.x > 0)
+                    pos.x = (int)(pos.x);
+                else if (pos.x < 0)
+                    pos.x = (int)(pos.x - 1);
 
-                if (Input.GetKey(KeyCode.Space)) {
-                    if (pos.x > 0)
-                        pos.x = (int)(pos.x + 0.5f);
-                    else if (pos.x < 0)
-                        pos.x = (int)(pos.x - 0.5f);
-
-                    if (pos.y > 0)
-                        pos.y = (int)(pos.y + 0.5f);
-                    else if (pos.y < 0)
-                        pos.y = (int)(pos.y - 0.5f);
-                }
+                if (pos.y > 0)
+                    pos.y = (int)(pos.y + 1);
+                else if (pos.y < 0)
+                    pos.y = (int)(pos.y);
 
                 selected.transform.position = pos;
 
@@ -76,8 +73,6 @@ public class MapEditorUI : MonoBehaviour {
                                 selectedObjSpawnToggle.isOn = obj.isSpawn;
                                 xField.text = obj.transform.position.x.ToString();
                                 yField.text = obj.transform.position.y.ToString();
-                                widthField.text = obj.transform.localScale.x.ToString();
-                                heightField.text = obj.transform.localScale.y.ToString();
 
                                 selectedMapObj = obj;
                             }
