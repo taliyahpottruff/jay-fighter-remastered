@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visible: 1
-  hasCollider: 0
+  hasCollider: 1
   isSpawn: 0
 --- !u!212 &212972443713588366
 SpriteRenderer:
