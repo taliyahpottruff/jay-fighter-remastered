@@ -22,6 +22,10 @@ public class MapEditorUI : MonoBehaviour {
     private int tool;
     private string objToSpawn = "Boulder";
 
+    private void Start() {
+        map.UpdateMap();
+    }
+
     private void Update() {
         if (selected != null) {
             ui.SetActive(true);

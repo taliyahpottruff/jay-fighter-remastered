@@ -41,8 +41,8 @@ public class EditorMap : MonoBehaviour {
             objs[i].name = gos[i].name;
             objs[i].x = t.position.x;
             objs[i].y = t.position.y;
-            objs[i].width = t.localScale.x;
-            objs[i].height = t.localScale.y;
+            objs[i].width = 1;
+            objs[i].height = 1;
 
             MapEditorObject mapEditObj = gos[i].GetComponent<MapEditorObject>();
             objs[i].visible = mapEditObj.visible;
