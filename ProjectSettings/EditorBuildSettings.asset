@@ -6,23 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+    path: Assets/Scenes/AnnoucementTrailer-Animation.unity
+    guid: c82277b7d00cb174f896aaba625f4d1c
+  - enabled: 0
     path: Assets/Scenes/SplashScreen.unity
-    guid: 00000000000000000000000000000000
+    guid: 7d2d17d25904a55409522fe6efd54d84
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 00000000000000000000000000000000
+    guid: b293aafe66c0c804fb8d070a062a0223
   - enabled: 1
     path: Assets/Scenes/Game.unity
-    guid: 00000000000000000000000000000000
+    guid: 9ba3a5600bb0fad4d82c448068cd1cb0
   - enabled: 0
     path: Assets/Scenes/NetworkingTest.unity
-    guid: 00000000000000000000000000000000
+    guid: f3242dcdf769531499f5ba6d1ce54f1d
   - enabled: 1
     path: Assets/Scenes/MapEditor.unity
-    guid: 00000000000000000000000000000000
+    guid: 83aa146b0e47a0d46867de4a8783cf02
   - enabled: 0
     path: Assets/Scenes/Lobby.unity
-    guid: 00000000000000000000000000000000
+    guid: 1fbcc1ada8311c54e802ff1d8e137f25
   - enabled: 1
     path: Assets/Scenes/Coop.unity
-    guid: 00000000000000000000000000000000
+    guid: af1af89eba4902640afedc2dc1674825

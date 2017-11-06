@@ -15,6 +15,9 @@ public class SmoothCamera : MonoBehaviour {
         try {
             if (lookAt == null) {
                 lookAt = GameObject.FindGameObjectWithTag("Player").transform;
+                if (lookAt == null) {
+                    lookAt = GameObject.Find("Map").transform;
+                }
                 return;
             }
 

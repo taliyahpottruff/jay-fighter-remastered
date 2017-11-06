@@ -25,6 +25,7 @@ public class PlayerCombat : NetworkBehaviour {
     private AudioSource aSource;
 
     private GameObject bulletPrefab;
+    private GameObject muzzleflashPrefab;
     private Vector2 playerPositon = Vector2.zero;
 
     private Transform shooter0;
@@ -35,6 +36,7 @@ public class PlayerCombat : NetworkBehaviour {
 
     private void Start() {
         bulletPrefab = Resources.Load<GameObject>("Prefabs/Bullet");
+        muzzleflashPrefab = Resources.Load<GameObject>("Prefabs/Muzzleflash");
 
         rb = GetComponent<Rigidbody2D>();
         aSource = GetComponent<AudioSource>();
@@ -63,6 +65,12 @@ public class PlayerCombat : NetworkBehaviour {
             firing = true;
         else
             firing = false;
+
+        //If the player is firing slow them down
+        if (firing)
+            player.movemement.SetSpeed(0.5f);
+        else
+            player.movemement.SetSpeed(1f);
 
         float horizontal = Mathf.Abs(fireVector.x);
         float vertical = Mathf.Abs(fireVector.y);
@@ -145,6 +153,7 @@ public class PlayerCombat : NetworkBehaviour {
     [Command]
     private void CmdFire(Vector2 position, Vector2 direction, NetworkIdentity _owner) {
         GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
+        GameObject flashObj = Instantiate(muzzleflashPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.playerBullet = true;
         bullet.owner = _owner;

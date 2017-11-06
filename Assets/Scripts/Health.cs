@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using Facepunch.Steamworks;
 
 /*
  * AUTHOR: Trenton Pottruff
@@ -15,13 +16,18 @@ public class Health : NetworkBehaviour {
     [SyncVar]
     public float health = 100;
     private float maxHeath = 100;
-   
+
+    private GameObject explosionPrefab;
+
+    private void Start() {
+        explosionPrefab = Resources.Load<GameObject>("Prefabs/Death Explosion");
+    }
+
     public void Update() {
         if(health > maxHeath) {
             health = maxHeath;
         }
     }
-
     /// <summary>
     /// Gets the current health
     /// </summary>
@@ -60,7 +66,9 @@ public class Health : NetworkBehaviour {
                     cpu.disposeTimer();
                     cpu.DropCoins();
                     GameManager.addScore(cpu.ScoreOnDeath);
+                    Game.STEAM.GiveAchievement("FIGHTER");
                 }
+                Instantiate<GameObject>(explosionPrefab, this.transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
                 return true;
             }

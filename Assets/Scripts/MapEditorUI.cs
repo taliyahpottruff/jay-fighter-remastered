@@ -16,11 +16,15 @@ public class MapEditorUI : MonoBehaviour {
     public Toggle selectedObjSpawnToggle;
     public InputField xField;
     public InputField yField;
-    public InputField widthField;
-    public InputField heightField;
 
     private MapEditorObject selectedMapObj;
     private bool moveMode;
+    private int tool;
+    private string objToSpawn = "Boulder";
+
+    private void Start() {
+        map.UpdateMap();
+    }
 
     private void Update() {
         if (selected != null) {
@@ -32,18 +36,17 @@ public class MapEditorUI : MonoBehaviour {
 
             if (moveMode) {
                 Vector2 pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                
+                //Lock to grid
+                if (pos.x > 0)
+                    pos.x = (int)(pos.x);
+                else if (pos.x < 0)
+                    pos.x = (int)(pos.x - 1);
 
-                if (Input.GetKey(KeyCode.Space)) {
-                    if (pos.x > 0)
-                        pos.x = (int)(pos.x + 0.5f);
-                    else if (pos.x < 0)
-                        pos.x = (int)(pos.x - 0.5f);
-
-                    if (pos.y > 0)
-                        pos.y = (int)(pos.y + 0.5f);
-                    else if (pos.y < 0)
-                        pos.y = (int)(pos.y - 0.5f);
-                }
+                if (pos.y > 0)
+                    pos.y = (int)(pos.y + 1);
+                else if (pos.y < 0)
+                    pos.y = (int)(pos.y);
 
                 selected.transform.position = pos;
 
@@ -56,41 +59,66 @@ public class MapEditorUI : MonoBehaviour {
         }
 
         if (!EventSystem.current.IsPointerOverGameObject()) {
-            if (Input.GetMouseButtonDown(0)) {
-                if (!moveMode) {
-                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            switch (tool) { //Utilize different tools
+                case 0:
+                    if (Input.GetMouseButtonDown(0)) {
+                        if (!moveMode) {
+                            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-                    if (hit) {
-                        if (hit.collider.gameObject.Equals(selected)) {
-                            moveMode = true;
-                        }
-                        else {
-                            MapEditorObject obj = hit.collider.gameObject.GetComponent<MapEditorObject>();
+                            if (hit) {
+                                if (hit.collider.gameObject.Equals(selected)) {
+                                    moveMode = true;
+                                }
+                                else {
+                                    MapEditorObject obj = hit.collider.gameObject.GetComponent<MapEditorObject>();
 
-                            if (obj != null) {
-                                selected = hit.collider.gameObject;
+                                    if (obj != null) {
+                                        selected = hit.collider.gameObject;
 
-                                selectedObjName.text = selected.name;
-                                selectedObjVisibleToggle.isOn = obj.visible;
-                                selectedObjColliderToggle.isOn = obj.hasCollider;
-                                selectedObjSpawnToggle.isOn = obj.isSpawn;
-                                xField.text = obj.transform.position.x.ToString();
-                                yField.text = obj.transform.position.y.ToString();
-                                widthField.text = obj.transform.localScale.x.ToString();
-                                heightField.text = obj.transform.localScale.y.ToString();
+                                        selectedObjName.text = selected.name;
+                                        selectedObjVisibleToggle.isOn = obj.visible;
+                                        selectedObjColliderToggle.isOn = obj.hasCollider;
+                                        selectedObjSpawnToggle.isOn = obj.isSpawn;
+                                        xField.text = obj.transform.position.x.ToString();
+                                        yField.text = obj.transform.position.y.ToString();
 
-                                selectedMapObj = obj;
+                                        selectedMapObj = obj;
+                                    }
+                                }
                             }
+                            else {
+                                selected = null;
+                                selectedMapObj = null;
+                            }
+                        } else {
+                            moveMode = false;
+                            map.UpdateMap();
                         }
                     }
-                    else {
-                        selected = null;
-                        selectedMapObj = null;
+                    break;
+                case 1:
+                    if (Input.GetMouseButton(0)) {
+                        Vector2 pos = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                        //Lock to grid
+                        if (pos.x > 0)
+                            pos.x = (int)(pos.x);
+                        else if (pos.x < 0)
+                            pos.x = (int)(pos.x - 1);
+
+                        if (pos.y > 0)
+                            pos.y = (int)(pos.y + 1);
+                        else if (pos.y < 0)
+                            pos.y = (int)(pos.y);
+
+                        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+
+                        if (hit) Destroy(hit.collider.gameObject);
+
+                        GameObject go = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/MapEditorObjects/" + objToSpawn), pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Map").transform);
+                        go.name = objToSpawn;
                     }
-                } else {
-                    moveMode = false;
-                    map.UpdateMap();
-                }
+                    break;
             }
         }
     }
@@ -157,5 +185,25 @@ public class MapEditorUI : MonoBehaviour {
             selected.transform.localScale = scale;
             map.UpdateMap();
         }
+    }
+
+    public void SetTool(int tool) {
+        this.tool = tool;
+    }
+
+    public void SetToolFromToggle(bool b, int tool) {
+        if (b) SetTool(tool);
+    }
+
+    public void SetEdit(bool b) {
+        if (b) SetTool(0);
+    }
+
+    public void SetPaint(bool b) {
+        if (b) SetTool(1);
+    }
+
+    public void SetSpawningObject(string obj) {
+        objToSpawn = obj;
     }
 }
