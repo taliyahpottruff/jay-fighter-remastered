@@ -1,9 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(NetworkManager))]
 public class MatchList : MonoBehaviour {
@@ -28,7 +31,6 @@ public class MatchList : MonoBehaviour {
             if (matchList.Count != 0) {
                 Debug.Log("Matches Found");
                 text.SetActive(false);
-                //NetworkManager.singleton.matchMaker.JoinMatch(matchList[0].networkId, "", "", "", 0, 1, OnMatchJoined);
                 foreach (var match in matchList) {
                     GameObject go = Instantiate<GameObject>(matchSelectionPrefab, this.transform);
                     Text matchName = go.GetComponentInChildren<Text>();
@@ -38,8 +40,6 @@ public class MatchList : MonoBehaviour {
             else {
                 Debug.Log("No Matches Found");
                 text.SetActive(true);
-                //Debug.Log("Creating Match");
-                //NetworkManager.singleton.matchMaker.CreateMatch("Match", 2, true, "", "", "", 0, 1, OnMatchCreate);
             }
         }
         else {

@@ -5,6 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 public class Toolbar : MonoBehaviour {
     public Image panelBody;
     public Image panelStrip;
@@ -19,8 +23,6 @@ public class Toolbar : MonoBehaviour {
     }
 
     public void Update() {
-        //Debug.Log("Inventory contains " + inventory.inventory.Count + " items!");
-
         try {
             if (inventory.inventory.Count <= 0) {
                 panelBody.enabled = false;
@@ -39,19 +41,18 @@ public class Toolbar : MonoBehaviour {
             }
 
             prevCount = currCount;
-        } catch (Exception e) { }
+        } catch (Exception e) { /*Do nothing*/ }
     }
 
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.11f);
         Debug.Log("Toolbar Delayed Start Executing...");
-
-        //inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        
         inventory = NetworkManager.singleton.client.connection.playerControllers[0].gameObject.GetComponent<Inventory>();
         prevCount = inventory.inventory.Count;
 
         Clear();
-        AddAllItems();
+        AddAllItems(); //Add all the items to store
 
         hasStarted = true;
     }
@@ -62,6 +63,9 @@ public class Toolbar : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Adds all available items to the store for purchase
+    /// </summary>
     public void AddAllItems() {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/Toolbar Button");
 

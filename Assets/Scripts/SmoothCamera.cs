@@ -1,7 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class SmoothCamera : MonoBehaviour {
     public Transform lookAt;
@@ -13,6 +15,9 @@ public class SmoothCamera : MonoBehaviour {
         try {
             if (lookAt == null) {
                 lookAt = GameObject.FindGameObjectWithTag("Player").transform;
+                if (lookAt == null) {
+                    lookAt = GameObject.Find("Map").transform;
+                }
                 return;
             }
 
@@ -20,6 +25,7 @@ public class SmoothCamera : MonoBehaviour {
 
             //Smooth
             transform.position -= (transform.position - newPosition) * smoothSpeed * Time.deltaTime;
-        } catch (Exception e) { }
+        }
+        catch (Exception e) { /*Do nothing*/ }
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Store : MonoBehaviour {
@@ -14,12 +12,16 @@ public class Store : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
             Debug.Log("Press");
-            bool current = storeObject.activeSelf;
-            bool b = !current;
+            bool current = storeObject.activeSelf; //Is the store open rn?
+            bool b = !current; //Toggle the store
             storeObject.SetActive(b);
             Game.PAUSED = b;
         }
     }
+
+    /// <summary>
+    /// Handles exiting the store
+    /// </summary>
     public void handleExit() {
         storeObject.SetActive(false);
         if (!pause.getOpened()) {
@@ -28,6 +30,10 @@ public class Store : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Sets the pause state
+    /// </summary>
+    /// <param name="b">Whether the game is pause or not</param>
     public void SetGamePaused(bool b) {
         Game.PAUSED = b;
     }

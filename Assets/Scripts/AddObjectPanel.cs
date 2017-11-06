@@ -19,6 +19,9 @@ public class AddObjectPanel : MonoBehaviour {
         expandButtonText = expandButton.GetComponentInChildren<Text>();
     }
 
+    /// <summary>
+    /// Toggles the panel.
+    /// </summary>
     public void TogglePanel() {
         if (mode == PanelMode.Open)
             ClosePanel();
@@ -26,12 +29,18 @@ public class AddObjectPanel : MonoBehaviour {
             OpenPanel();
     }
 
+    /// <summary>
+    /// Opens the panel, regardless of it's current state.
+    /// </summary>
     public void OpenPanel() {
         anim.Play("addObjectPanel-Up");
         expandButtonText.text = "-";
         mode = PanelMode.Open;
     }
 
+    /// <summary>
+    /// Closes the panel, regardless of it's current state
+    /// </summary>
     public void ClosePanel() {
         anim.Play("addObjectPanel-Down");
         expandButtonText.text = "+";

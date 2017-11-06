@@ -24,4 +24,8 @@ public class SteamClient {
         tex.Apply();
         return Sprite.Create(tex, new Rect(0, img.Height, img.Width, -img.Height), new Vector2(0, 0));
     }
+
+    public void GiveAchievement(string id) {
+        client.Achievements.Trigger(id);
+    }
 }

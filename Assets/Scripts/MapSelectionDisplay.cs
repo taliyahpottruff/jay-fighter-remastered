@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.IO;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 /*
  * AUTHOR: Trenton Pottruff
@@ -8,6 +9,7 @@ using System.IO;
 
 public class MapSelectionDisplay : MonoBehaviour {
     public MenuManager menuManager;
+    public GameLoader gameLoader;
 
     [SerializeField]
     private Transform officialMapHolder;
@@ -16,8 +18,12 @@ public class MapSelectionDisplay : MonoBehaviour {
 
     public GameObject mapSelectButtonPrefab;
 
+    private ToggleGroup tg;
+
     private void Start() {
-        PopulateList();
+        tg = GetComponent<ToggleGroup>();
+
+        PopulateList(); //Populate the list as soon as possible
     }
 
     private void PopulateList() {
@@ -30,13 +36,12 @@ public class MapSelectionDisplay : MonoBehaviour {
 
         string[] names = new string[mapPaths.Length];
 
-        /*for (int i = 0; i < maps.Length; i++) {
-            names[i] = maps[i].name;
-        }*/
         for (int i = 0; i < mapPaths.Length; i++) {
             names[i] = mapPaths[i].Replace(Application.persistentDataPath, "").Replace(".map", "").Replace("/maps\\", "");
         }
-    
+
+        int index = 0;
+
         //Populate the official maps
         Utilities.ClearChildren(officialMapHolder);
         for (int i = 0; i < maps.Length; i++) {
@@ -46,6 +51,11 @@ public class MapSelectionDisplay : MonoBehaviour {
             MapSelectButton msb = go.GetComponent<MapSelectButton>();
             
             msb.SetInfo(maps[i].name, "This is a map!");
+            if (tg != null) {
+                go.GetComponent<Toggle>().group = tg;
+
+                if (maps[i].name.Equals(Game.CURRENT_MAP)) go.GetComponent<Toggle>().isOn = true;
+            }
         }
 
         //Populate the custom maps
@@ -57,13 +67,20 @@ public class MapSelectionDisplay : MonoBehaviour {
             MapSelectButton msb = go.GetComponent<MapSelectButton>();
 
             msb.SetInfo(names[i], "This is a map!");
+            go.GetComponent<Toggle>().group = tg;
         }
     }
 
+    /// <summary>
+    /// Plays the game
+    /// </summary>
     public void PlayGame() {
-        SceneManager.LoadScene("Game");
+        gameLoader.LoadGame();
     }
 
+    /// <summary>
+    /// Returns the user to the main menu
+    /// </summary>
     public void BackToMain() {
         menuManager.ChangeMenu(0);
     }

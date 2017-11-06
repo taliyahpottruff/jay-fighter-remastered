@@ -5,17 +5,21 @@ using System;
 using System.IO;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class EditorMap : MonoBehaviour {
     public new string name = "New Map";
     public string json;
 
     private Map map;
-    private string directory = Application.persistentDataPath + "/maps";
+    private string directory;
 
     private InputField mapNameField;
+
+    private void Awake() {
+        directory = Application.persistentDataPath + "/maps";
+    }
 
     private void Start() {
         mapNameField = GameObject.FindGameObjectWithTag("MapNameInput").GetComponent<InputField>();
@@ -23,6 +27,9 @@ public class EditorMap : MonoBehaviour {
         UpdateMap(); //Init the JSON
     }
 
+    /// <summary>
+    /// Converts the current map configuration into JSON, and sets it to the json variable.
+    /// </summary>
     public void UpdateMap() {
         map = new Map();
         map.name = name;
@@ -34,8 +41,8 @@ public class EditorMap : MonoBehaviour {
             objs[i].name = gos[i].name;
             objs[i].x = t.position.x;
             objs[i].y = t.position.y;
-            objs[i].width = t.localScale.x;
-            objs[i].height = t.localScale.y;
+            objs[i].width = 1;
+            objs[i].height = 1;
 
             MapEditorObject mapEditObj = gos[i].GetComponent<MapEditorObject>();
             objs[i].visible = mapEditObj.visible;
@@ -45,26 +52,36 @@ public class EditorMap : MonoBehaviour {
         map.objects = objs;
 
         json = JsonUtility.ToJson(map);
-        Debug.Log(json);
     }
 
+    /// <summary>
+    /// Changes the map name and updates the map.
+    /// </summary>
+    /// <param name="name">The new map name</param>
     public void SetMapName(string name) {
         this.name = name;
         UpdateMap();
     }
 
+    /// <summary>
+    /// Save the map to the "maps" folder.
+    /// </summary>
     public void SaveMap() {
         Directory.CreateDirectory(directory);
         FileStream fs = new FileStream(directory + "/" + map.name + ".map", FileMode.OpenOrCreate);
         using (StreamWriter writer = new StreamWriter(fs)) {
-            writer.Write(Utilities.Base64Encode(json));
+            writer.Write(Utilities.Base64Encode(json)); //Write the encoded data
         }
     }
 
+    /// <summary>
+    /// Load a map from the "map" folder.
+    /// </summary>
+    /// <param name="mapToLoad">The name of the map to load</param>
     public void LoadMap(string mapToLoad) {
         FileStream fs = new FileStream(directory + "/" + mapToLoad + ".map", FileMode.Open);
         using (StreamReader reader = new StreamReader(fs)) {
-            json = Utilities.Base64Decode(reader.ReadToEnd());
+            json = Utilities.Base64Decode(reader.ReadToEnd()); //Decodes the map
             map = JsonUtility.FromJson<Map>(json);
             GameObject mapGO = GameObject.FindGameObjectWithTag("Map");
             //Clears the map object of existing children
@@ -89,6 +106,9 @@ public class EditorMap : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Load the map specified by the current "name" variable.
+    /// </summary>
     public void LoadMap() {
         LoadMap(name);
     }

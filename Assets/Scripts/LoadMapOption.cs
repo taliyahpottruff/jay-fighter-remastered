@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class LoadMapOption : MonoBehaviour {
     public string mapToLoad;

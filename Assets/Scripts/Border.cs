@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
-*/
+ * AUTHOR: Trenton Pottruff
+ */
 
+//I'm not even sure this class is used anymore
+//TODO Remove this class
 public class Border : MonoBehaviour {
     public BorderMode mode = BorderMode.Bottom;
 

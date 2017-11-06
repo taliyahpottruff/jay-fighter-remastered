@@ -5,21 +5,22 @@ using System.Timers;
 using UnityEngine.Networking;
 
 /*
-    * AUTHOR: Trenton Pottruff
-    * 
-    * CONTRIBUTOR: Garrett Nicholas
-    * (Logic for the different types of enemies and balancing)
-*/
+ * AUTHOR: Trenton Pottruff
+ * 
+ * CONTRIBUTOR: Garrett Nicholas
+ * (Logic for the different types of enemies and balancing)
+ */
 
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 public class CPU : NetworkBehaviour {
     #region Member Variables
     public float minSpeed = 1;
     public float maxSpeed = 3;
     public float speed = 3;
-    public bool shooter = false;
-    public bool duplicator = false;
+    public bool shooter = false; //Is this enemy a Shooter?
+    public bool duplicator = false; //Is this enemy a Savage?
     public bool firing = false;
     public int ScoreOnDeath;
     public int minCoins;
@@ -27,6 +28,7 @@ public class CPU : NetworkBehaviour {
     public GameObject FullHealthBar;
     public GameObject HealthBar;
     public EnemySpriteManager spriteManager;
+    public AudioClip spawnSound;
     [SyncVar]
     public bool hideHealth;
     #endregion
@@ -35,7 +37,7 @@ public class CPU : NetworkBehaviour {
     private Rigidbody2D rb;
     private GameObject bulletPrefab;
     private GameObject basicEnemy;
-    private Vector2 td;
+    private Vector2 td; //Direction of the target player
     private Health health;
     private GameObject player;
     private bool melee = false;
@@ -46,6 +48,7 @@ public class CPU : NetworkBehaviour {
     private GameObject GoldCoin;
     private Pathfinding pathfinder;
     private float previousHealth;
+    private AudioSource aSource;
     #endregion
 
     #region Initialize
@@ -54,6 +57,9 @@ public class CPU : NetworkBehaviour {
     }
 
     private void Start() {
+        //TODO Remove collsions from enemies beautifully
+        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
+        //Set all required variables
         BronzeCoin = Resources.Load<GameObject>("Prefabs/BronzeCoin");
         SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
         GoldCoin = Resources.Load<GameObject>("Prefabs/GoldCoin");
@@ -65,6 +71,14 @@ public class CPU : NetworkBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         FullHealthBar.SetActive(false);
         previousHealth = health.health;
+        aSource = GetComponent<AudioSource>();
+
+        //Play Spawn Sound, If Exists
+        if (spawnSound != null) {
+            aSource.PlayOneShot(spawnSound);
+        }
+
+        //Start appropriate co-routines
         StartCoroutine(FireBullet());
         StartCoroutine(MeleeAttack());
 	}
@@ -72,10 +86,9 @@ public class CPU : NetworkBehaviour {
 
     #region Update
     void Update() {
-        player = GetClosestPlayer(); //Grab the player object
+        player = GetClosestPlayer(); //Reference the closest player
         #region Health Hiding
-        if (previousHealth != health.health)
-            resetTimer();
+        if (previousHealth != health.health) resetTimer(); //If there are any changes in the enemies health, reset the health bar's timer
 
         if (hideHealth) {
             FullHealthBar.SetActive(false);
@@ -88,9 +101,8 @@ public class CPU : NetworkBehaviour {
         if (!Game.PAUSED) {
             List<Node> path = pathfinder.FindPath(this.transform.position, player.transform.position);
             Vector2 playerPosition = player.transform.position;
-            if (path != null && path.Count > 0)
-                playerPosition = path[0].position;
-            Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized;
+            if (path != null && path.Count > 0) playerPosition = path[0].position; //If the pathfinder can find a path to the player, use the first node as a target for movement instead
+            Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized; //Set the target direction towards whatever target is set
             td = targetDirection;
 
             #region Direction Handling
@@ -98,6 +110,7 @@ public class CPU : NetworkBehaviour {
                 if (!targetDirection.Equals(Vector2.zero)) {
                     Vector2 absVector = new Vector2(Mathf.Abs(targetDirection.x), Mathf.Abs(targetDirection.y));
 
+                    //Handle sprite animations
                     #region Handle Horizontal
                     if (absVector.x > absVector.y) {
                         if (targetDirection.x > 0)
@@ -118,7 +131,7 @@ public class CPU : NetworkBehaviour {
             }
             #endregion
 
-            rb.velocity = targetDirection * speed;
+            rb.velocity = targetDirection * speed; //Move the enemy towards the appropriate target
             HealthBar.transform.localScale = new Vector3((float)(health.health / 100), 0.9081425f, 0.908152f);
             EnemyLogic();
         } else {
@@ -129,6 +142,10 @@ public class CPU : NetworkBehaviour {
     #endregion
 
     #region Player Chooser
+    /// <summary>
+    /// Finds the closest player to the enemy.
+    /// </summary>
+    /// <returns>The GameObject of the closest player</returns>
     public GameObject GetClosestPlayer() {
         GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
         if (objs.Length > 0) {
@@ -149,6 +166,9 @@ public class CPU : NetworkBehaviour {
     #endregion
 
     #region Coin Dropping
+    /// <summary>
+    /// Drop coins based on the pre-set ranges.
+    /// </summary>
     public void DropCoins() {
         int drop = Random.Range(minCoins, maxCoins+1);
         int goldCoins = drop / 10;
@@ -253,7 +273,7 @@ public class CPU : NetworkBehaviour {
     private IEnumerator SpawnMinions() {
         yield return new WaitForSeconds(1f);
         GameObject go = Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity); //Spawn Minions
-        NetworkServer.Spawn(go);
+        NetworkServer.Spawn(go); //Ensure that the minions get spawned server side too
     }
     #endregion
     #endregion

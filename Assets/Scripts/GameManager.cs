@@ -1,13 +1,12 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
 /*
-    * AUTHOR: Garrett Nicholas
-    * MODIFICATIONS: Trenton Pottruff
-*/
+ * AUTHOR: Garrett Nicholas
+ * MODIFICATIONS: Trenton Pottruff
+ */
 
 public class GameManager : MonoBehaviour {
     private GameObject playerPrefab;
@@ -41,42 +40,30 @@ public class GameManager : MonoBehaviour {
         shootEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Shooting Enemy");
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
-        /* Now in ScoreManager
-        scoreText = SCORE.GetComponent<Text>();
-        healthText = HEALTHTX.GetComponent<Text>();
-        healthSlider = HEALTH.GetComponent<Slider>();
-        coinsText = COINS.GetComponent<Text>();
-        roundText = ROUND.GetComponent<Text>();*/
-
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-        //player = (GameObject)Instantiate(playerPrefab, new Vector3(0,0,0), Quaternion.identity);
 
         nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
 
         //TP: Added a coroutine
         StartCoroutine(DelayedStartSpawn());
     }
+
+    /// <summary>
+    /// Adds a number to the score
+    /// </summary>
+    /// <param name="s">The amount to add</param>
 	public static void addScore(long s) {
         Score += s;
     }
+
 	void Update () {
         #region Trenton Pottruff: Get Player List
         players = GameObject.FindGameObjectsWithTag("Player");
         #endregion
 
         if (hasStarted) {
-            /* Old Game Over Code
-             * if (player == null && hasDied == false) {
-                Debug.Log("Player has died!");
-                NetworkManager.singleton.StopHost();
-                hasDied = true;
-                GAMEOVER.SetActive(true);
-                for (int i = 0; i < toSpawn; i++) {
-                    Destroy(spawned[i]);
-                }
-            }*/
             #region Trenton Pottruff: Game Over
-            if (players.Length < 1) {
+            if (players.Length < 1) { //When there's no players left
                 NetworkManager.singleton.StopHost();
             }
             #endregion
@@ -84,6 +71,9 @@ public class GameManager : MonoBehaviour {
         }
 	}
 
+    /// <summary>
+    /// Resets all the stats
+    /// </summary>
     public void resetGame() {
         NetworkManager.singleton.StopHost();
         Score = 0;
@@ -92,21 +82,34 @@ public class GameManager : MonoBehaviour {
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
+
+    /// <summary>
+    /// Returns to main menu.
+    /// </summary>
     public void goToMainMenu() {
         SceneManager.LoadScene("MainMenu");
     }
+
+    /// <summary>
+    /// Goes to the next round
+    /// </summary>
     public void handleRound() {
         if (hasDied) return;
-        if(checkDead()) {
+        if(checkDead()) { //Are all enemies dead?
             round++;
             toSpawn = 1 + round + (int)(Mathf.Round(Random.Range(0f, round)));
             for(int i = 0; i < toSpawn; i++) {
-                int sp = selectSP();
+                int sp = selectSP(); //Select a spawn point
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
                 NetworkServer.Spawn(spawned[i]);
             }
         }
     }
+
+    /// <summary>
+    /// Checks to see if all enemies are dead.
+    /// </summary>
+    /// <returns></returns>
     public bool checkDead() {
         for(int i = 0; i < toSpawn; i++) {
             if (spawned[i] != null) {
@@ -116,12 +119,19 @@ public class GameManager : MonoBehaviour {
         
         return true;
     }
-    //Selects a spawnpoint (this returns an int to be used with the array)
+
+    /// <summary>
+    /// Selects a spawnpoint.
+    /// </summary>
+    /// <returns>An int to be used with a spawn point array</returns>
     private int selectSP() {
         return (int)Mathf.Round(Random.Range(0f, spawnPoints.Length - 1));
     }
 
-    //This returns a random enemy prefab based on what round the game is on
+    /// <summary>
+    /// This returns a random enemy prefab based on what round the game is on
+    /// </summary>
+    /// <returns>An enemy prefab</returns>
     private GameObject getEnemy() {
         if(round < 5) {
             return basicEnemy;
@@ -157,18 +167,13 @@ public class GameManager : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
         Health = player.GetComponent<Health>();
 
-        //Play HUD Animations
-        /*healthAnim.Play("healthPanel-in");
-        statsAnim.Play("statsPanel-in");*/
-
         //Spawning code originally by Garrett Nicholas
         spawnPoints = GameObject.FindGameObjectsWithTag("Spawn Point");
         //DEBUG OUT
-        Debug.Log("I found " + spawnPoints.Length + " Spawn Points!");
         round++;
         toSpawn = round + (int)(Mathf.Round(Random.Range(0f, round)));
         for (int i = 0; i < toSpawn; i++) {
-            int sp = selectSP();
+            int sp = selectSP(); //Select a spawn point
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
             NetworkServer.Spawn(spawned[i]);
         }

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ToolbarButton : MonoBehaviour {
@@ -21,6 +19,9 @@ public class ToolbarButton : MonoBehaviour {
         icon.sprite = inv.inventory[index].GetSprite();
     }
 
+    /// <summary>
+    /// Executes the action on click of this button
+    /// </summary>
     public void Click() {
         inv.inventory[index].Consume(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>());
 

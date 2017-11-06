@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
-*/
+ */
 
 public class StoreItemButton : MonoBehaviour {
     public string itemName;
@@ -50,6 +49,9 @@ public class StoreItemButton : MonoBehaviour {
         itemIcon.sprite = Game.ITEMS[itemName].GetSprite();
     }
 
+    /// <summary>
+    /// Buys the item
+    /// </summary>
     public void BuyItem() {
         if (player.coins < cost) return;
         player.coins -= cost;
