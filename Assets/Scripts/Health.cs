@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Collections;
+using Facepunch.Steamworks;
 
 /*
  * AUTHOR: Trenton Pottruff
@@ -65,6 +66,7 @@ public class Health : NetworkBehaviour {
                     cpu.disposeTimer();
                     cpu.DropCoins();
                     GameManager.addScore(cpu.ScoreOnDeath);
+                    Game.STEAM.GiveAchievement("FIGHTER");
                 }
                 Instantiate<GameObject>(explosionPrefab, this.transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
