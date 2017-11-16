@@ -14,6 +14,7 @@ TagManager:
   - StoreScreen
   - GameUI
   - Pathfinder
+  - Coin
   layers:
   - Default
   - TransparentFX

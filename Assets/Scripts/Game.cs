@@ -14,31 +14,11 @@ public class Game
     public static bool PAUSED = false;
     public static float SFX_VOLUME = 0.25f;
     public static float MUSIC_VOLUME = 0.05f;
-    public static string CURRENT_MAP = "Basic";
+    public static string CURRENT_MAP = "Yard";
     public static SteamClient STEAM; //Steam Integration
 
     #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
-        #region Basic Map
-        {"Basic", new Map("Basic", 30, 30, new MapObj[] {
-            //Objects
-            new MapObj("Grass", -14.5f, 14.17f, 30f, 30f, true, false),
-            //Colliders
-                //Right
-                new MapObj("Boulder", 15f, 15f, 1, 31, true, true),
-                //Left
-                new MapObj("Boulder", -15f, 15f, 1, 30, true, true),
-                //Top
-                new MapObj("Boulder", -15f, 15f, 30, 1, true, true),
-                //Bottom
-                new MapObj("Boulder", -15f, -15f, 31, 1, true, true),
-            //Spawns
-            new MapObj("Test Object", 4, 4, 1, 1),
-            new MapObj("Test Object", 4, -4, 1, 1),
-            new MapObj("Test Object", -4, 4, 1, 1),
-            new MapObj("Test Object", -4, -4, 1, 1)
-        })},
-        #endregion
         {"Yard", new Map("Yard")},
         {"Lava Twins", new Map("Lava Twins")},
         {"Four Squares", new Map("Four Squares")}
