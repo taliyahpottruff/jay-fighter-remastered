@@ -33,7 +33,7 @@ public class Toolbar : MonoBehaviour {
                 panelStrip.enabled = true;
             }
 
-            int currCount = inventory.inventory.Count;
+            int currCount = GetInventoryCount();
 
             if (prevCount != currCount && hasStarted) {
                 Clear();
@@ -41,7 +41,19 @@ public class Toolbar : MonoBehaviour {
             }
 
             prevCount = currCount;
-        } catch (Exception e) { /*Do nothing*/ }
+        } catch (Exception e) {
+            Debug.LogError(e.StackTrace);
+        }
+    }
+
+    private int GetInventoryCount() {
+        int c = 0;
+
+        for (int i = 0; i < inventory.inventory.Count; i++) {
+            c += inventory.inventory[i].GetAmount();
+        }
+
+        return c;
     }
 
     private IEnumerator DelayedStart() {
@@ -59,7 +71,7 @@ public class Toolbar : MonoBehaviour {
 
     public void Clear() {
         for (int i = 0; i < this.transform.childCount; i++) {
-            Destroy(this.transform.GetChild(i));
+            Destroy(this.transform.GetChild(i).gameObject);
         }
     }
 
