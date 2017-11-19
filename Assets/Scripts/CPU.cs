@@ -49,6 +49,7 @@ public class CPU : NetworkBehaviour {
     private Pathfinding pathfinder;
     private float previousHealth;
     private AudioSource aSource;
+    private Vector2 playerPosition = Vector2.zero;
     #endregion
 
     #region Initialize
@@ -99,8 +100,10 @@ public class CPU : NetworkBehaviour {
         #endregion
         #region Game Logic
         if (!Game.PAUSED) {
-            List<Node> path = pathfinder.FindPath(this.transform.position, player.transform.position);
-            Vector2 playerPosition = player.transform.position;
+            playerPosition = this.transform.position;
+            if (player != null) playerPosition = player.transform.position;
+
+            List<Node> path = pathfinder.FindPath(this.transform.position, playerPosition);
             if (path != null && path.Count > 0) playerPosition = path[0].position; //If the pathfinder can find a path to the player, use the first node as a target for movement instead
             Vector2 targetDirection = (playerPosition - (Vector2)transform.position).normalized; //Set the target direction towards whatever target is set
             td = targetDirection;
@@ -227,9 +230,9 @@ public class CPU : NetworkBehaviour {
         #endregion
 
         if (!shooter) {
-            float distance = Vector2.Distance(player.transform.position, this.transform.position);
+            float distance = Vector2.Distance(playerPosition, this.transform.position);
             if (distance <= 2) {
-                Vector2 playerDirection = (player.transform.position - this.transform.position).normalized;
+                Vector2 playerDirection = (playerPosition - (Vector2)this.transform.position).normalized;
                 meleeHit = Physics2D.Raycast(this.transform.position, playerDirection, 2f, 1 << LayerMask.NameToLayer("Player"));
                 Debug.DrawRay(this.transform.position, playerDirection * 2, Color.red, 5000);
                 melee = (bool) meleeHit;

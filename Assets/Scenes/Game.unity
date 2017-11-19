@@ -5583,6 +5583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6205cce22c7494094cd41730803dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 2117868037}
 --- !u!1 &1080530733
 GameObject:
   m_ObjectHideFlags: 0
@@ -8326,7 +8327,7 @@ Prefab:
     - target: {fileID: 224000012191296596, guid: 8ab7487e1236c99479bc63b17f2f789f,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: -1113
+      value: -972
       objectReference: {fileID: 0}
     - target: {fileID: 224000012191296596, guid: 8ab7487e1236c99479bc63b17f2f789f,
         type: 2}
@@ -8881,6 +8882,7 @@ GameObject:
   - component: {fileID: 2117868035}
   - component: {fileID: 2117868036}
   - component: {fileID: 2117868037}
+  - component: {fileID: 2117868038}
   m_Layer: 0
   m_Name: Map
   m_TagString: Map
@@ -8964,6 +8966,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 0, y: 0}
+--- !u!114 &2117868038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2117868034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 1
+  m_LocalPlayerAuthority: 0
 --- !u!4 &2126622062 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010206584058, guid: 645043a89e6ecc24c8a03f5a9bc51aaf,

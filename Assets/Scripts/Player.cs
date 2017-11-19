@@ -27,11 +27,11 @@ public class Player : NetworkBehaviour {
 
     public void Start() {
         health = GetComponent<Health>();
-
-        if (isLocalPlayer) username = Game.STEAM.GetUsername();
     }
 
     private void Update() {
+        if (isLocalPlayer && username.Equals("Player") && Game.STEAM != null) username = Game.STEAM.GetUsername();
+
         //Set the control scheme to whatever is being used
         if ((Input.anyKey && !Input.GetButton("Fire1")) || Input.GetMouseButton(0))
             currentScheme = ControlScheme.Keyboard;

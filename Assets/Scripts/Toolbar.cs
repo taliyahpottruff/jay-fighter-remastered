@@ -24,6 +24,8 @@ public class Toolbar : MonoBehaviour {
 
     public void Update() {
         try {
+            if (inventory == null) return;
+
             if (inventory.inventory.Count <= 0) {
                 panelBody.enabled = false;
                 panelStrip.enabled = false;

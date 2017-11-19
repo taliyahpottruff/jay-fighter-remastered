@@ -40,9 +40,6 @@ public class ScoreManager : NetworkBehaviour {
         healthSlider = HEALTH.GetComponent<Slider>();
         coinsText = COINS.GetComponent<Text>();
         roundText = ROUND.GetComponent<Text>();
-
-        health = playerObj.GetComponent<Health>();
-        player = playerObj.GetComponent<Player>();
     }
 
     private void Update() {
