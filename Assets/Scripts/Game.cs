@@ -15,6 +15,7 @@ public class Game
     public static float SFX_VOLUME = 0.25f;
     public static float MUSIC_VOLUME = 0.05f;
     public static string CURRENT_MAP = "Yard";
+    public static bool IS_MP = false;
     public static SteamClient STEAM; //Steam Integration
 
     #region Maps
@@ -29,6 +30,14 @@ public class Game
         {"Repair Kit", new HealthPotion()},
         {"Mine", new MineItem()},
         {"Plating Upgrade", new PlatingUpgrade()}
+    };
+    #endregion
+    #region Stats
+    public static Dictionary<string, int> STATS = new Dictionary<string, int>() {
+        {"gamesPlayed", 0},
+        {"score", 0},
+        {"coins", 0},
+        {"highestRound", 0}
     };
     #endregion
 
