@@ -30,12 +30,4 @@ public class SteamClient {
             client.Achievements.Trigger(id);
         }
     }
-
-    public int GetStat(string id) {
-        if (client.Stats != null) {
-            return client.Stats.GetInt(id);
-        }
-
-        return 0;
-    }
 }

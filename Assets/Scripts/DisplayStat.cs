@@ -13,8 +13,7 @@ public class DisplayStat : MonoBehaviour {
 
     private void Update() {
         if (Game.STEAM != null) {
-            int stat = Game.STEAM.GetStat(statID);
-            Game.STATS[statID] = stat;
+            int stat = PlayerPrefs.GetInt(statID);
             text.text = stat + "";
         }
     }

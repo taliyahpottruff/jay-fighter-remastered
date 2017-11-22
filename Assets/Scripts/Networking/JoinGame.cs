@@ -81,10 +81,10 @@ public class JoinGame : MonoBehaviour {
 
     public void JoinRoom(MatchInfoSnapshot match) {
         Debug.Log("Joining " + match.name);
+        Game.IS_MP = true;
         manager.matchMaker.JoinMatch(match.networkId, "", "", "", 0, 0, manager.OnMatchJoined);
         ClearRoomList();
         status.text = "Joining...";
-        Game.IS_MP = true;
     }
 
     public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo) {

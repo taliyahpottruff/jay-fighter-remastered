@@ -27,6 +27,12 @@ public class Player : NetworkBehaviour {
 
     public void Start() {
         health = GetComponent<Health>();
+
+        if (isLocalPlayer && Game.IS_MP) {
+            int newGP = PlayerPrefs.GetInt("gamesPlayed") + 1;
+            PlayerPrefs.SetInt("gamesPlayed", newGP);
+            PlayerPrefs.Save();
+        }
     }
 
     private void Update() {

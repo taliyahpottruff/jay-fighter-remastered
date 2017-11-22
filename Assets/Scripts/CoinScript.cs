@@ -26,6 +26,12 @@ public class CoinScript : MonoBehaviour {
         Player player = other.GetComponent<Player>();
         if (player != null) {
             player.coins += this.coinValue;
+            
+            if (player.isLocalPlayer) {
+                PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + this.coinValue);
+                PlayerPrefs.Save();
+            }
+
             Destroy(this.gameObject);
         }
     }
