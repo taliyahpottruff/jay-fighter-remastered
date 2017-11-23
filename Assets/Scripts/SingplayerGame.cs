@@ -13,6 +13,6 @@ public class SingplayerGame : MonoBehaviour {
     private void Start() {
         net = GetComponent<NetworkManager>();
         net.StartHost(); //Starts a single player game
-        map.StartMap();
+        //map.StartMap();
     }
 }

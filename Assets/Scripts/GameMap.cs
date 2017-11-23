@@ -9,7 +9,11 @@ public class GameMap : NetworkBehaviour {
     public Vector2 size;
 
     private Map map;
-    
+
+    private void Start() {
+        StartMap();
+    }
+
     public void StartMap() {
         Utilities.ClearChildren(this.transform); //Make sure there are no children at the beginning
         map = Game.LoadCurrentMap();
