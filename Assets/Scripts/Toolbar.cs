@@ -9,7 +9,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
-public class Toolbar : MonoBehaviour {
+public class Toolbar : NetworkBehaviour {
     public Image panelBody;
     public Image panelStrip;
     public Inventory inventory;
@@ -61,12 +61,27 @@ public class Toolbar : MonoBehaviour {
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.11f);
         Debug.Log("Toolbar Delayed Start Executing...");
+
+        /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
+
+        Debug.Log(gos.Length);
+        for (int i = 0; i < gos.Length; i++) {
+            Player p = gos[i].GetComponent<Player>();
+            Debug.Log(i);
+
+            if (p.isLocalPlayer) {
+                Debug.Log("Found own player at " + i);
+
+                inventory = gos[i].GetComponent<Inventory>();
+                break;
+            }
+            else Debug.Log(i + " ain't my nigga.");
+        }*/
         
-        inventory = NetworkManager.singleton.client.connection.playerControllers[0].gameObject.GetComponent<Inventory>();
-        prevCount = inventory.inventory.Count;
+        prevCount = 0;
 
         Clear();
-        AddAllItems(); //Add all the items to store
+        //AddAllItems(); //Add all the items to store
 
         hasStarted = true;
     }

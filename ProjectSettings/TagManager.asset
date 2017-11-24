@@ -15,6 +15,7 @@ TagManager:
   - GameUI
   - Pathfinder
   - Coin
+  - Toolbar
   layers:
   - Default
   - TransparentFX

@@ -23,6 +23,9 @@ public class Player : NetworkBehaviour {
         //Set local camera to follow this player
         SmoothCamera sc = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<SmoothCamera>();
         if (sc != null) sc.lookAt = this.transform; //Have the smooth camera target the player
+
+        Toolbar t = GameObject.FindGameObjectWithTag("Toolbar").GetComponent<Toolbar>();
+        t.inventory = GetComponent<Inventory>();
     }
 
     public void Start() {

@@ -21,8 +21,7 @@ public class Game
     #region Maps
     public static Dictionary<string, Map> MAPS = new Dictionary<string, Map>() {
         {"Yard", new Map("Yard")},
-        {"Lava Twins", new Map("Lava Twins")},
-        {"Four Squares", new Map("Four Squares")}
+        {"Lava Twins", new Map("Lava Twins")}
     };
     #endregion
     #region Items

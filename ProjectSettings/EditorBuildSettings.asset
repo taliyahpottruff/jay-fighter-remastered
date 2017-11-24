@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/NetworkingTest.unity
     guid: f3242dcdf769531499f5ba6d1ce54f1d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MapEditor.unity
     guid: 83aa146b0e47a0d46867de4a8783cf02
   - enabled: 0
