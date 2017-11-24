@@ -58,8 +58,14 @@ public class Player : NetworkBehaviour {
         health.IncreaseMax(amount);
     }
 
+    public void SpawnItemProxy(string item) {
+        Debug.Log("Spawning proxy");
+        CmdSpawnItem(item);
+    }
+
     [Command]
     public void CmdSpawnItem(string name) {
+        Debug.Log("Spawning actual.");
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + name);
         GameObject go = Instantiate<GameObject>(prefab, this.transform.position, Quaternion.identity);
         NetworkServer.Spawn(go);

@@ -46,12 +46,10 @@ public class PlayerMovement : NetworkBehaviour {
 
             if (horizontal != 0 || vertical != 0) {
                 if (horizontal > vertical) {
-                    base_1 = true;
-                    side_wheels = true;
+                    CmdSetBottom(true, true);
                 }
                 else {
-                    base_1 = false;
-                    side_wheels = false;
+                    CmdSetBottom(false, false);
                 }
             }
 
@@ -69,6 +67,12 @@ public class PlayerMovement : NetworkBehaviour {
         } else {
             wheelsRenderer.sprite = frontWheels[0];
         }
+    }
+
+    [Command]
+    public void CmdSetBottom(bool base_1, bool side_wheels) {
+        this.base_1 = base_1;
+        this.side_wheels = side_wheels;
     }
 
     public void SetSpeed(float multiplier) {

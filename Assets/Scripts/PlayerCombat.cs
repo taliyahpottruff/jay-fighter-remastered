@@ -28,6 +28,14 @@ public class PlayerCombat : NetworkBehaviour {
     private GameObject muzzleflashPrefab;
     private Vector2 playerPositon = Vector2.zero;
 
+    [SyncVar]
+    public bool _topDown = true;
+    [SyncVar]
+    public bool _topLeft = false;
+    [SyncVar]
+    public bool _topRight = false;
+    [SyncVar]
+    public bool _topUp = false;
     private Transform shooter0;
     private Transform shooter1;
     private bool shooter = false;
@@ -76,46 +84,76 @@ public class PlayerCombat : NetworkBehaviour {
         float vertical = Mathf.Abs(fireVector.y);
 
         //Set directional data
-        if (horizontal != 0 || vertical != 0) {
-            if (horizontal > vertical) {
-                if (fireVector.x > 0) {
-                    //Right
-                    topDown.SetActive(false);
-                    topLeft.SetActive(false);
-                    topRight.SetActive(true);
-                    topUp.SetActive(false);
-                    shooter0 = topRight.transform.Find("Right Shooter"); 
-                    shooter1 = topRight.transform.Find("Right Shooter");
-                } else {
-                    //Left
-                    topDown.SetActive(false);
-                    topLeft.SetActive(true);
-                    topRight.SetActive(false);
-                    topUp.SetActive(false);
-                    shooter0 = topLeft.transform.Find("Left Shooter");
-                    shooter1 = topLeft.transform.Find("Left Shooter");
-                }
-            }
-            else {
-                if (fireVector.y > 0) {
-                    //Up
-                    topDown.SetActive(false);
-                    topLeft.SetActive(false);
-                    topRight.SetActive(false);
-                    topUp.SetActive(true);
-                    shooter0 = topUp.transform.Find("Left Shooter");
-                    shooter1 = topUp.transform.Find("Right Shooter");
+        if (isLocalPlayer) {
+            if (horizontal != 0 || vertical != 0) {
+                if (horizontal > vertical) {
+                    if (fireVector.x > 0) {
+                        CmdSetTop(1);
+                        shooter0 = topRight.transform.Find("Right Shooter");
+                        shooter1 = topRight.transform.Find("Right Shooter");
+                    }
+                    else {
+                        CmdSetTop(2);
+                        shooter0 = topLeft.transform.Find("Left Shooter");
+                        shooter1 = topLeft.transform.Find("Left Shooter");
+                    }
                 }
                 else {
-                    //Down
-                    topDown.SetActive(true);
-                    topLeft.SetActive(false);
-                    topRight.SetActive(false);
-                    topUp.SetActive(false);
-                    shooter0 = topDown.transform.Find("Left Shooter");
-                    shooter1 = topDown.transform.Find("Right Shooter");
+                    if (fireVector.y > 0) {
+                        CmdSetTop(3);
+                        shooter0 = topUp.transform.Find("Left Shooter");
+                        shooter1 = topUp.transform.Find("Right Shooter");
+                    }
+                    else {
+                        CmdSetTop(4);
+                        shooter0 = topDown.transform.Find("Left Shooter");
+                        shooter1 = topDown.transform.Find("Right Shooter");
+                    }
                 }
             }
+        }
+
+        topDown.SetActive(_topDown);
+        topLeft.SetActive(_topLeft);
+        topRight.SetActive(_topRight);
+        topUp.SetActive(_topUp);
+    }
+
+    [Command]
+    public void CmdSetTop(int _case) {
+        switch (_case) {
+            case 1:
+                //Right
+                _topDown = false;
+                _topLeft = false;
+                _topRight = true;
+                _topUp = false;
+                
+                break;
+            case 2:
+                //Left
+                _topDown = false;
+                _topLeft = true;
+                _topRight = false;
+                _topUp = false;
+                
+                break;
+            case 3:
+                //Up
+                _topDown = false;
+                _topLeft = false;
+                _topRight = false;
+                _topUp = true;
+                
+                break;
+            case 4:
+                //Down
+                _topDown = true;
+                _topLeft = false;
+                _topRight = false;
+                _topUp = false;
+                
+                break;
         }
     }
 
