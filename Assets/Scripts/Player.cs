@@ -26,6 +26,8 @@ public class Player : NetworkBehaviour {
 
         Toolbar t = GameObject.FindGameObjectWithTag("Toolbar").GetComponent<Toolbar>();
         t.inventory = GetComponent<Inventory>();
+
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Player"));
     }
 
     public void Start() {

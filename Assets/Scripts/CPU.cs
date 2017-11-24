@@ -59,7 +59,7 @@ public class CPU : NetworkBehaviour {
 
     private void Start() {
         //TODO Remove collsions from enemies beautifully
-        //Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Enemy"));
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemy"), LayerMask.NameToLayer("Player"));
         //Set all required variables
         BronzeCoin = Resources.Load<GameObject>("Prefabs/BronzeCoin");
         SilverCoin = Resources.Load<GameObject>("Prefabs/SilverCoin");
