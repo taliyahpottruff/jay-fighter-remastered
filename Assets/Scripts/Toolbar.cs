@@ -62,6 +62,7 @@ public class Toolbar : NetworkBehaviour {
         yield return new WaitForSeconds(0.11f);
         Debug.Log("Toolbar Delayed Start Executing...");
 
+        //TODO Remove this
         /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
 
         Debug.Log(gos.Length);

@@ -87,6 +87,8 @@ public class CPU : NetworkBehaviour {
 
     #region Update
     void Update() {
+        HealthBar.transform.localScale = new Vector3((float)(health.health / 100), 0.9081425f, 0.908152f);
+
         player = GetClosestPlayer(); //Reference the closest player
         #region Health Hiding
         if (previousHealth != health.health) resetTimer(); //If there are any changes in the enemies health, reset the health bar's timer
@@ -99,7 +101,7 @@ public class CPU : NetworkBehaviour {
         previousHealth = health.health;
         #endregion
         #region Game Logic
-        if (!Game.PAUSED) {
+        if (!Game.PAUSED && isServer) {
             playerPosition = this.transform.position;
             if (player != null) playerPosition = player.transform.position;
 
@@ -135,7 +137,7 @@ public class CPU : NetworkBehaviour {
             #endregion
 
             rb.velocity = targetDirection * speed; //Move the enemy towards the appropriate target
-            HealthBar.transform.localScale = new Vector3((float)(health.health / 100), 0.9081425f, 0.908152f);
+            
             EnemyLogic();
         } else {
             rb.velocity = Vector2.zero;
