@@ -2,7 +2,6 @@
 
 public class PlatingUpgrade : Item {
     public PlatingUpgrade() {
-        AddItems(1);
         SetName("Plating Upgrade");
         SetCost(100);
         SetSprite(Resources.Load<Sprite>("Sprites/Items/PlatingUpgrade"));

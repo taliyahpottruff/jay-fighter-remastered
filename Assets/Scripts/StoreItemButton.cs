@@ -73,6 +73,12 @@ public class StoreItemButton : MonoBehaviour {
         }
 
         //If not, create a new slot
-        playerInventory.inventory.Add(Game.ITEMS[itemName]);
+        Item item = Game.ITEMS[itemName];
+        int amount = item.GetAmount();
+        if (amount < 1) {
+            int deficit = Mathf.Abs(1-amount);
+            item.AddItems(deficit);
+        }
+        playerInventory.inventory.Add(item);
     }
 }

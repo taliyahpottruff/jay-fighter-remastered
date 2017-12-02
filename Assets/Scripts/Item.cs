@@ -5,7 +5,7 @@
  */
 
 public abstract class Item {
-    private int amount;
+    private int amount = 1;
     private string name;
     private int cost;
     private Sprite sprite;

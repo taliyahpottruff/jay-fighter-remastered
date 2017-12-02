@@ -2,7 +2,6 @@
 
 public class MineItem : Item {
     public MineItem() {
-        AddItems(1);
         SetName("Mine");
         SetCost(10);
         SetSprite(Resources.Load<Sprite>("Sprites/Items/Mine"));
