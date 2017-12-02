@@ -23,6 +23,6 @@ public class ToolbarButton : MonoBehaviour {
     /// Executes the action on click of this button
     /// </summary>
     public void Click() {
-        inv.Consume(index, this.gameObject);
+        inv.Consume(text.text, this.gameObject);
     }
 }

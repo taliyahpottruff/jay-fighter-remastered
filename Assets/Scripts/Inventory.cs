@@ -14,8 +14,23 @@ public class Inventory : NetworkBehaviour {
 
     private GameObject toSpawn;
 
-    public void Consume(int index, GameObject toDelete) {
+    public void Consume(string name, GameObject toDelete) {
         Debug.Log("Consuming...");
+
+        int index = -1;
+        //Search for item
+        for (int i = 0; i < inventory.Count; i++) {
+            if (inventory[i].GetName().Equals(name)) {
+                index = i;
+                break;
+            }
+        }
+
+        //Check to see if the item was found
+        if (index < 0) {
+            Debug.LogError("The item attempting to be consumed wasn't found.");
+            return;
+        }
 
         toSpawn = inventory[index].Consume(this.gameObject.GetComponent<Player>());
 
