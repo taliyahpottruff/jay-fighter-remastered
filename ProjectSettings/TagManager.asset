@@ -16,6 +16,7 @@ TagManager:
   - Pathfinder
   - Coin
   - Toolbar
+  - NetworkManager
   layers:
   - Default
   - TransparentFX

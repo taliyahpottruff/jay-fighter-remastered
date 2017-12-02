@@ -15,8 +15,9 @@ public class PlatingUpgrade : Item {
         SetSprite(Resources.Load<Sprite>("Sprites/Items/PlatingUpgrade"));
     }
 
-    protected override void Action(Player player) {
+    protected override GameObject Action(Player player) {
         //Increase Player's Max Health by 10
         player.IncreaseMaxHealth(10);
+        return null;
     }
 }

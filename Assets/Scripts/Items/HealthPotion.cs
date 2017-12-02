@@ -15,8 +15,9 @@ public class HealthPotion : Item {
         SetSprite(Resources.Load<Sprite>("Sprites/Items/RepairKit"));
     }
 
-    protected override void Action(Player player) {
+    protected override GameObject Action(Player player) {
         //Give player health
         player.GiveHealth(10);
+        return null;
     }
 }

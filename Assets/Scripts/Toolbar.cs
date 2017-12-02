@@ -35,14 +35,16 @@ public class Toolbar : NetworkBehaviour {
                 panelStrip.enabled = true;
             }
 
-            int currCount = GetInventoryCount();
+            if (hasStarted) {
+                int currCount = GetInventoryCount();
 
-            if (prevCount != currCount && hasStarted) {
-                Clear();
-                AddAllItems();
+                if (prevCount != currCount) {
+                    Clear();
+                    AddAllItems();
+                }
+
+                prevCount = currCount;
             }
-
-            prevCount = currCount;
         } catch (Exception e) {
             Debug.LogError(e.StackTrace);
         }
@@ -61,23 +63,6 @@ public class Toolbar : NetworkBehaviour {
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.11f);
         Debug.Log("Toolbar Delayed Start Executing...");
-
-        //TODO Remove this
-        /*GameObject[] gos = GameObject.FindGameObjectsWithTag("Player");
-
-        Debug.Log(gos.Length);
-        for (int i = 0; i < gos.Length; i++) {
-            Player p = gos[i].GetComponent<Player>();
-            Debug.Log(i);
-
-            if (p.isLocalPlayer) {
-                Debug.Log("Found own player at " + i);
-
-                inventory = gos[i].GetComponent<Inventory>();
-                break;
-            }
-            else Debug.Log(i + " ain't my nigga.");
-        }*/
         
         prevCount = 0;
 

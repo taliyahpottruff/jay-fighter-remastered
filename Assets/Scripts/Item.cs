@@ -14,10 +14,9 @@ public abstract class Item {
     /// Consumes one of this item
     /// </summary>
     /// <param name="player">The player who is consuming this item; in case it's relavent</param>
-    public void Consume(Player player) {
-        Action(player); //Executes the action of this item
-
+    public GameObject Consume(Player player) {
         amount--;
+        return Action(player); //Executes the action of this item
     }
 
     /// <summary>
@@ -89,5 +88,5 @@ public abstract class Item {
     /// An abstract method for executing whatever action the specified item needs to execute
     /// </summary>
     /// <param name="player">The player who is executing the action</param>
-    protected abstract void Action(Player player);
+    protected abstract GameObject Action(Player player);
 }

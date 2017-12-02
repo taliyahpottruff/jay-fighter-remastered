@@ -23,11 +23,6 @@ public class ToolbarButton : MonoBehaviour {
     /// Executes the action on click of this button
     /// </summary>
     public void Click() {
-        inv.inventory[index].Consume(GameObject.FindGameObjectWithTag("Player").GetComponent<Player>());
-
-        if (inv.inventory[index].GetAmount() <= 0) {
-            inv.inventory.RemoveAt(index);
-            Destroy(this.gameObject);
-        }
+        inv.Consume(index, this.gameObject);
     }
 }

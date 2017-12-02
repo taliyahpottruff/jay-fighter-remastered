@@ -15,7 +15,8 @@ public class MineItem : Item {
         SetSprite(Resources.Load<Sprite>("Sprites/Items/Mine"));
     }
 
-    protected override void Action(Player player) {
-        player.CmdSpawnItem("Mine");
+    protected override GameObject Action(Player player) {
+        //player.CmdSpawnItem("Mine");
+        return Resources.Load<GameObject>("Prefabs/Mine");
     }
 }
