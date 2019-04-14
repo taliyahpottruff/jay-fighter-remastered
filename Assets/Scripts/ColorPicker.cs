@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-/// <summary>
-/// AUTHOR: Trenton Pottruff
-/// </summary>
+/*
+/* AUTHOR: Trenton Pottruff
+ */
 
+//TODO: Comment this class
 public class ColorPicker : MonoBehaviour {
     public ColorPickerMode mode;
     public Color selectedColor;

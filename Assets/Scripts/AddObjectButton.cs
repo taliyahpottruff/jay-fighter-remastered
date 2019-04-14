@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
+ * AUTHOR: Trenton Pottruff
 */
 
 public class AddObjectButton : MonoBehaviour {

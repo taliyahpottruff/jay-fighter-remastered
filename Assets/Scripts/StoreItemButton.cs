@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
  */
 
 public class StoreItemButton : MonoBehaviour {

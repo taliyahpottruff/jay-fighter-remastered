@@ -5,6 +5,7 @@ using UnityEngine.Networking.Match;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRUBITOR: Garrett Nicholas
  */
 
 public class PauseScreenManager : MonoBehaviour {

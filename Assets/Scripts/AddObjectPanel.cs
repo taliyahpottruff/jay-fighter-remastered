@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 /*
-    * AUTHOR: Trenton Pottruff
+ * AUTHOR: Trenton Pottruff
 */
 
 [RequireComponent(typeof(Animator))]

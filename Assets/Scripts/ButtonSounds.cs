@@ -12,6 +12,6 @@ public class ButtonSounds : MonoBehaviour {
     private AudioSource source { get{ return GetComponent<AudioSource>(); } }
 
     public void OnHover() {
-        source.PlayOneShot(hoverSound);
+        source.PlayOneShot(hoverSound); //Play the hover sound
     }
 }

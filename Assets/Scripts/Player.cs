@@ -6,6 +6,7 @@ using UnityEngine.Networking;
  */
 
 [RequireComponent(typeof(Health))]
+[System.Obsolete("Uses Unity's old networking features")]
 public class Player : NetworkBehaviour {
     [SyncVar] public string username = "Player";
     public ControlScheme currentScheme = ControlScheme.Keyboard;

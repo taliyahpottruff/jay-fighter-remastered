@@ -1,6 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
+ */
+
 public class DynamicFitCamera : MonoBehaviour {
     private List<GameObject> entities = new List<GameObject>();
     private Vector2 min = Vector2.zero;

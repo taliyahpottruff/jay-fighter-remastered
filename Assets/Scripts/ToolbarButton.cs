@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 public class ToolbarButton : MonoBehaviour {
     public Image icon;
     public Text text;

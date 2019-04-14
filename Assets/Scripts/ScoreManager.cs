@@ -6,6 +6,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class ScoreManager : NetworkBehaviour {
     private Player player;
     

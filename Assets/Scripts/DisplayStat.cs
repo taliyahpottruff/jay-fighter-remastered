@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ */
+
 [RequireComponent(typeof(Text))]
 public class DisplayStat : MonoBehaviour {
     public string statID;

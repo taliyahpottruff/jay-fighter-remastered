@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
+ */
+
 public class Store : MonoBehaviour {
     public GameObject storeObject;
     private PauseScreenManager pause;
@@ -11,7 +16,6 @@ public class Store : MonoBehaviour {
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.E)) {
-            Debug.Log("Press");
             bool current = storeObject.activeSelf; //Is the store open rn?
             bool b = !current; //Toggle the store
             storeObject.SetActive(b);

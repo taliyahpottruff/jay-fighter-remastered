@@ -1,6 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ */
 
 public class SelfDeleter : MonoBehaviour {
     public float lifespan;

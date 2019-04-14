@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*
  * AUTHOR: Garrett Nicholas
- * MODIFICATIONS: Trenton Pottruff
+ * CONTRIBUTOR: Trenton Pottruff
  */
 
 [RequireComponent(typeof(SpriteRenderer))]

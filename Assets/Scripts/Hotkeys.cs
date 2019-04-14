@@ -2,6 +2,7 @@ using UnityEngine;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
  */
 
 public class Hotkeys : MonoBehaviour {

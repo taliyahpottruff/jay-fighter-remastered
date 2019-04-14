@@ -5,9 +5,10 @@ using UnityEngine.Networking;
 
 /*
  * AUTHOR: Garrett Nicholas
- * MODIFICATIONS: Trenton Pottruff
+ * CONTRIBUTOR: Trenton Pottruff
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class GameManager : MonoBehaviour {
     private GameObject playerPrefab;
     private GameObject player;

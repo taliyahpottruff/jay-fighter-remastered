@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ * Uses the A* pathfinding algorithm
+ * Used https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW by Sebastian Lague for reference
+*/
+
 public class Grid : MonoBehaviour {
     public LayerMask unwalkableMask;
     public GameMap gameMap;

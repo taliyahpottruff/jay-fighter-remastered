@@ -3,9 +3,11 @@ using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
  */
 
 [RequireComponent(typeof(Rigidbody2D))]
+[System.Obsolete("Uses Unity's old networking features")]
 public class Bullet : NetworkBehaviour {
     public int damage = 10;
     public bool playerBullet; //Is this bullet a playey bullet

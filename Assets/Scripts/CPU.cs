@@ -14,6 +14,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
+[System.Obsolete("Uses Unity's old networking features")]
 public class CPU : NetworkBehaviour {
     #region Member Variables
     public float minSpeed = 1;
