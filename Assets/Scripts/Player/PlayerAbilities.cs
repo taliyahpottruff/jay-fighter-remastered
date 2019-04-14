@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// AUTHOR: Trenton Pottruff
-/// </summary>
+/*
+/* AUTHOR: Trenton Pottruff
+*/
 [RequireComponent(typeof(Player))]
 public class PlayerAbilities : MonoBehaviour {
     [SerializeField]
@@ -42,6 +41,7 @@ public class PlayerAbilities : MonoBehaviour {
     private void Update() {
         #region Abilities
         if (abilities.Contains("Magnetism")) {
+			//Find all coins in range and attract them to the player
             RaycastHit2D[] hits = Physics2D.CircleCastAll(this.transform.position, 4f, Vector2.up);
             for (int i = 0; i < hits.Length; i++) {
                 if (hits[i].collider.tag.Equals("Coin")) {
