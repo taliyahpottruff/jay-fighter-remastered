@@ -66,6 +66,7 @@ public class Health : NetworkBehaviour {
                     cpu.disposeTimer();
                     cpu.DropCoins();
                     GameManager.addScore(cpu.ScoreOnDeath);
+                    if (Game.STEAM != null)
                     Game.STEAM.GiveAchievement("FIGHTER");
                 }
                 Instantiate<GameObject>(explosionPrefab, this.transform.position, Quaternion.identity);

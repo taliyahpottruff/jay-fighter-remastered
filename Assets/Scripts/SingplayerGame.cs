@@ -8,8 +8,11 @@ using UnityEngine.Networking;
 public class SingplayerGame : MonoBehaviour {
     NetworkManager net;
 
+    public GameMap map;
+
     private void Start() {
         net = GetComponent<NetworkManager>();
         net.StartHost(); //Starts a single player game
+        //map.StartMap();
     }
 }

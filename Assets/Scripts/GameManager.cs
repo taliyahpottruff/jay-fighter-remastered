@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour {
     /// <param name="s">The amount to add</param>
 	public static void addScore(long s) {
         Score += s;
+
+        if (Game.IS_MP) {
+            PlayerPrefs.SetInt("score", PlayerPrefs.GetInt("score") + (int)s);
+            PlayerPrefs.Save();
+        }
     }
 
 	void Update () {
@@ -64,6 +69,7 @@ public class GameManager : MonoBehaviour {
         if (hasStarted) {
             #region Trenton Pottruff: Game Over
             if (players.Length < 1) { //When there's no players left
+                GAMEOVER.SetActive(true);
                 NetworkManager.singleton.StopHost();
             }
             #endregion
@@ -97,6 +103,13 @@ public class GameManager : MonoBehaviour {
         if (hasDied) return;
         if(checkDead()) { //Are all enemies dead?
             round++;
+
+            int pRound = PlayerPrefs.GetInt("highestRound");
+            if (round > pRound) {
+                PlayerPrefs.SetInt("highestRound", round);
+                PlayerPrefs.Save();
+            }
+
             toSpawn = 1 + round + (int)(Mathf.Round(Random.Range(0f, round)));
             for(int i = 0; i < toSpawn; i++) {
                 int sp = selectSP(); //Select a spawn point

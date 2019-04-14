@@ -67,8 +67,6 @@ public class MapColorDictionary {
     public static MapObj[] ConvertImgToMapObjs(Texture2D texture) {
         List<MapObj> objects = new List<MapObj>();
 
-        Debug.Log(texture.width);
-
         for (int x = 0; x < texture.width; x++) {
             for (int y = 0; y < texture.height; y++) {
                 Color c = texture.GetPixel(x, y);

@@ -11,6 +11,7 @@ using System.IO;
 public class EditorMap : MonoBehaviour {
     public new string name = "New Map";
     public string json;
+    public MapSettingsPanel settingsPanel;
 
     private Map map;
     private string directory;
@@ -72,6 +73,7 @@ public class EditorMap : MonoBehaviour {
         using (StreamWriter writer = new StreamWriter(fs)) {
             writer.Write(Utilities.Base64Encode(json)); //Write the encoded data
         }
+        settingsPanel.ClosePanel();
     }
 
     /// <summary>

@@ -26,6 +26,8 @@ public class SteamClient {
     }
 
     public void GiveAchievement(string id) {
-        client.Achievements.Trigger(id);
+        if (client.Achievements != null) {
+            client.Achievements.Trigger(id);
+        }
     }
 }

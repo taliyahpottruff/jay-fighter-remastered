@@ -38,6 +38,7 @@ public class MapSelectButton : MonoBehaviour {
     /// </summary>
     public void SelectAndPlay() {
         SelectMap();
+        Game.IS_MP = false;
         display.PlayGame();
     }
 }

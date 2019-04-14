@@ -40,9 +40,6 @@ public class ScoreManager : NetworkBehaviour {
         healthSlider = HEALTH.GetComponent<Slider>();
         coinsText = COINS.GetComponent<Text>();
         roundText = ROUND.GetComponent<Text>();
-
-        health = playerObj.GetComponent<Health>();
-        player = playerObj.GetComponent<Player>();
     }
 
     private void Update() {
@@ -63,7 +60,7 @@ public class ScoreManager : NetworkBehaviour {
         }
         if (health != null) {
             if (healthText.text != health.GetHealth().ToString()) {
-                healthText.text = health.GetHealth().ToString();
+                healthText.text = ((health.GetHealth() / health.GetMaxHealth()) * 100f).ToString("0.00") + "%";
             }
             if (coinsText.text != ("$" + player.coins.ToString())) {
                 coinsText.text = "$" + player.coins.ToString();
