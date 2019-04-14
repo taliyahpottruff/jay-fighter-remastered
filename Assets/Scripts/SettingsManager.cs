@@ -15,13 +15,14 @@ public class SettingsManager : MonoBehaviour {
     public Slider musicSlider;
 
     private void Start() {
-        Resolution[] resolutions = Screen.resolutions;
+        //TODO Do something with this
+        /*Resolution[] resolutions = Screen.resolutions;
         for (int i = 0; i < resolutions.Length; i++) {
             resolutionDropdown.AddOptions(new List<string> { resolutions[i].width + "x" + resolutions[i].height });
         }
 
         resolutionWidth.text = Screen.currentResolution.width.ToString();
-        resolutionHeight.text = Screen.currentResolution.height.ToString();
+        resolutionHeight.text = Screen.currentResolution.height.ToString();*/
 
         //Set slider positions to current values on load
         sfxSlider.value = Game.SFX_VOLUME;

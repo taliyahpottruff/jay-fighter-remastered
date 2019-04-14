@@ -48,6 +48,7 @@ public class HostGame : MonoBehaviour {
         if (roomName != "" && roomName != null) {
             Debug.Log("Creating Room:" + roomName + " with " + roomSize + " slots!");
             //Create Room, manager.OnMatchCreate
+            Game.IS_MP = true;
             manager.matchMaker.CreateMatch(roomName, roomSize, true, "", "", "", 0, 0, manager.OnMatchCreate);
         }
     }

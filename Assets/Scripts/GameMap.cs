@@ -9,21 +9,32 @@ public class GameMap : NetworkBehaviour {
     public Vector2 size;
 
     private Map map;
-    
-    private void Awake() {
-        Utilities.ClearChildren(this.transform); //Make sure there are no children at the beginning
-        map = Game.LoadCurrentMap();
-        LoadMap();
+
+    private void Start() {
+        StartMap();
     }
 
-    public void LoadMap() {
+    public void StartMap() {
+        Utilities.ClearChildren(this.transform); //Make sure there are no children at the beginning
+        map = Game.LoadCurrentMap();
+        while (!NetworkServer.active) {
+            //Do nothing while we wait for the server to be activated.
+            Debug.Log("Waiting...");
+        }
+        Debug.Log("Server Started. Now loading map..." + NetworkServer.active);
+        CmdLoadMap();
+    }
+
+    [Command]
+    public void CmdLoadMap() {
+        
+
         size = new Vector2(map.width, map.height);
         GameObject mapGO = GameObject.FindGameObjectWithTag("Map");
         //Clears the map object of existing children
         Utilities.ClearChildren(mapGO.transform);
         for (int i = 0; i < map.objects.Length; i++) {
             MapObj mapObj = map.objects[i];
-            Debug.Log(mapObj.name);
             GameObject prefab = Resources.Load<GameObject>("Prefabs/MapObjects/" + mapObj.name);
             GameObject newGO = Instantiate(prefab, new Vector2(mapObj.x, mapObj.y), Quaternion.identity) as GameObject;
             newGO.name = mapObj.name;

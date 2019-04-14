@@ -26,9 +26,16 @@ public class StoreItemButton : MonoBehaviour {
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.11f);
         button = GetComponentInChildren<Text>();
-        GameObject playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
-        player = playerObj.GetComponent<Player>();
-        playerInventory = playerObj.GetComponent<Inventory>();
+        for (int i = 0; i < NetworkManager.singleton.client.connection.playerControllers.Count; i++) {
+            GameObject playerObj = NetworkManager.singleton.client.connection.playerControllers[i].gameObject;
+            
+            Player p = playerObj.GetComponent<Player>();
+            if (p.isLocalPlayer) {
+                player = p;
+                playerInventory = playerObj.GetComponent<Inventory>();
+                break;
+            }
+        }
     }
 
     private void Update() {
@@ -66,6 +73,12 @@ public class StoreItemButton : MonoBehaviour {
         }
 
         //If not, create a new slot
-        playerInventory.inventory.Add(Game.ITEMS[itemName]);
+        Item item = Game.ITEMS[itemName];
+        int amount = item.GetAmount();
+        if (amount < 1) {
+            int deficit = Mathf.Abs(1-amount);
+            item.AddItems(deficit);
+        }
+        playerInventory.inventory.Add(item);
     }
 }

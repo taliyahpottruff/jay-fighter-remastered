@@ -9,7 +9,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
-public class Toolbar : MonoBehaviour {
+public class Toolbar : NetworkBehaviour {
     public Image panelBody;
     public Image panelStrip;
     public Inventory inventory;
@@ -24,6 +24,8 @@ public class Toolbar : MonoBehaviour {
 
     public void Update() {
         try {
+            if (inventory == null) return;
+
             if (inventory.inventory.Count <= 0) {
                 panelBody.enabled = false;
                 panelStrip.enabled = false;
@@ -33,33 +35,46 @@ public class Toolbar : MonoBehaviour {
                 panelStrip.enabled = true;
             }
 
-            int currCount = inventory.inventory.Count;
+            if (hasStarted) {
+                int currCount = GetInventoryCount();
 
-            if (prevCount != currCount && hasStarted) {
-                Clear();
-                AddAllItems();
+                if (prevCount != currCount) {
+                    Clear();
+                    AddAllItems();
+                }
+
+                prevCount = currCount;
             }
+        } catch (Exception e) {
+            Debug.LogError(e.StackTrace);
+        }
+    }
 
-            prevCount = currCount;
-        } catch (Exception e) { /*Do nothing*/ }
+    private int GetInventoryCount() {
+        int c = 0;
+
+        for (int i = 0; i < inventory.inventory.Count; i++) {
+            c += inventory.inventory[i].GetAmount();
+        }
+
+        return c;
     }
 
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.11f);
         Debug.Log("Toolbar Delayed Start Executing...");
         
-        inventory = NetworkManager.singleton.client.connection.playerControllers[0].gameObject.GetComponent<Inventory>();
-        prevCount = inventory.inventory.Count;
+        prevCount = 0;
 
         Clear();
-        AddAllItems(); //Add all the items to store
+        //AddAllItems(); //Add all the items to store
 
         hasStarted = true;
     }
 
     public void Clear() {
         for (int i = 0; i < this.transform.childCount; i++) {
-            Destroy(this.transform.GetChild(i));
+            Destroy(this.transform.GetChild(i).gameObject);
         }
     }
 

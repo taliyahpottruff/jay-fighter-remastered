@@ -13,6 +13,11 @@ public class PlayerMovement : NetworkBehaviour {
     public SpriteRenderer baseRenderer;
     public SpriteRenderer wheelsRenderer;
 
+    [SyncVar]
+    public bool base_1 = false;
+    [SyncVar]
+    public bool side_wheels = false;
+
     public Sprite[] bases;
     public Sprite[] frontWheels;
     public Sprite[] sideWheels;
@@ -32,23 +37,42 @@ public class PlayerMovement : NetworkBehaviour {
     }
 
     private void DoUpdate() {
-        Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        Vector2 directionVector = inputVector.normalized;
+        if (isLocalPlayer) {
+            Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            Vector2 directionVector = inputVector.normalized;
 
-        float horizontal = Mathf.Abs(directionVector.x);
-        float vertical = Mathf.Abs(directionVector.y);
+            float horizontal = Mathf.Abs(directionVector.x);
+            float vertical = Mathf.Abs(directionVector.y);
 
-        if (horizontal != 0 || vertical != 0) {
-            if (horizontal > vertical) {
-                baseRenderer.sprite = bases[1];
-                wheelsRenderer.sprite = sideWheels[0];
-            } else {
-                baseRenderer.sprite = bases[0];
-                wheelsRenderer.sprite = frontWheels[0];
+            if (horizontal != 0 || vertical != 0) {
+                if (horizontal > vertical) {
+                    CmdSetBottom(true, true);
+                }
+                else {
+                    CmdSetBottom(false, false);
+                }
             }
+
+            rb.velocity = directionVector * current_speed;
         }
 
-        rb.velocity = directionVector * current_speed;
+        if (base_1) {
+            baseRenderer.sprite = bases[1];
+        } else {
+            baseRenderer.sprite = bases[0];
+        }
+
+        if (side_wheels) {
+            wheelsRenderer.sprite = sideWheels[0];
+        } else {
+            wheelsRenderer.sprite = frontWheels[0];
+        }
+    }
+
+    [Command]
+    public void CmdSetBottom(bool base_1, bool side_wheels) {
+        this.base_1 = base_1;
+        this.side_wheels = side_wheels;
     }
 
     public void SetSpeed(float multiplier) {
