@@ -1,9 +1,6 @@
 # Jay Fighter: Remastered
+Jay Fighter: Remastered is property of Semicolon Entertainment Ltd. The source code provided is purely for reference and may not be copied, modified, or redistributed without the express written permission of Semicolon Entertainment Ltd.
 You can view the license [here](https://github.com/TrentonPottruff/jay-fighter-remastered/blob/master/license.md).
 
-## Latest Changelog
-## v0.5.0b
-### Changes
-- Did a little housekeeping on the Main Menu. Moved the version text to the bottom right, added copyright information, added a little notification for which Steam account is playing the game, changed the way things scale a little bit and replaced the music.
-- Made some minor changes to the way that the font size on Main Menu buttons scale.
-- Separated Official and Custom maps in map selection.
+## Development
+Development officially began on October 17, 2016. Semicolon; incorporated on October 25, 2016 making JFR a Semicolon project. The game was released December 1, 2017 with a few bugfixes being released the next day.
