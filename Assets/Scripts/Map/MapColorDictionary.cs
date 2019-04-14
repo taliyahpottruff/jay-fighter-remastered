@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ * Helper class for converting an image into a map using coloured pixels.
+*/
 public class MapColorDictionary {
     private static MapColor[] mapColors = new MapColor[] {
         new MapColor(new Color(1, 1, 0), "Enemy Spawn"),
@@ -55,6 +59,11 @@ public class MapColorDictionary {
         new MapColor(new Color(255f/255f, 255f/255f, 19f/255f), "Lava_BottomEdges")
     };
 
+	/// <summary>
+	/// Convert a color to an object
+	/// </summary>
+	/// <param name="c">The color to convert</param>
+	/// <returns>The corresponding object. Return a blank ID if no Color matches.</returns>
     public static string ColorToID(Color c) {
         for (int i = 0; i < mapColors.Length; i++) {
             if (mapColors[i].color.Equals(c))

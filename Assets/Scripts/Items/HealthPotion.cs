@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// AUTHOR: Trenton Pottruff
 public class HealthPotion : Item {
     public HealthPotion() {
         SetName("Repair Kit");
@@ -7,6 +8,10 @@ public class HealthPotion : Item {
         SetSprite(Resources.Load<Sprite>("Sprites/Items/RepairKit"));
     }
 
+	/// <summary>
+	/// Sets up a health potion.
+	/// </summary>
+	/// <param name="amount">The amount of health potions.</param>
     public HealthPotion(int amount) {
         AddItems(amount);
         SetName("Repair Kit");
