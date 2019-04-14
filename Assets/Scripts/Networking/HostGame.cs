@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using UnityEngine.UI;
 
 /*
  * AUTHOR: Trenton Pottruff
- */
+*/
 
+[Obsolete("Unity is removing the old networking features")]
 public class HostGame : MonoBehaviour {
     [SerializeField]
     private uint roomSize = 4;
@@ -16,16 +18,18 @@ public class HostGame : MonoBehaviour {
     public Transform playerListings;
     public Button hostGameButton;
 
-    private NetworkManager manager;
+    private NetworkManager manager; //Deprecated now, but was not depracated at the time of devlepment.
 
     private GameObject playerListingPrefab;
 
     private void Start() {
+		//Initialize the network manager
         manager = NetworkManager.singleton;
         if (manager.matchMaker == null) {
             manager.StartMatchMaker();
         }
 
+		//Set the player listing prefab from resources
         playerListingPrefab = Resources.Load<GameObject>("Prefabs/Player Listing");
     }
 
@@ -60,9 +64,5 @@ public class HostGame : MonoBehaviour {
             Utilities.ClearChildren(playerListings);
             Instantiate(playerListingPrefab, playerListings);
         }
-    }
-
-    public void StartGame() {
-        manager.ServerChangeScene("Coop");
     }
 }

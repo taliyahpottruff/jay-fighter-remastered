@@ -1,9 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+ * AUTHOR: Trenton Pottruff
+*/
+
 [RequireComponent(typeof(Button))]
+[Obsolete("Refrences a class that uses old Unity networking.")]
 public class HostGameButton : MonoBehaviour {
     private Button button;
 

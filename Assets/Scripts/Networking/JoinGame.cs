@@ -3,12 +3,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
-using System.Collections;
+using System;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
+[Obsolete("Unity is removing the old networking features")]
 public class JoinGame : MonoBehaviour {
     private List<GameObject> roomList = new List<GameObject>();
     private List<MatchInfoSnapshot> matchList = new List<MatchInfoSnapshot>();
@@ -28,14 +29,20 @@ public class JoinGame : MonoBehaviour {
     private NetworkManager manager;
 
     private void Start() {
+		//Initialize network manager
         manager = NetworkManager.singleton;
         if (manager.matchMaker == null) manager.StartMatchMaker();
 
+		//Load player listing prefab from resources
         playerListingPrefab = Resources.Load<GameObject>("Prefabs/Player Listing");
 
+		//Refresh the list of available room
         RefreshRoomList();
     }
 
+	/// <summary>
+	/// Refreshes the list of available games.
+	/// </summary>
     public void RefreshRoomList() {
         ClearRoomList();
         manager.matchMaker.ListMatches(0, 20, "", true, 0, 0, OnMatchList);
@@ -46,6 +53,7 @@ public class JoinGame : MonoBehaviour {
         matchList = matches;
         status.text = "";
         
+		//If there was a problem grabbing the list, display an error message
         if (!success) {
             status.text = "Something went wrong...";
             return;
@@ -53,6 +61,7 @@ public class JoinGame : MonoBehaviour {
 
         ClearRoomList();
 
+		//Loop through the rooms and add them to the UI list
         foreach (var match in matches) {
             GameObject _roomListItemGO = Instantiate<GameObject>(roomListItemPrefab, roomListParent);
 
@@ -71,6 +80,9 @@ public class JoinGame : MonoBehaviour {
         }
     }
 
+	/// <summary>
+	/// Clears the UI list of rooms
+	/// </summary>
     private void ClearRoomList() {
         for (int i = 0; i < roomList.Count; i++) {
             Destroy(roomList[i]);
@@ -78,7 +90,7 @@ public class JoinGame : MonoBehaviour {
 
         roomList.Clear();
     }
-
+	
     public void JoinRoom(MatchInfoSnapshot match) {
         Debug.Log("Joining " + match.name);
         Game.IS_MP = true;
@@ -86,8 +98,8 @@ public class JoinGame : MonoBehaviour {
         ClearRoomList();
         status.text = "Joining...";
     }
-
-    public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo) {
+	
+	public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo) {
         if (success) {
             menuManager.ChangeMenu(3);
             Utilities.ClearChildren(playerListings);
@@ -102,10 +114,10 @@ public class JoinGame : MonoBehaviour {
 
         Debug.LogError(extendedInfo);
     }
-
-    public void JoinRandom() {
+	
+	public void JoinRandom() {
         RefreshRoomList();
-        int rand = Random.Range(0, matchList.Count);
+        int rand = UnityEngine.Random.Range(0, matchList.Count);
         JoinRoom(matchList[rand]);
     }
 }
