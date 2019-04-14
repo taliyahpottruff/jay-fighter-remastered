@@ -17,6 +17,8 @@ public class PlatingUpgrade : Item {
     protected override GameObject Action(Player player) {
         //Increase Player's Max Health by 10
         player.IncreaseMaxHealth(10);
+        float maxHealth = player.GetComponent<Health>().GetMaxHealth();
+        player.GetComponent<Health>().health = maxHealth;
         return null;
     }
 }
