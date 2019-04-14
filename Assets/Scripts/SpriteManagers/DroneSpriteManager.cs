@@ -2,7 +2,7 @@
 
 /*
  * AUTHOR: Trenton Pottruff
- */
+*/
 
 public class DroneSpriteManager : EnemySpriteManager {
     public GameObject[] wheels;

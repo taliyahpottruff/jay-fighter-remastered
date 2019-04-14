@@ -2,7 +2,7 @@
 
 /*
  * AUTHOR: Trenton Pottruff
- */
+*/
 
 public class SavageSpriteManager : EnemySpriteManager {
     public Animator legAnimator;
