@@ -4,6 +4,7 @@
  * AUTHOR: Trenton Pottruff
 */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class SavageSpriteManager : EnemySpriteManager {
     public Animator legAnimator;
     public Animator topAnimator;

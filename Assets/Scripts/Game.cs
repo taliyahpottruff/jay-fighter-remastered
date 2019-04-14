@@ -10,6 +10,7 @@ using System.IO;
  * Almost everything goes through here one way or another.
  */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Game
 {
     public static bool PAUSED = false;

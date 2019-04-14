@@ -4,7 +4,9 @@ using UnityEngine;
 /*
 /* AUTHOR: Trenton Pottruff
 */
+
 [RequireComponent(typeof(Player))]
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class PlayerAbilities : MonoBehaviour {
     [SerializeField]
     private List<string> abilities = new List<string>();

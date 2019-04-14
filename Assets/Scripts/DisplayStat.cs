@@ -6,6 +6,7 @@ using UnityEngine.UI;
  */
 
 [RequireComponent(typeof(Text))]
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class DisplayStat : MonoBehaviour {
     public string statID;
 

@@ -30,9 +30,10 @@ public class EditorMap : MonoBehaviour {
     /// Converts the current map configuration into JSON, and sets it to the json variable.
     /// </summary>
     public void UpdateMap() {
-        map = new Map();
-        map.name = name;
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("MapObj");
+		map = new Map {
+			name = name
+		};
+		GameObject[] gos = GameObject.FindGameObjectsWithTag("MapObj");
         MapObj[] objs = new MapObj[gos.Length];
         for (int i = 0; i < gos.Length; i++) {
             objs[i] = new MapObj();

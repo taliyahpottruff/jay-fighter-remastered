@@ -4,6 +4,7 @@
  * AUTHOR: Trenton Pottruff
 */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class DroneSpriteManager : EnemySpriteManager {
     public GameObject[] wheels;
     public GameObject[] faces;

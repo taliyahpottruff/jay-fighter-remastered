@@ -8,6 +8,7 @@ using UnityEngine;
  * Used https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW by Sebastian Lague for reference
 */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Grid : MonoBehaviour {
     public LayerMask unwalkableMask;
     public GameMap gameMap;

@@ -5,6 +5,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class GameMap : NetworkBehaviour {
     public Vector2 size;
 

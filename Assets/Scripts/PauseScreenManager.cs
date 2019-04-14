@@ -8,6 +8,7 @@ using UnityEngine.Networking.Match;
  * CONTRUBITOR: Garrett Nicholas
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class PauseScreenManager : MonoBehaviour {
     private bool opened = false; //Is the pause screen open?
 

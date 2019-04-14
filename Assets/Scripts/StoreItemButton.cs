@@ -8,6 +8,7 @@ using UnityEngine.Networking;
  * CONTRIBUTOR: Garrett Nicholas
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class StoreItemButton : MonoBehaviour {
     public string itemName;
     public int cost;

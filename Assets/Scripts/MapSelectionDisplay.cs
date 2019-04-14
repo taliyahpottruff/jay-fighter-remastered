@@ -7,6 +7,7 @@ using UnityEngine.UI;
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class MapSelectionDisplay : MonoBehaviour {
     public MenuManager menuManager;
     public GameLoader gameLoader;
@@ -39,8 +40,6 @@ public class MapSelectionDisplay : MonoBehaviour {
         for (int i = 0; i < mapPaths.Length; i++) {
             names[i] = mapPaths[i].Replace(Application.persistentDataPath, "").Replace(".map", "").Replace("/maps\\", "");
         }
-
-        int index = 0;
 
         //Populate the official maps
         Utilities.ClearChildren(officialMapHolder);
