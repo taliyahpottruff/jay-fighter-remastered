@@ -1,1 +1,1 @@
-Copyright (C) 2017 Semicolon Entertainment. All rights reserved.
+Copyright (C) 2019 Semicolon Entertainment. All rights reserved.
