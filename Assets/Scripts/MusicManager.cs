@@ -7,7 +7,6 @@ using UnityEngine;
 
 //TODO Debate whether to keep in-game music or not
 [RequireComponent(typeof(AudioSource))]
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class MusicManager : MonoBehaviour {
     public List<AudioClip> songs;
     public MusicNotification musicNotification;

@@ -6,17 +6,16 @@ using UnityEngine.Networking;
  */
 
 [RequireComponent(typeof(Health))]
-[System.Obsolete("Uses Unity's old networking features")]
-public class Player : NetworkBehaviour {
-    [SyncVar] public string username = "Player";
+public class Player : MonoBehaviour {
+    public string username = "Player";
     public ControlScheme currentScheme = ControlScheme.Keyboard;
-    [SyncVar] public float score;
-    [SyncVar] public int coins;
+    public float score;
+    public int coins;
 
     private SpriteRenderer sr;
     private Health health;
 
-    public override void OnStartLocalPlayer() {
+    public void StartLocalPlayer() {
         sr = GetComponent<SpriteRenderer>();
         if (sr != null)
             sr.color = Color.blue;
@@ -32,17 +31,14 @@ public class Player : NetworkBehaviour {
     }
 
     public void Start() {
-        health = GetComponent<Health>();
+		StartLocalPlayer();
 
-        if (isLocalPlayer && Game.IS_MP) {
-            int newGP = PlayerPrefs.GetInt("gamesPlayed") + 1;
-            PlayerPrefs.SetInt("gamesPlayed", newGP);
-            PlayerPrefs.Save();
-        }
+        health = GetComponent<Health>();
     }
 
     private void Update() {
-        if (isLocalPlayer && username.Equals("Player") && Game.STEAM != null) username = Game.STEAM.GetUsername();
+		//TODO: Is setting the username necessary?
+		if (username.Equals("Player") && Game.STEAM != null) username = Game.STEAM.GetUsername();
 
         //Set the control scheme to whatever is being used
         if ((Input.anyKey && !Input.GetButton("Fire1")) || Input.GetMouseButton(0))
@@ -64,12 +60,10 @@ public class Player : NetworkBehaviour {
         CmdSpawnItem(item);
     }
 
-    [Command]
     public void CmdSpawnItem(string name) {
         Debug.Log("Spawning actual.");
         GameObject prefab = Resources.Load<GameObject>("Prefabs/" + name);
-        GameObject go = Instantiate<GameObject>(prefab, this.transform.position, Quaternion.identity);
-        NetworkServer.Spawn(go);
+        Instantiate<GameObject>(prefab, this.transform.position, Quaternion.identity);
     }
 
     public PlayerMovement movemement

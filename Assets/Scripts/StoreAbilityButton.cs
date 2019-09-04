@@ -1,13 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
 
 /// <summary>
 /// AUTHOR: Trenton Pottruff
 /// </summary>
-[System.Obsolete("Uses Unity's old networking features")]
 public class StoreAbilityButton : MonoBehaviour {
     public string abilityName;
     public int cost;
@@ -26,7 +23,7 @@ public class StoreAbilityButton : MonoBehaviour {
 		//Wait a fraction of a second before initializing
         yield return new WaitForSeconds(0.11f);
         button = GetComponentInChildren<Text>();
-        GameObject playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
+        GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         player = playerObj.GetComponent<Player>();
         playerAbilities = playerObj.GetComponent<PlayerAbilities>();
     }

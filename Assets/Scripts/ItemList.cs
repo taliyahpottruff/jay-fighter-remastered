@@ -4,7 +4,6 @@
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class ItemList : MonoBehaviour {
     public GameObject buttonPrefab;
 

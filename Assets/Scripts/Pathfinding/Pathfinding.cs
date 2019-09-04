@@ -8,7 +8,6 @@ using UnityEngine;
 */
 
 [RequireComponent(typeof(Grid))]
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Pathfinding : MonoBehaviour {
     Grid grid;
 

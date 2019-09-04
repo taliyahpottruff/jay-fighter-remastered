@@ -11,12 +11,11 @@ public class Map {
     public int width;
     public int height;
     public MapObj[] objects;
-
-    public Map() {
-        //Why is this blank?
-        //Idk...
-    }
     
+	public Map() {
+
+	}
+
     public Map(string name, int width, int height, MapObj[] objects) {
         this.width = width;
         this.height = height;

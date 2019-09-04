@@ -2,7 +2,6 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
-using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
@@ -14,8 +13,7 @@ using UnityEngine.Networking;
 [RequireComponent(typeof(Health))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
-[System.Obsolete("Uses Unity's old networking features")]
-public class CPU : NetworkBehaviour {
+public class CPU : MonoBehaviour {
     #region Member Variables
     public float minSpeed = 1;
     public float maxSpeed = 3;
@@ -30,7 +28,6 @@ public class CPU : NetworkBehaviour {
     public GameObject HealthBar;
     public EnemySpriteManager spriteManager;
     public AudioClip spawnSound;
-    [SyncVar]
     public bool hideHealth;
     #endregion
 
@@ -102,7 +99,7 @@ public class CPU : NetworkBehaviour {
         previousHealth = health.health;
         #endregion
         #region Game Logic
-        if (!Game.PAUSED && isServer) {
+        if (!Game.PAUSED) {
             playerPosition = this.transform.position;
             if (player != null) playerPosition = player.transform.position;
 
@@ -190,7 +187,6 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
-            NetworkServer.Spawn(gold);
         }
         #endregion
         #region Spawn Silver Coins
@@ -201,7 +197,6 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
-            NetworkServer.Spawn(silver);
         }
         #endregion
         #region Spawn Bronze Coins
@@ -212,7 +207,6 @@ public class CPU : NetworkBehaviour {
             float angle = Random.Range(0f, 360f);
             direction = Quaternion.Euler(0, 0, angle) * direction;
             rb.AddForce(direction * 5, ForceMode2D.Impulse);
-            NetworkServer.Spawn(bronze);
         }
         #endregion
     }
@@ -278,8 +272,7 @@ public class CPU : NetworkBehaviour {
     #region Minion Spawning
     private IEnumerator SpawnMinions() {
         yield return new WaitForSeconds(1f);
-        GameObject go = Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity); //Spawn Minions
-        NetworkServer.Spawn(go); //Ensure that the minions get spawned server side too
+        Instantiate(basicEnemy, this.transform.position + new Vector3(0, 1), Quaternion.identity); //Spawn Minions
     }
     #endregion
     #endregion

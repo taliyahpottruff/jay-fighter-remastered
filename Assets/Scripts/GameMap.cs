@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public class GameMap : NetworkBehaviour {
+public class GameMap : MonoBehaviour {
     public Vector2 size;
 
     private Map map;
@@ -18,18 +16,11 @@ public class GameMap : NetworkBehaviour {
     public void StartMap() {
         Utilities.ClearChildren(this.transform); //Make sure there are no children at the beginning
         map = Game.LoadCurrentMap();
-        while (!NetworkServer.active) {
-            //Do nothing while we wait for the server to be activated.
-            Debug.Log("Waiting...");
-        }
-        Debug.Log("Server Started. Now loading map..." + NetworkServer.active);
-        CmdLoadMap();
+        Debug.Log("Now loading map...");
+        LoadMap();
     }
 
-    [Command]
-    public void CmdLoadMap() {
-        
-
+    public void LoadMap() {
         size = new Vector2(map.width, map.height);
         GameObject mapGO = GameObject.FindGameObjectWithTag("Map");
         //Clears the map object of existing children
@@ -52,9 +43,6 @@ public class GameMap : NetworkBehaviour {
             newMapObj.visible = mapObj.visible;
             newMapObj.hasCollider = mapObj.collider;
             newMapObj.isSpawn = mapObj.spawn;
-
-            NetworkServer.Spawn(newGO);
         }
-        
     }
 }

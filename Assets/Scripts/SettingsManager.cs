@@ -5,7 +5,6 @@ using UnityEngine.UI;
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class SettingsManager : MonoBehaviour {
     public GameObject panel;
     public Dropdown resolutionDropdown;

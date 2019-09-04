@@ -1,14 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
  * CONTRIBUTOR: Garrett Nicholas
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
 public class StoreItemButton : MonoBehaviour {
     public string itemName;
     public int cost;
@@ -28,16 +26,10 @@ public class StoreItemButton : MonoBehaviour {
     private IEnumerator DelayedStart() {
         yield return new WaitForSeconds(0.11f);
         button = GetComponentInChildren<Text>();
-        for (int i = 0; i < NetworkManager.singleton.client.connection.playerControllers.Count; i++) {
-            GameObject playerObj = NetworkManager.singleton.client.connection.playerControllers[i].gameObject;
-            
-            Player p = playerObj.GetComponent<Player>();
-            if (p.isLocalPlayer) {
-                player = p;
-                playerInventory = playerObj.GetComponent<Inventory>();
-                break;
-            }
-        }
+		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+        Player p = playerObj.GetComponent<Player>();
+        player = p;
+        playerInventory = playerObj.GetComponent<Inventory>();
     }
 
     private void Update() {

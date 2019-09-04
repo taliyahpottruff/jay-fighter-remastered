@@ -7,7 +7,6 @@ using UnityEngine.UI;
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class MapSelectionDisplay : MonoBehaviour {
     public MenuManager menuManager;
     public GameLoader gameLoader;

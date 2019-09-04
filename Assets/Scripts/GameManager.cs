@@ -8,7 +8,6 @@ using UnityEngine.Networking;
  * CONTRIBUTOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
 public class GameManager : MonoBehaviour {
     private GameObject playerPrefab;
     private GameObject player;
@@ -21,7 +20,6 @@ public class GameManager : MonoBehaviour {
     private Health Health;
     public GameObject[] spawned = new GameObject[900];
     private GameObject[] spawnPoints;
-    private NetworkManager nm;
     public GameObject GAMEOVER;
 
     private GameObject basicEnemy;
@@ -42,8 +40,6 @@ public class GameManager : MonoBehaviour {
         dupeEnemy = Resources.Load<GameObject>("Prefabs/Enemies/Duplicator Enemy");
 
         playerPrefab = Resources.Load<GameObject>("Prefabs/Player");
-
-        nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
 
         //TP: Added a coroutine
         StartCoroutine(DelayedStartSpawn());
@@ -71,7 +67,6 @@ public class GameManager : MonoBehaviour {
             #region Trenton Pottruff: Game Over
             if (players.Length < 1) { //When there's no players left
                 GAMEOVER.SetActive(true);
-                NetworkManager.singleton.StopHost();
             }
             #endregion
             handleRound();
@@ -82,7 +77,6 @@ public class GameManager : MonoBehaviour {
     /// Resets all the stats
     /// </summary>
     public void resetGame() {
-        NetworkManager.singleton.StopHost();
         Score = 0;
         Coins = 0;
         round = 0;
@@ -115,7 +109,6 @@ public class GameManager : MonoBehaviour {
             for(int i = 0; i < toSpawn; i++) {
                 int sp = selectSP(); //Select a spawn point
                 spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
-                NetworkServer.Spawn(spawned[i]);
             }
         }
     }
@@ -189,7 +182,6 @@ public class GameManager : MonoBehaviour {
         for (int i = 0; i < toSpawn; i++) {
             int sp = selectSP(); //Select a spawn point
             spawned[i] = (GameObject)Instantiate(getEnemy(), spawnPoints[sp].transform.position, Quaternion.identity);
-            NetworkServer.Spawn(spawned[i]);
         }
         hasStarted = true;
     }

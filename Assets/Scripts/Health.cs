@@ -9,12 +9,10 @@ using Facepunch.Steamworks;
  * (added the checks for the enemy death then spawns a coin)
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public class Health : NetworkBehaviour {
+public class Health : MonoBehaviour {
     [SerializeField]
     private bool invincible;
 
-    [SyncVar]
     public float health = 100;
     private float maxHeath = 100;
 
@@ -59,7 +57,7 @@ public class Health : NetworkBehaviour {
     /// <param name="attack">The amount of damage to deal</param>
     /// <returns>True if the damage killed the entity and False if it didn't</returns>
     public bool DoDamage(float attack) {
-        if (!invincible && isServer) {
+        if (!invincible) {
             if (health <= attack) { //The attack will kill player
                                     //Entity dies
                 CPU cpu = this.gameObject.GetComponent<CPU>();

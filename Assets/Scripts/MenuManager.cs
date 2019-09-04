@@ -16,9 +16,9 @@ public class MenuManager : MonoBehaviour {
         //Loop through the existing menus. Enable the menu that is being changed to and disable all others.
         for (int i = 0; i < menus.Length; i++) {
             if (i == menuIndex) {
-                menus[i].SetActive(true);
+				if (menus[i] != null) menus[i].SetActive(true);
             } else {
-                menus[i].SetActive(false);
+				if (menus[i] != null) menus[i].SetActive(false);
             }
         }
     }

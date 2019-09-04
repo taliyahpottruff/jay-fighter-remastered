@@ -5,7 +5,6 @@
  */
 
 [RequireComponent(typeof(Collider2D))]
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Explosion : MonoBehaviour {
     [SerializeField]
     private float explosionDamage;

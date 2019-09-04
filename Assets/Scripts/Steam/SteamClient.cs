@@ -28,7 +28,7 @@ public class SteamClient {
 	/// <returns></returns>
     public Sprite GetAvatar() {
         ulong steamID = client.SteamId;
-        Image img = client.Friends.GetAvatar(Friends.AvatarSize.Medium, steamID);
+        Image img = (client != null) ? client.Friends.GetAvatar(Friends.AvatarSize.Medium, steamID) : new Image();
         Texture2D tex = new Texture2D(img.Width, img.Height, TextureFormat.RGBA32, false);
         tex.LoadRawTextureData(img.Data);
         tex.Apply();

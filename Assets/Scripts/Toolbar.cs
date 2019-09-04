@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public class Toolbar : NetworkBehaviour {
+public class Toolbar : MonoBehaviour {
     public Image panelBody;
     public Image panelStrip;
     public Inventory inventory;
@@ -19,7 +16,6 @@ public class Toolbar : NetworkBehaviour {
     private bool hasStarted = false;
 
     public void Start() {
-        
         StartCoroutine(DelayedStart());
     }
 

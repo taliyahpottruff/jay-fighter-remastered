@@ -6,17 +6,14 @@ using UnityEngine.Networking;
  */
 
 [RequireComponent(typeof(Rigidbody2D))]
-[System.Obsolete("Uses Unity's old networking features")]
-public class PlayerMovement : NetworkBehaviour {
+public class PlayerMovement : MonoBehaviour {
     public float speed = 5;
     private float current_speed;
     
     public SpriteRenderer baseRenderer;
     public SpriteRenderer wheelsRenderer;
 
-    [SyncVar]
     public bool base_1 = false;
-    [SyncVar]
     public bool side_wheels = false;
 
     public Sprite[] bases;
@@ -39,25 +36,22 @@ public class PlayerMovement : NetworkBehaviour {
 
 	//Acts as a abstraction
     private void DoUpdate() {
-		//If this player is the local player then it can be controlled
-        if (isLocalPlayer) {
-            Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            Vector2 directionVector = inputVector.normalized;
+        Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 directionVector = inputVector.normalized;
 
-            float horizontal = Mathf.Abs(directionVector.x);
-            float vertical = Mathf.Abs(directionVector.y);
+        float horizontal = Mathf.Abs(directionVector.x);
+        float vertical = Mathf.Abs(directionVector.y);
 
-            if (horizontal != 0 || vertical != 0) {
-                if (horizontal > vertical) {
-                    CmdSetBottom(true, true);
-                }
-                else {
-                    CmdSetBottom(false, false);
-                }
+        if (horizontal != 0 || vertical != 0) {
+            if (horizontal > vertical) {
+                CmdSetBottom(true, true);
             }
-
-            rb.velocity = directionVector * current_speed;
+            else {
+                CmdSetBottom(false, false);
+            }
         }
+
+        rb.velocity = directionVector * current_speed;
 
         if (base_1) {
             baseRenderer.sprite = bases[1];
@@ -72,7 +66,6 @@ public class PlayerMovement : NetworkBehaviour {
         }
     }
 
-    [Command]
     public void CmdSetBottom(bool base_1, bool side_wheels) {
         this.base_1 = base_1;
         this.side_wheels = side_wheels;

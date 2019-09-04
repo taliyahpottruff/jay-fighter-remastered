@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public class ScoreManager : NetworkBehaviour {
+public class ScoreManager : MonoBehaviour {
     private Player player;
     
     public GameManager gameManager;
@@ -45,7 +43,7 @@ public class ScoreManager : NetworkBehaviour {
 
     private void Update() {
         if (playerObj == null) {
-            playerObj = NetworkManager.singleton.client.connection.playerControllers[0].gameObject;
+            playerObj = GameObject.FindGameObjectWithTag("Player");
             return;
         }
 

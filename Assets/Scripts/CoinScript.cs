@@ -8,7 +8,6 @@ using UnityEngine;
  */
 
 [RequireComponent(typeof(SpriteRenderer))]
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class CoinScript : MonoBehaviour {
     public int coinValue;
 
@@ -28,10 +27,8 @@ public class CoinScript : MonoBehaviour {
         if (player != null) {
             player.coins += this.coinValue;
             
-            if (player.isLocalPlayer) {
-                PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + this.coinValue);
-                PlayerPrefs.Save();
-            }
+            PlayerPrefs.SetInt("coins", PlayerPrefs.GetInt("coins") + this.coinValue);
+            PlayerPrefs.Save();
 
             Destroy(this.gameObject);
         }

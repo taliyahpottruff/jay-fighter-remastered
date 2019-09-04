@@ -7,23 +7,18 @@ using UnityEngine.Networking;
  */
 
 [RequireComponent(typeof(Rigidbody2D))]
-[System.Obsolete("Uses Unity's old networking features")]
-public class Bullet : NetworkBehaviour {
+public class Bullet : MonoBehaviour {
     public int damage = 10;
     public bool playerBullet; //Is this bullet a playey bullet
-    public NetworkIdentity owner; //Used to identify who is shooting the bullet
+    public GameObject owner; //Used to identify who is shooting the bullet
     private Rigidbody2D rb;
     private Vector2 velocity;
 
     private void Start() {
-        if (!isLocalPlayer) return; //If this bullet doesn't belong to the player rendering it, then ignore the rest
-
         rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update() {
-        if (!isLocalPlayer) return;
-
         if (Game.PAUSED) { //Make sure the bullet doesn't move when the game is paused
             rb.velocity = Vector2.zero;
         } else {
@@ -33,7 +28,6 @@ public class Bullet : NetworkBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if (isServer) { //Only handle hit events on the server
             if ((other.gameObject.tag.Equals("Player") && !playerBullet) || (!other.gameObject.tag.Equals("Player") && playerBullet)) {
                 Health health = other.GetComponent<Health>();
 
@@ -48,7 +42,6 @@ public class Bullet : NetworkBehaviour {
                     }
                 }
             }
-        }
     }
 
     /// <summary>

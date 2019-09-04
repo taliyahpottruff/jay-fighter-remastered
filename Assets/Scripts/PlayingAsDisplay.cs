@@ -8,7 +8,6 @@ using UnityEngine.UI;
 /// <summary>
 /// Displays to the user what Steam player is currently logged in.
 /// </summary>
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class PlayingAsDisplay : MonoBehaviour {
     private Text text;
     [SerializeField]

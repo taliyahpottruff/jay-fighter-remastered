@@ -5,7 +5,6 @@ using UnityEngine;
  * CONTRIBUTOR: Garrett Nicholas
  */
 
-[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Store : MonoBehaviour {
     public GameObject storeObject;
     private PauseScreenManager pause;

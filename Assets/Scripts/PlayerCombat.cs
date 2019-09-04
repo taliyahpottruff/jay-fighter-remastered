@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Networking;
 using System.Collections;
 
 /*
@@ -10,8 +9,7 @@ using System.Collections;
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
-[System.Obsolete("Uses Unity's old networking features")]
-public class PlayerCombat : NetworkBehaviour {
+public class PlayerCombat : MonoBehaviour {
     public bool firing = false;
 
     public AudioClip gunSound;
@@ -30,13 +28,9 @@ public class PlayerCombat : NetworkBehaviour {
     private GameObject muzzleflashPrefab;
     private Vector2 playerPositon = Vector2.zero;
 
-    [SyncVar]
     public bool _topDown = true;
-    [SyncVar]
     public bool _topLeft = false;
-    [SyncVar]
     public bool _topRight = false;
-    [SyncVar]
     public bool _topUp = false;
     private Transform shooter0;
     private Transform shooter1;
@@ -86,34 +80,32 @@ public class PlayerCombat : NetworkBehaviour {
         float vertical = Mathf.Abs(fireVector.y);
 
         //Set directional data
-        if (isLocalPlayer) {
             if (horizontal != 0 || vertical != 0) {
                 if (horizontal > vertical) {
                     if (fireVector.x > 0) {
-                        CmdSetTop(1);
+                        SetTop(1);
                         shooter0 = topRight.transform.Find("Right Shooter");
                         shooter1 = topRight.transform.Find("Right Shooter");
                     }
                     else {
-                        CmdSetTop(2);
+                        SetTop(2);
                         shooter0 = topLeft.transform.Find("Left Shooter");
                         shooter1 = topLeft.transform.Find("Left Shooter");
                     }
                 }
                 else {
                     if (fireVector.y > 0) {
-                        CmdSetTop(3);
+                        SetTop(3);
                         shooter0 = topUp.transform.Find("Left Shooter");
                         shooter1 = topUp.transform.Find("Right Shooter");
                     }
                     else {
-                        CmdSetTop(4);
+                        SetTop(4);
                         shooter0 = topDown.transform.Find("Left Shooter");
                         shooter1 = topDown.transform.Find("Right Shooter");
                     }
                 }
             }
-        }
 
         topDown.SetActive(_topDown);
         topLeft.SetActive(_topLeft);
@@ -121,8 +113,7 @@ public class PlayerCombat : NetworkBehaviour {
         topUp.SetActive(_topUp);
     }
 
-    [Command]
-    public void CmdSetTop(int _case) {
+    public void SetTop(int _case) {
         switch (_case) {
             case 1:
                 //Right
@@ -169,7 +160,7 @@ public class PlayerCombat : NetworkBehaviour {
     }
     public virtual IEnumerator FireBullet() {
         do {
-            if (firing && isLocalPlayer && !Game.PAUSED) {
+            if (firing && !Game.PAUSED) {
                 Vector2 direction = fireVector.normalized;
 
                 Vector3 pos = Vector3.zero;
@@ -183,15 +174,14 @@ public class PlayerCombat : NetworkBehaviour {
                     shooter = true;
                 }
                 
-                CmdFire(pos, direction, GetComponent<NetworkIdentity>());
+                CmdFire(pos, direction, gameObject);
                 aSource.PlayOneShot(gunSound);
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);
     }
 
-    [Command]
-    private void CmdFire(Vector2 position, Vector2 direction, NetworkIdentity _owner) {
+    private void CmdFire(Vector2 position, Vector2 direction, GameObject _owner) {
         GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
         GameObject flashObj = Instantiate(muzzleflashPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
@@ -199,7 +189,6 @@ public class PlayerCombat : NetworkBehaviour {
         bullet.owner = _owner;
         
         bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
-        NetworkServer.Spawn(bulletObj);
         bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
     }
 }

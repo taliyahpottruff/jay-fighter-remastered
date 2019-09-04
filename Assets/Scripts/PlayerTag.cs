@@ -6,8 +6,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public class PlayerTag : NetworkBehaviour {
+public class PlayerTag : MonoBehaviour {
     [SerializeField]
     GameObject playerTag;
     public new Text name;
@@ -16,11 +15,10 @@ public class PlayerTag : NetworkBehaviour {
 
     private void Awake() {
         player = GetComponent<Player>();
-    }
+		playerTag.SetActive(false); //Don't show someone their own name
+	}
 
     private void Update() {
-        if (isLocalPlayer) playerTag.SetActive(false); //Don't show someone their own name
-
         name.text = player.username;
     }
 }
