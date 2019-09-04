@@ -8,7 +8,7 @@ using UnityEngine;
 public class SmoothCamera : MonoBehaviour {
     public Transform lookAt;
 
-    private float smoothSpeed = 5f;
+    private readonly float smoothSpeed = 5f;
     private Vector3 offset = new Vector3(0, 0, -10);
 
     public void FixedUpdate() {
@@ -26,6 +26,6 @@ public class SmoothCamera : MonoBehaviour {
             //Smooth
             transform.position -= (transform.position - newPosition) * smoothSpeed * Time.deltaTime;
         }
-        catch (Exception e) { /*Do nothing*/ }
+        catch (Exception) { /*Do nothing*/ }
     }
 }

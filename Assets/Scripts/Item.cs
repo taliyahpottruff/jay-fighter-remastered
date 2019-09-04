@@ -4,6 +4,7 @@
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public abstract class Item {
     private int amount = 1;
     private string name;

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class Inventory : NetworkBehaviour {
     public List<Item> inventory = new List<Item>();
     [SyncVar]

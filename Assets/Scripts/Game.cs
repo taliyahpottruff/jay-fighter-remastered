@@ -4,11 +4,13 @@ using System.IO;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
  * 
  * This is the main class for information storing.
  * Almost everything goes through here one way or another.
  */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Game
 {
     public static bool PAUSED = false;

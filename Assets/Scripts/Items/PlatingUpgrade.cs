@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//AUTHOR: Trenton Pottruff
 public class PlatingUpgrade : Item {
     public PlatingUpgrade() {
         SetName("Plating Upgrade");
@@ -7,6 +8,10 @@ public class PlatingUpgrade : Item {
         SetSprite(Resources.Load<Sprite>("Sprites/Items/PlatingUpgrade"));
     }
 
+	/// <summary>
+	/// Sets up a Plating Upgrade.
+	/// </summary>
+	/// <param name="amount">The number of items.</param>
     public PlatingUpgrade(int amount) {
         AddItems(amount);
         SetName("Plating Upgrade");

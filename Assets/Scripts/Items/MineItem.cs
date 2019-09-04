@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// AUTHOR: Trenton Pottruff
 public class MineItem : Item {
     public MineItem() {
         SetName("Mine");
@@ -7,6 +8,10 @@ public class MineItem : Item {
         SetSprite(Resources.Load<Sprite>("Sprites/Items/Mine"));
     }
 
+	/// <summary>
+	/// Sets up a Mine item.
+	/// </summary>
+	/// <param name="amount">The number of mines</param>
     public MineItem(int amount) {
         AddItems(amount);
         SetName("Mine");
@@ -15,7 +20,6 @@ public class MineItem : Item {
     }
 
     protected override GameObject Action(Player player) {
-        //player.CmdSpawnItem("Mine");
         return Resources.Load<GameObject>("Prefabs/Mine");
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.Networking;
  */
 
 [RequireComponent(typeof(Rigidbody2D))]
+[System.Obsolete("Uses Unity's old networking features")]
 public class PlayerMovement : NetworkBehaviour {
     public float speed = 5;
     private float current_speed;
@@ -36,7 +37,9 @@ public class PlayerMovement : NetworkBehaviour {
             rb.velocity = Vector2.zero;
     }
 
+	//Acts as a abstraction
     private void DoUpdate() {
+		//If this player is the local player then it can be controlled
         if (isLocalPlayer) {
             Vector2 inputVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             Vector2 directionVector = inputVector.normalized;

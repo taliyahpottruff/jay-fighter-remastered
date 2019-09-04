@@ -9,6 +9,7 @@ public class FirstTimeCheck : MonoBehaviour {
     MenuManager menuManager;
 
     private void Start() {
+		//Is this the player's first time playing...
         if (!PlayerPrefs.HasKey("username"))
             menuManager.ChangeMenu(4);
     }

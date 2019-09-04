@@ -4,11 +4,13 @@ using System.Collections;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
  */
 
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
+[System.Obsolete("Uses Unity's old networking features")]
 public class PlayerCombat : NetworkBehaviour {
     public bool firing = false;
 

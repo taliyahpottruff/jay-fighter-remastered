@@ -1,13 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/*
+ * AUTHOR: Trenton Pottruf
+*/
+
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class SetupSteam : MonoBehaviour {
     private void Start() {
         Game.STEAM = new SteamClient();
-
-        /*if (!GameObject.FindGameObjectWithTag("NetworkManager")) {
-            Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/_NetworkManager"));
-        }*/
     }
 }

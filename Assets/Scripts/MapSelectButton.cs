@@ -5,6 +5,7 @@ using UnityEngine.UI;
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class MapSelectButton : MonoBehaviour {
     public Text title;
     public Text description;

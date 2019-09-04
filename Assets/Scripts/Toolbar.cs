@@ -9,6 +9,7 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class Toolbar : NetworkBehaviour {
     public Image panelBody;
     public Image panelStrip;
@@ -67,7 +68,6 @@ public class Toolbar : NetworkBehaviour {
         prevCount = 0;
 
         Clear();
-        //AddAllItems(); //Add all the items to store
 
         hasStarted = true;
     }

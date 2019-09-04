@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 /*
- * Author: Garrett Nicholas
+ * AUTHOR: Garrett Nicholas
  */
 
 public class EditorCam : MonoBehaviour {

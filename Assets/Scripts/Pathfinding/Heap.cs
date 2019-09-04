@@ -1,6 +1,10 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ * Uses the A* pathfinding algorithm
+ * Used https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW by Sebastian Lague for reference
+*/
 
 public class Heap<T> where T : IHeapItem<T> {
 

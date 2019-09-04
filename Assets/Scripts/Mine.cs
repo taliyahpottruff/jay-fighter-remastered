@@ -6,6 +6,7 @@ using UnityEngine.Networking;
  */
 
 [RequireComponent(typeof(Collider2D))]
+[System.Obsolete("Uses Unity's old networking features")]
 public class Mine : NetworkBehaviour {
     [SerializeField]
     private GameObject explosionPrefab;

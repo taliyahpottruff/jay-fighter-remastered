@@ -5,6 +5,8 @@ using UnityEngine.Networking;
  * AUTHOR: Trenton Pottruff
  */
 
+//Class name was mispelled and I never changed it.
+[System.Obsolete("Uses Unity's old networking features")]
 public class SingplayerGame : MonoBehaviour {
     NetworkManager net;
 

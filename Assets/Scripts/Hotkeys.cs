@@ -2,8 +2,10 @@ using UnityEngine;
 
 /*
  * AUTHOR: Trenton Pottruff
+ * CONTRIBUTOR: Garrett Nicholas
  */
 
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Hotkeys : MonoBehaviour {
     private PauseScreenManager pauseScreenManager;
     public GameObject store;

@@ -9,6 +9,7 @@ using Facepunch.Steamworks;
  * (added the checks for the enemy death then spawns a coin)
  */
 
+[System.Obsolete("Uses Unity's old networking features")]
 public class Health : NetworkBehaviour {
     [SerializeField]
     private bool invincible;

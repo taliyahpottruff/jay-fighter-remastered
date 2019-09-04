@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+/*
+ * AUTHOR: Trenton Pottruff
+ * Helper class for converting an image into a map using coloured pixels.
+*/
 public class MapColorDictionary {
     private static MapColor[] mapColors = new MapColor[] {
         new MapColor(new Color(1, 1, 0), "Enemy Spawn"),
@@ -55,7 +59,13 @@ public class MapColorDictionary {
         new MapColor(new Color(255f/255f, 255f/255f, 19f/255f), "Lava_BottomEdges")
     };
 
+	/// <summary>
+	/// Convert a color to an object
+	/// </summary>
+	/// <param name="c">The color to convert</param>
+	/// <returns>The corresponding object. Return a blank ID if no Color matches.</returns>
     public static string ColorToID(Color c) {
+		//Loop through the map colors to find the requested color
         for (int i = 0; i < mapColors.Length; i++) {
             if (mapColors[i].color.Equals(c))
                 return mapColors[i].objID;
@@ -64,9 +74,15 @@ public class MapColorDictionary {
         return "";
     }
 
+	/// <summary>
+	/// Convert an image to an array of map objects.
+	/// </summary>
+	/// <param name="texture">The image to convert</param>
+	/// <returns>The array of map objects</returns>
     public static MapObj[] ConvertImgToMapObjs(Texture2D texture) {
         List<MapObj> objects = new List<MapObj>();
 
+		//Loop through each pixel in the image
         for (int x = 0; x < texture.width; x++) {
             for (int y = 0; y < texture.height; y++) {
                 Color c = texture.GetPixel(x, y);
@@ -94,6 +110,9 @@ public class MapColorDictionary {
     }
 }
 
+/// <summary>
+/// Simple data holder
+/// </summary>
 public class MapColor {
     public Color color;
     public string objID;

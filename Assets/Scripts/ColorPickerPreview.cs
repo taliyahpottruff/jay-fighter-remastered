@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// AUTHOR: Trenton Pottruff
-/// </summary>
+/*
+/* AUTHOR: Trenton Pottruff
+ */
 
 [RequireComponent(typeof(Image))]
 public class ColorPickerPreview : MonoBehaviour {
@@ -19,6 +17,7 @@ public class ColorPickerPreview : MonoBehaviour {
 
         Color c = Color.white;
 
+		//Set the colour depending on what body part this component is attached to
         if (mode == ColorPickerMode.Head) {
             c = new Color(PlayerPrefs.GetFloat("head_r"), PlayerPrefs.GetFloat("head_g"), PlayerPrefs.GetFloat("head_b"));
         }
@@ -33,6 +32,7 @@ public class ColorPickerPreview : MonoBehaviour {
     }
 
     private void Update() {
+		//Display the appropriate body part with the selected colour
         if (colorPicker.gameObject.activeInHierarchy)
             image.color = colorPicker.selectedColor;
     }

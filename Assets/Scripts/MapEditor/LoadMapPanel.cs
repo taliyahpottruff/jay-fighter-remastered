@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using System.IO;
 
 /*
-    * AUTHOR: Trenton Pottruff
+ * AUTHOR: Trenton Pottruff
 */
 
 public class LoadMapPanel : MonoBehaviour {
@@ -14,14 +13,19 @@ public class LoadMapPanel : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
+	/// <summary>
+	/// Show the load map panel.
+	/// </summary>
     public void ShowPanel() {
         //Clear the content
         for (int i = 0; i < content.childCount; i++) {
             Destroy(content.GetChild(i).gameObject);
         }
 
+		//Find the path of all the maps
         string[] mapPaths = Directory.GetFiles(Application.persistentDataPath + "/maps");
 
+		//Loop through all paths and instantiate a selectable UI option
         for (int i = 0; i < mapPaths.Length; i++) {
             string mapName = mapPaths[i].Replace(Application.persistentDataPath, "").Replace(".map", "").Replace("/maps\\", "");
             GameObject prefab = Resources.Load<GameObject>("Prefabs/Load Map Option");
@@ -35,6 +39,7 @@ public class LoadMapPanel : MonoBehaviour {
             option.panel = this;
         }
 
+		//Actually show the panel
         gameObject.SetActive(true);
     }
 }

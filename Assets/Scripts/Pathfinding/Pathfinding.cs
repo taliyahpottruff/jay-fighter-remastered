@@ -1,9 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Diagnostics;
+
+/*
+ * AUTHOR: Trenton Pottruff
+ * Uses the A* pathfinding algorithm
+ * Used https://www.youtube.com/playlist?list=PLFt_AvWsXl0cq5Umv3pMC9SPnKjfp9eGW by Sebastian Lague for reference
+*/
 
 [RequireComponent(typeof(Grid))]
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class Pathfinding : MonoBehaviour {
     Grid grid;
 

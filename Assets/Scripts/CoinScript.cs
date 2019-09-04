@@ -4,16 +4,17 @@ using UnityEngine;
 
 /*
  * AUTHOR: Garrett Nicholas
- * MODIFICATIONS: Trenton Pottruff
+ * CONTRIBUTOR: Trenton Pottruff
  */
 
 [RequireComponent(typeof(SpriteRenderer))]
+[System.Obsolete("Implements a class that uses old Unity networking")]
 public class CoinScript : MonoBehaviour {
     public int coinValue;
 
     private SpriteRenderer sr;
 
-    float lifespan = 100f;
+    readonly float lifespan = 100f;
     float flashTime;
 
     private void Start() {
