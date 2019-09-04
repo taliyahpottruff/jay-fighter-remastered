@@ -65,7 +65,8 @@ public class MapSelectionDisplay : MonoBehaviour {
             MapSelectButton msb = go.GetComponent<MapSelectButton>();
 
             msb.SetInfo(names[i], "This is a map!");
-            go.GetComponent<Toggle>().group = tg;
+			var toggle = go.GetComponent<Toggle>();
+			if (toggle != null) toggle.group = tg;
         }
     }
 
