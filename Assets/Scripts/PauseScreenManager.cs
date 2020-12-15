@@ -3,12 +3,10 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking.Match;
 
-/*
- * AUTHOR: Trenton Pottruff
- * CONTRUBITOR: Garrett Nicholas
- */
-
-[System.Obsolete("Uses Unity's old networking features")]
+/// <summary>
+/// AUTHOR: Trenton Pottruff
+/// CONTRUBITOR: Garrett Nicholas
+/// </summary>
 public class PauseScreenManager : MonoBehaviour {
     private bool opened = false; //Is the pause screen open?
 
@@ -56,8 +54,8 @@ public class PauseScreenManager : MonoBehaviour {
     /// Exits the game and returns the user to the main menu
     /// </summary>
     public void ExitGame() {
-        NetworkManager nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
-        nm.StopHost();
+        /*NetworkManager nm = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<NetworkManager>();
+        nm.StopHost();*/
 
         SceneManager.LoadScene("MainMenu");
     }
@@ -66,10 +64,10 @@ public class PauseScreenManager : MonoBehaviour {
     /// Disconnects the user from the match
     /// </summary>
     public void Disconnect() {
-        NetworkManager nm = NetworkManager.singleton;
+        /*NetworkManager nm = NetworkManager.singleton;
         MatchInfo match = nm.matchInfo;
         nm.matchMaker.DropConnection(match.networkId, match.nodeId, 0, nm.OnDropConnection);
-        nm.StopHost();
+        nm.StopHost();*/
     }
 
     /// <summary>

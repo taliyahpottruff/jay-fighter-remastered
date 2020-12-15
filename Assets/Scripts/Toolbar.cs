@@ -5,12 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 
-/*
- * AUTHOR: Trenton Pottruff
- */
-
-[System.Obsolete("Uses Unity's old networking features")]
-public class Toolbar : NetworkBehaviour {
+/// <summary>
+/// AUTHOR: Taliyah Pottruff
+/// </summary>
+public class Toolbar : MonoBehaviour {
     public Image panelBody;
     public Image panelStrip;
     public Inventory inventory;
@@ -72,6 +70,9 @@ public class Toolbar : NetworkBehaviour {
         hasStarted = true;
     }
 
+    /// <summary>
+    /// Clears all items out of the toolbar.
+    /// </summary>
     public void Clear() {
         for (int i = 0; i < this.transform.childCount; i++) {
             Destroy(this.transform.GetChild(i).gameObject);
@@ -79,7 +80,7 @@ public class Toolbar : NetworkBehaviour {
     }
 
     /// <summary>
-    /// Adds all available items to the store for purchase
+    /// Adds all available items to the store for purchase.
     /// </summary>
     public void AddAllItems() {
         GameObject prefab = Resources.Load<GameObject>("Prefabs/Toolbar Button");

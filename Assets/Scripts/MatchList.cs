@@ -1,32 +1,30 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
-using UnityEngine.Networking.Match;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
-[RequireComponent(typeof(NetworkManager))]
+//[RequireComponent(typeof(NetworkManager))]
 public class MatchList : MonoBehaviour {
     public GameObject text;
     public GameObject matchSelectionPrefab;
 
-    public NetworkManager manager;
+    //public NetworkManager manager;
 
     private void Start() {
         ListMatches();
     }
 
     public void ListMatches() {
-        manager.StartMatchMaker();
+        /*manager.StartMatchMaker();
         manager.SetMatchHost("mm.unet.unity3d.com", 443, true);
 
-        manager.matchMaker.ListMatches(0, 20, "", false, 1, 0, OnMatchList);
+        manager.matchMaker.ListMatches(0, 20, "", false, 1, 0, OnMatchList);*/
     }
 
-    public virtual void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList) {
+    /*public virtual void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matchList) {
         if (success) {
             if (matchList.Count != 0) {
                 Debug.Log("Matches Found");
@@ -45,5 +43,5 @@ public class MatchList : MonoBehaviour {
         else {
             Debug.Log("ERROR : Match Search Failure");
         }
-    }
+    }*/
 }

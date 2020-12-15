@@ -1,17 +1,14 @@
 using UnityEngine;
-using UnityEngine.Networking;
 using System.Collections;
 
-/*
- * AUTHOR: Trenton Pottruff
- * CONTRIBUTOR: Garrett Nicholas
- */
-
+/// <summary>
+/// AUTHOR: Taliyah Pottruff
+/// CONTRIBUTOR: Garrett Nicholas
+/// </summary>
 [RequireComponent(typeof(Player))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(AudioSource))]
-[System.Obsolete("Uses Unity's old networking features")]
-public class PlayerCombat : NetworkBehaviour {
+public class PlayerCombat : MonoBehaviour {
     public bool firing = false;
 
     public AudioClip gunSound;
@@ -30,13 +27,9 @@ public class PlayerCombat : NetworkBehaviour {
     private GameObject muzzleflashPrefab;
     private Vector2 playerPositon = Vector2.zero;
 
-    [SyncVar]
     public bool _topDown = true;
-    [SyncVar]
     public bool _topLeft = false;
-    [SyncVar]
     public bool _topRight = false;
-    [SyncVar]
     public bool _topUp = false;
     private Transform shooter0;
     private Transform shooter1;
@@ -86,7 +79,7 @@ public class PlayerCombat : NetworkBehaviour {
         float vertical = Mathf.Abs(fireVector.y);
 
         //Set directional data
-        if (isLocalPlayer) {
+        if (player.isLocalPlayer) {
             if (horizontal != 0 || vertical != 0) {
                 if (horizontal > vertical) {
                     if (fireVector.x > 0) {
@@ -121,7 +114,6 @@ public class PlayerCombat : NetworkBehaviour {
         topUp.SetActive(_topUp);
     }
 
-    [Command]
     public void CmdSetTop(int _case) {
         switch (_case) {
             case 1:
@@ -169,7 +161,7 @@ public class PlayerCombat : NetworkBehaviour {
     }
     public virtual IEnumerator FireBullet() {
         do {
-            if (firing && isLocalPlayer && !Game.PAUSED) {
+            if (firing && player.isLocalPlayer && !Game.PAUSED) {
                 Vector2 direction = fireVector.normalized;
 
                 Vector3 pos = Vector3.zero;
@@ -183,23 +175,20 @@ public class PlayerCombat : NetworkBehaviour {
                     shooter = true;
                 }
                 
-                CmdFire(pos, direction, GetComponent<NetworkIdentity>());
+                FireBullet(pos, direction, player.id);
                 aSource.PlayOneShot(gunSound);
             }
             yield return new WaitForSeconds(0.1f);
         } while (true);
     }
 
-    [Command]
-    private void CmdFire(Vector2 position, Vector2 direction, NetworkIdentity _owner) {
+    private void FireBullet(Vector2 position, Vector2 direction, uint _owner) {
         GameObject bulletObj = Instantiate(bulletPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
         GameObject flashObj = Instantiate(muzzleflashPrefab, position, Quaternion.FromToRotation(Vector2.up, direction)) as GameObject;
         Bullet bullet = bulletObj.GetComponent<Bullet>();
         bullet.playerBullet = true;
         bullet.owner = _owner;
-        
-        bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
-        NetworkServer.Spawn(bulletObj);
-        bulletObj.GetComponent<Rigidbody2D>().velocity = (direction * 10);
+        bullet.SetVelocity(direction * 10);
+        //NetworkServer.Spawn(bulletObj);
     }
 }

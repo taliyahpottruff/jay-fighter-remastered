@@ -1,15 +1,12 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Networking;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public class Inventory : NetworkBehaviour {
+public class Inventory : MonoBehaviour {
     public List<Item> inventory = new List<Item>();
-    [SyncVar]
     public int max = 0; //A maximum item limit, if any.
     //TODO Implement max inventory limits
 
@@ -48,10 +45,9 @@ public class Inventory : NetworkBehaviour {
         }
     }
 
-    [Command]
     private void CmdSpawn(string name) {
         Debug.Log("Doit.");
         GameObject go = Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/" + name), this.transform.position, Quaternion.identity);
-        NetworkServer.Spawn(go);
+        //NetworkServer.Spawn(go);
     }
 }

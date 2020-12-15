@@ -1,11 +1,10 @@
-﻿using UnityEngine.Networking;
+﻿using UnityEngine;
 
 /*
  * AUTHOR: Trenton Pottruff
  */
 
-[System.Obsolete("Uses Unity's old networking features")]
-public abstract class EnemySpriteManager : NetworkBehaviour {
+public abstract class EnemySpriteManager : MonoBehaviour {
     public abstract void MoveUp();
     public abstract void MoveDown();
     public abstract void MoveLeft();

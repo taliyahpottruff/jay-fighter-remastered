@@ -1,13 +1,10 @@
 ﻿using UnityEngine;
 using System.IO;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
-/*
- * AUTHOR: Trenton Pottruff
- */
-
-[System.Obsolete("Implements a class that uses old Unity networking")]
+/// <summary>
+/// AUTHOR: Taliyah Pottruff
+/// </summary>
 public class MapSelectionDisplay : MonoBehaviour {
     public MenuManager menuManager;
     public GameLoader gameLoader;

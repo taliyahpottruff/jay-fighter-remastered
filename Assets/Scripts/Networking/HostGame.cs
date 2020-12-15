@@ -4,11 +4,10 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
 using UnityEngine.UI;
 
-/*
- * AUTHOR: Trenton Pottruff
-*/
+/// <summary>
+/// AUTHOR: Taliyah Pottruff
+/// </summary>
 
-[Obsolete("Unity is removing the old networking features")]
 public class HostGame : MonoBehaviour {
     [SerializeField]
     private uint roomSize = 4;
@@ -18,16 +17,16 @@ public class HostGame : MonoBehaviour {
     public Transform playerListings;
     public Button hostGameButton;
 
-    private NetworkManager manager; //Deprecated now, but was not depracated at the time of devlepment.
+    //private NetworkManager manager; Deprecated now, but was not deprecated at the time of development.
 
     private GameObject playerListingPrefab;
 
     private void Start() {
 		//Initialize the network manager
-        manager = NetworkManager.singleton;
+        /*manager = NetworkManager.singleton;
         if (manager.matchMaker == null) {
             manager.StartMatchMaker();
-        }
+        }*/
 
 		//Set the player listing prefab from resources
         playerListingPrefab = Resources.Load<GameObject>("Prefabs/Player Listing");
@@ -53,7 +52,7 @@ public class HostGame : MonoBehaviour {
             Debug.Log("Creating Room:" + roomName + " with " + roomSize + " slots!");
             //Create Room, manager.OnMatchCreate
             Game.IS_MP = true;
-            manager.matchMaker.CreateMatch(roomName, roomSize, true, "", "", "", 0, 0, manager.OnMatchCreate);
+            //manager.matchMaker.CreateMatch(roomName, roomSize, true, "", "", "", 0, 0, manager.OnMatchCreate);
         }
     }
 
