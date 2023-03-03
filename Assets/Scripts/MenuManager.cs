@@ -2,11 +2,19 @@
 using UnityEngine.SceneManagement;
 
 /*
- * AUTHOR: Trenton Pottruff
+ * AUTHOR: Taliyah Pottruff
  */
 
 public class MenuManager : MonoBehaviour {
     public GameObject[] menus;
+
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt("EOS-Acknowledged", 0) < 1)
+        {
+            ChangeMenu(6);
+        }
+    }
 
     /// <summary>
     /// Changes the menu
@@ -36,5 +44,12 @@ public class MenuManager : MonoBehaviour {
     /// <param name="sceneName">The scene to be loaded</param>
     public void LoadScene(string sceneName) {
         SceneManager.LoadScene(sceneName);
+    }
+
+    public void DismissEOSMessage()
+    {
+        PlayerPrefs.SetInt("EOS-Acknowledged", 1);
+        ChangeMenu(0);
+        PlayerPrefs.Save();
     }
 }
